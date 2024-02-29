@@ -10,5 +10,7 @@ namespace DanderiNetwork.Core.Domain.Entities
     public class Reply : BaseEntityForComments
     {
         public int ReferenceCommentID { get; set; }
+        public int ReplyID { get; set; }
+        public ICollection<Reply> Replies { get; set; }
     }
 }
