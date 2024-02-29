@@ -20,8 +20,8 @@ namespace DanderiNetwork.Core.Domain.Entities
 
         //Navigation Properties
 
-        public ICollection<Following> Following { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<Following>? Following { get; set; }
+        public ICollection<Post>? Posts { get; set; }
 
     }
 }
