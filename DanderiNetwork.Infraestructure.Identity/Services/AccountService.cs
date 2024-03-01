@@ -3,11 +3,8 @@ using DanderiNetwork.Core.Application.Enums;
 using DanderiNetwork.Infraestructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DanderiNetwork.Infraestructure.Identity.Services
 {
@@ -32,7 +29,8 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             if (user == null)
             {
                 response.HasError = true;
-                response.Error = $"No Accounts registered with {request.Email}";
+
+                response.Error = $"There're not Accounts registered with {request.Email}";
                 return response;
             }
 
@@ -46,7 +44,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             if (!user.EmailConfirmed)
             {
                 response.HasError = true;
-                response.Error = $"Account no confirmed for {request.Email}";
+                response.Error = $"Account no actived for {request.Email}";
                 return response;
             }
 
@@ -164,7 +162,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
 
             var verificationUri = await SendForgotPasswordUri(user, origin);
 
-            await _emailService.SendAsync(new Core.Application.DTOs.Email.EmailRequest()
+            await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
             {
                 To = user.Email,
                 Body = $"Please reset your account visiting this URL {verificationUri}",
