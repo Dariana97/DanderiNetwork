@@ -1,5 +1,7 @@
 ﻿using DanderiNetwork.Core.Application.Dtos.Account;
+using DanderiNetwork.Core.Application.Dtos.Email;
 using DanderiNetwork.Core.Application.Enums;
+using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Infraestructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
@@ -8,17 +10,17 @@ using System.Text;
 
 namespace DanderiNetwork.Infraestructure.Identity.Services
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        //private readonly IEmailService _emailService;
+        private readonly IEmailService _emailService;
 
-        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager/*, IEmailService emailService*/)
+        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            //_emailService = emailService;
+            _emailService = emailService;
         }
 
         public async Task<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request)
@@ -88,15 +90,16 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                UserName = request.UserName
+                UserName = request.UserName,
+                ImageURL = request.ImageURL
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+                await _userManager.AddToRoleAsync(user, Roles.User.ToString());
                 var verificationUri = await SendVerificationEmailUri(user, origin);
-                await _emailService.SendAsync(new Core.Application.DTOs.Email.EmailRequest()
+                await _emailService.SendAsync(new EmailRequest()
                 {
                     To = user.Email,
                     Body = $"Please confirm your account visiting this URL {verificationUri}",
@@ -162,7 +165,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
 
             var verificationUri = await SendForgotPasswordUri(user, origin);
 
-            await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
+            await _emailService.SendAsync(new EmailRequest()
             {
                 To = user.Email,
                 Body = $"Please reset your account visiting this URL {verificationUri}",
@@ -188,6 +191,35 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request)
+        {
+            ResetPasswordResponse response = new()
+            {
+                HasError = false
+            };
+
+            var user = await _userManager.FindByEmailAsync(request.Email);
+
+            if (user == null)
+            {
+                response.HasError = true;
+                response.Error = $"No Accounts registered with {request.Email}";
+                return response;
+            }
+
+            request.Token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.Token));
+            var result = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
+
+            if (!result.Succeeded)
+            {
+                response.HasError = true;
+                response.Error = $"An error occurred while reset password";
+                return response;
+            }
+
+            return response;
         }
 
     }

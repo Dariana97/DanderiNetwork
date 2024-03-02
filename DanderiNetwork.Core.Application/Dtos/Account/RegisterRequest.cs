@@ -1,6 +1,4 @@
-﻿
-
-namespace DanderiNetwork.Core.Application.Dtos.Account
+﻿namespace DanderiNetwork.Core.Application.Dtos.Account
 {
     public class RegisterRequest
     {
@@ -11,5 +9,7 @@ namespace DanderiNetwork.Core.Application.Dtos.Account
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string Phone { get; set; }
+
+        public string ImageURL { get; set; }
     }
 }

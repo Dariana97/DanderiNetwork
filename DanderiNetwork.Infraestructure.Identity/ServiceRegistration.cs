@@ -1,5 +1,7 @@
-﻿using DanderiNetwork.Infraestructure.Identity.Contexts;
+﻿using DanderiNetwork.Core.Application.Interfaces.Services;
+using DanderiNetwork.Infraestructure.Identity.Contexts;
 using DanderiNetwork.Infraestructure.Identity.Entities;
+using DanderiNetwork.Infraestructure.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,9 +43,9 @@ namespace DanderiNetwork.Infraestructure.Identity
             services.AddAuthentication();
             #endregion
 
-            //#region Services
-            //services.AddTransient<IAccountService, AccountService>();
-            //#endregion
+            #region Services
+            services.AddTransient<IAccountService, AccountService>();
+            #endregion
         }
     }
 }

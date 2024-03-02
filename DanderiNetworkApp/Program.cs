@@ -1,6 +1,8 @@
 using DanderiNetwork.Infraestructure.Identity;
 using DanderiNetwork.Infraestructure.Identity.Entities;
 using DanderiNetwork.Infraestructure.Identity.Seeds;
+using DanderiNetwork.Infraestructure.Shared;
+using DanderiNetwork.Infraestructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,8 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
+builder.Services.AddSharedInfrastructure(builder.Configuration);
+builder.Services.AddPersistenceInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,5 +1,4 @@
-﻿
-namespace DanderiNetwork.Core.Application.Dtos.Account
+﻿namespace DanderiNetwork.Core.Application.Dtos.Account
 {
     public class ResetPasswordRequest
     {

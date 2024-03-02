@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DanderiNetwork.Core.Domain\DanderiNetwork.Core.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

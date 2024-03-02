@@ -9,5 +9,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public string ImageURL { get; set; }
+
     }
 }
