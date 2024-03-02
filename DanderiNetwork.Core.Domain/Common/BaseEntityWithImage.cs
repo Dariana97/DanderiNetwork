@@ -9,5 +9,6 @@ namespace DanderiNetwork.Core.Domain.Common
     public class BaseEntityWithImage : BaseEntity
     {
         public string? ImageURL { get; set; }
+        
     }
 }

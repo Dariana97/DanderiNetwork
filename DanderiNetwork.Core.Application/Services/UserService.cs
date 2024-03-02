@@ -1,13 +1,7 @@
 ﻿using DanderiNetwork.Core.Application.Dtos.Account;
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.User;
-using StockApp.Core.Application.ViewModels.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static DanderiNetwork.Core.Application.Services.UserService;
+
 
 namespace DanderiNetwork.Core.Application.Services
 {

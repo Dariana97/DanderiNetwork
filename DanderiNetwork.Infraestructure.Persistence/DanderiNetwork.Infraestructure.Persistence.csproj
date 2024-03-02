@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DanderiNetwork.Core.Application\DanderiNetwork.Core.Application.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Core.Domain\DanderiNetwork.Core.Domain.csproj" />
   </ItemGroup>
 
