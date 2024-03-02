@@ -1,4 +1,5 @@
-﻿using DanderiNetwork.Core.Application.Dtos.Account;
+﻿using AutoMapper;
+using DanderiNetwork.Core.Application.Dtos.Account;
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.User;
 

@@ -20,9 +20,10 @@ namespace DanderiNetwork.Infraestructure.Persistence.Repositories
             return entity;
         }
 
-        public virtual async Task UpdateAsync(Entity entity)
+        public virtual async Task UpdateAsync(Entity entity, int id)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            var entry = await _dbContext.Set<Entity>().FindAsync(id);
+            _dbContext.Entry(entry).CurrentValues.SetValues(entity);
             await _dbContext.SaveChangesAsync();
         }
 

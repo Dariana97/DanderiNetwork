@@ -10,7 +10,9 @@ namespace DanderiNetwork.Core.Application.ViewModels.Post
 {
     public class SavePostViewModel
     {
-        public  int? ID { get; set; }
+        // Se puede quitar el null?
+        public int? ID { get; set; }
+
         [DataType(DataType.Url)]
         public string? VideoUrl { get; set; }
 

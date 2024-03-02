@@ -6,7 +6,7 @@ namespace DanderiNetwork.Core.Domain.Entities
     {
         public int? IdReference { get; set; }
 
-        //Navigator Properties
+        //Navigation Properties
         public Post? Post { get; set; }
         public ICollection<Comment>? Comments { get; set;}
     }

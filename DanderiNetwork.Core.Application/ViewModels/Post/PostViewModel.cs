@@ -14,6 +14,6 @@ namespace DanderiNetwork.Core.Application.ViewModels.Post
         public int UserID { get; set; }
         public string? ImageURL { get; set; }
         public DateTime Created { get; set; }
-        public List<CommentViewModel>? Comments { get; set; }
+        public List<CommentViewModel>? CommentList { get; set; }
     }
 }
