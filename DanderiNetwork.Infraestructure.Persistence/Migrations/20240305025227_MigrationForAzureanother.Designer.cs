@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DanderiNetwork.Infraestructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240304065854_InitialMigrationAnother")]
-    partial class InitialMigrationAnother
+    [Migration("20240305025227_MigrationForAzureanother")]
+    partial class MigrationForAzureanother
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,9 +33,6 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("CommentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -52,9 +49,10 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.Property<int?>("UserIDReplied")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CommentID");
+                    b.HasKey("ID");
 
                     b.HasIndex("PostID");
 
@@ -115,61 +113,8 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
                     b.ToTable("Posts", (string)null);
                 });
 
-            modelBuilder.Entity("DanderiNetwork.Core.Domain.Entities.User", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageURL")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsActived")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Lastname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("User");
-                });
-
             modelBuilder.Entity("DanderiNetwork.Core.Domain.Entities.Comment", b =>
                 {
-                    b.HasOne("DanderiNetwork.Core.Domain.Entities.Comment", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("CommentID");
-
                     b.HasOne("DanderiNetwork.Core.Domain.Entities.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostID")
@@ -177,11 +122,6 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Post");
-                });
-
-            modelBuilder.Entity("DanderiNetwork.Core.Domain.Entities.Comment", b =>
-                {
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("DanderiNetwork.Core.Domain.Entities.Post", b =>

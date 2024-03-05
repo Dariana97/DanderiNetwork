@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using DanderiNetwork.Core.Application;
 using DanderiNetworkApp.Middlewares;
 using DanderiNetworkApp.Midleware;
+using DanderiNetwork.Core.Application.Interfaces.Services;
+using DanderiNetwork.Core.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,12 +26,14 @@ builder.Services.AddTransient<ValidateUserSession, ValidateUserSession>();
 
 
 
+
 var app = builder.Build();
 
 
 
 using (var scope = app.Services.CreateScope())
 {
+
     var services = scope.ServiceProvider;
 
     try

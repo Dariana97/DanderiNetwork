@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DanderiNetwork.Infraestructure.Identity.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20240304065800_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240305014711_InitialMigrationForAzure")]
+    partial class InitialMigrationForAzure
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

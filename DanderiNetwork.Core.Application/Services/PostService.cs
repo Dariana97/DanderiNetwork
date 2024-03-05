@@ -10,6 +10,7 @@ namespace DanderiNetwork.Core.Application.Services
     {
         private readonly IPostRepository _postRepository;
         private readonly ICommentService _commentService;
+
         private readonly IMapper _mapper;
 
         public PostService(IPostRepository postRepository, IMapper mapper, ICommentService commentService) : base(postRepository, mapper)
@@ -21,6 +22,7 @@ namespace DanderiNetwork.Core.Application.Services
 
         public override async Task<List<PostViewModel>> GetAllViewModel()
         {
+            
             var modelList = await base.GetAllViewModel();
 
             var postWithComment = modelList.Select(async post =>  {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DanderiNetwork.Infraestructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240304065948_InitialMigrationAnotherOfficial")]
-    partial class InitialMigrationAnotherOfficial
+    [Migration("20240305051057_OtraMigration")]
+    partial class OtraMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,9 +33,6 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("CommentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -49,12 +46,14 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
                     b.Property<int>("PostID")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserIDReplied")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CommentID");
 
                     b.HasIndex("PostID");
 
@@ -117,10 +116,6 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
 
             modelBuilder.Entity("DanderiNetwork.Core.Domain.Entities.Comment", b =>
                 {
-                    b.HasOne("DanderiNetwork.Core.Domain.Entities.Comment", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("CommentID");
-
                     b.HasOne("DanderiNetwork.Core.Domain.Entities.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostID")
@@ -128,11 +123,6 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Post");
-                });
-
-            modelBuilder.Entity("DanderiNetwork.Core.Domain.Entities.Comment", b =>
-                {
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("DanderiNetwork.Core.Domain.Entities.Post", b =>

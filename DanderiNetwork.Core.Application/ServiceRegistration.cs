@@ -19,7 +19,10 @@ namespace DanderiNetwork.Core.Application
 
             services.AddTransient<IUserService, UserService>();
 
-            
+            services.AddTransient<ICommentService, CommentServices>();
+
+
+
 
 
 

@@ -8,6 +8,7 @@ namespace DanderiNetwork.Core.Application.ViewModels.Comment
         public int PostID { get; set; }
         public int? UserID { get; set; }
         public int? IdReference { get; set; }
+        public int? UserIDReplied { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime? Created { get; set; }

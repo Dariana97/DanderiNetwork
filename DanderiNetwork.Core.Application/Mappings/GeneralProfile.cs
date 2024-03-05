@@ -30,12 +30,12 @@ namespace DanderiNetwork.Core.Application.Mappings
             CreateMap<Comment, CommentViewModel>()
                 .ForMember(dest => dest.Replies, opt => opt.Ignore())
                 .ReverseMap()
-                .ForMember(dest => dest.Comments, opt => opt.Ignore())
+                
                 .ForMember(dest => dest.Post, opt => opt.Ignore());
 
             CreateMap<Comment, SaveCommentViewModel>()
                 .ReverseMap()
-                .ForMember(dest => dest.Comments, opt => opt.Ignore())
+              
                 .ForMember(dest => dest.Post, opt => opt.Ignore());
 
             #endregion

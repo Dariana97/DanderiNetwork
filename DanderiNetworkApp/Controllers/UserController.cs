@@ -11,11 +11,15 @@ namespace DanderiNetworkApp.Controllers
     {
         private readonly IUserService _userService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ICommentService _commentService;
+        private readonly IUserApplication _userApplication;
 
-        public UserController(IUserService userService, IHttpContextAccessor httpContextAccessor)
+        public UserController(IUserService userService, IUserApplication userApplication, IHttpContextAccessor httpContextAccessor, ICommentService commentService)
         {
             _userService = userService;
             _httpContextAccessor = httpContextAccessor;
+            _commentService = commentService;
+            _userApplication = userApplication;
         }
 
         [ServiceFilter(typeof(LoginAuthorize))]
@@ -119,9 +123,12 @@ namespace DanderiNetworkApp.Controllers
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
 
-        public IActionResult AccessDenied()
+        public async Task<IActionResult> AccessDenied()
         {
-            return View();
+            await _commentService.GetAllViewModel();
+            return View(_userApplication.GetAllUsers());
+            
+
         }
     }
 }

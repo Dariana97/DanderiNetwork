@@ -45,6 +45,8 @@ namespace DanderiNetwork.Infraestructure.Identity
 
             #region Services
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IUserApplication, UserService>();
+            
             #endregion
         }
     }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DanderiNetwork.Infraestructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240304065152_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240305024258_InitialMigrationForAzurebr")]
+    partial class InitialMigrationForAzurebr
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,9 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserIDReplied")
                         .HasColumnType("int");
 
                     b.HasKey("ID");

@@ -6,7 +6,7 @@ namespace DanderiNetwork.Core.Domain.Entities
     {
         public string? VideoUrl { get; set; }
         public string Caption { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         //Navigation properties
         

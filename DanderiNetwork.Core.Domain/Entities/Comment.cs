@@ -6,12 +6,12 @@ namespace DanderiNetwork.Core.Domain.Entities
     {
         public int? IdReference { get; set; }
         public int PostID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public string? UserIDReplied { get; set; }
         public string Content { get; set; }
 
         //Navigation Properties
         public Post? Post { get; set; }
-        public ICollection<Comment>? Comments { get; set;}
+        
     }
 }
