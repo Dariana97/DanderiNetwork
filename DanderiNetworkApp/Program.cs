@@ -5,19 +5,28 @@ using DanderiNetwork.Infraestructure.Shared;
 using DanderiNetwork.Infraestructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using DanderiNetwork.Core.Application;
+using DanderiNetworkApp.Middlewares;
+using DanderiNetworkApp.Midleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
-
-
+builder.Services.AddSession();
+builder.Services.AddPersistenceInfrastructure(builder.Configuration);
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
 builder.Services.AddSharedInfrastructure(builder.Configuration);
-builder.Services.AddPersistenceInfrastructure(builder.Configuration);
-builder.Services.AddApplicationLayer(builder.Configuration);
+builder.Services.AddApplicationLayer();
+builder.Services.AddScoped<LoginAuthorize>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<ValidateUserSession, ValidateUserSession>();
+
+
 
 var app = builder.Build();
+
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -47,11 +56,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 
 app.UseAuthentication();
 app.UseAuthorization();

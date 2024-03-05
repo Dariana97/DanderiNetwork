@@ -17,7 +17,7 @@ namespace DanderiNetwork.Core.Application.Mappings
                 .ForMember(dest => dest.CommentList, opt => opt.Ignore())
                 .ReverseMap()
                 .ForMember(dest => dest.Comments, opt => opt.Ignore())
-                .ForMember(dest => dest.User, opt => opt.Ignore());
+               ;
 
             CreateMap<Post, SavePostViewModel>()
                 .ForMember(dest => dest.Photo, opt => opt.Ignore())

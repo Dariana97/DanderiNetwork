@@ -1,6 +1,8 @@
 ﻿
 
+using DanderiNetwork.Core.Application.Interfaces.Repositories;
 using DanderiNetwork.Infraestructure.Persistence.Contexts;
+using DanderiNetwork.Infraestructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,16 +21,19 @@ namespace DanderiNetwork.Infraestructure.Persistence
             else
             {
                 services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                options.UseSqlServer(configuration.GetConnectionString("ConnetionMaster"),
                 m => m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
             }
             #endregion
 
-            //#region Repositories
-            //services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            //services.AddTransient<IProductRepository, ProductRepository>();
-            //services.AddTransient<ICategoryRepository, CategoryRepository>();
-            //#endregion
+            #region Repositories
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IFollowingRepository, FollowingRepository>();
+
+            #endregion
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using DanderiNetwork.Core.Application.Dtos.Account;
 using DanderiNetwork.Core.Application.Dtos.Email;
 using DanderiNetwork.Core.Application.Enums;
+using DanderiNetwork.Core.Application.Helpers;
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Infraestructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -68,6 +69,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             {
                 HasError = false
             };
+           
 
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
@@ -91,20 +93,30 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 UserName = request.UserName,
-                ImageURL = request.ImageURL
+                
             };
 
-            var result = await _userManager.CreateAsync(user, request.Password);
+           
+          
+           
+                var result = await _userManager.CreateAsync(user, request.Password);
+
+        
+         
+
+            
             if (result.Succeeded)
             {
+
                 await _userManager.AddToRoleAsync(user, Roles.User.ToString());
                 var verificationUri = await SendVerificationEmailUri(user, origin);
                 await _emailService.SendAsync(new EmailRequest()
                 {
                     To = user.Email,
-                    Body = $"Please confirm your account visiting this URL {verificationUri}",
+                    //Body = $"Please confirm your account visiting this URL {verificationUri}",
+                    Body = HtmlComponents.BodyEmail(verificationUri),
                     Subject = "Confirm registration"
-                });
+                }); 
             }
             else
             {
@@ -140,7 +152,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var route = "User/ConfirmEmail";
+            var route = "Home/ConfirmEmail";
             var Uri = new Uri(string.Concat($"{origin}/", route));
             var verificationUri = QueryHelpers.AddQueryString(Uri.ToString(), "userId", user.Id);
             verificationUri = QueryHelpers.AddQueryString(verificationUri, "token", code);
@@ -160,6 +172,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             {
                 response.HasError = true;
                 response.Error = $"No Accounts registered with {request.Email}";
+
                 return response;
             }
 

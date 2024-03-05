@@ -9,7 +9,7 @@ namespace DanderiNetwork.Core.Domain.Entities
         public int UserID { get; set; }
 
         //Navigation properties
-        public User? User { get; set; }
+        
         public ICollection<Comment>? Comments { get; set; }
     }
 }

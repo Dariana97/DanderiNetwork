@@ -7,7 +7,7 @@ namespace DanderiNetwork.Core.Application.ViewModels.Post
 {
     public class PostViewModel
     {
-        public virtual string ID { get; set; }
+        public int ID { get; set; }
 
         public string? VideoUrl { get; set; }
         public string Caption { get; set; }

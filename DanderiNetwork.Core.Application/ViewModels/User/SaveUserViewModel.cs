@@ -20,7 +20,7 @@ namespace DanderiNetwork.Core.Application.ViewModels.User
 
         [Required(ErrorMessage = "Must enter a Username")]
         [DataType(DataType.Text)]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Must enter a password")]
         [DataType(DataType.Password)]

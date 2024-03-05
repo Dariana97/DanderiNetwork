@@ -45,10 +45,10 @@ namespace DanderiNetwork.Core.Application.Services
             await _repository.DeleteAsync(model);
         }
 
-        public async Task<List<ViewModel>> GetAllViewModel()
+        public virtual async Task<List<ViewModel>> GetAllViewModel()
         {
             var modelList = await _repository.GetAllAsync();
-
+            
             return _mapper.Map<List<ViewModel>>(modelList);
         }
 

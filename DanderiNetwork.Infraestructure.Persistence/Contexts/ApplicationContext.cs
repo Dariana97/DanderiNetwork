@@ -70,6 +70,8 @@ namespace DanderiNetwork.Infraestructure.Persistence.Contexts
                Property(d => d.Created)
             .IsRequired();
 
+         
+
 
             #endregion
 

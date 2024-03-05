@@ -7,7 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCoreCurrentRequestContext" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.16">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.16">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DanderiNetwork.Core.Application\DanderiNetwork.Core.Application.csproj" />
+    <ProjectReference Include="..\DanderiNetwork.Core.Domain\DanderiNetwork.Core.Domain.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Infraestructure.Identity\DanderiNetwork.Infraestructure.Identity.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Infraestructure.Persistence\DanderiNetwork.Infraestructure.Persistence.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Infraestructure.Shared\DanderiNetwork.Infraestructure.Shared.csproj" />

@@ -6,5 +6,6 @@ namespace DanderiNetwork.Core.Domain.Entities
     {
         public int UserMainID { get; set; }
         public int FollowingUserID { get; set; }
+        public string? UsernameUserFollowed { get; set; }
     }
 }
