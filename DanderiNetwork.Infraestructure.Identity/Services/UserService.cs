@@ -66,6 +66,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 response.Error = "This user doesn't exit";
                 return response;
             }
+
             user.ImageURL = request.ImageURL;
             var result = await _userManager.UpdateAsync(user);
 

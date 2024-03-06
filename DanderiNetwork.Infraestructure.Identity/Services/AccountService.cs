@@ -71,7 +71,6 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 HasError = false
             };
 
-
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
             {
@@ -96,7 +95,6 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 UserName = request.UserName,
 
             };
-
 
 
 

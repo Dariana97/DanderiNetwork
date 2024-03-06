@@ -1,4 +1,5 @@
 ﻿@using DanderiNetwork.Core.Application.ViewModels.User
+@model SaveUserViewModel
 
 @{
 	ViewData["Tittle"] = "Login";
@@ -7,7 +8,7 @@
 <div class="container probanding">
 
 	<div class="row popo d-flex justify-content-center align-items-center">
-		
+
 		<div class="col-md-5">
 			<img src="/images/app/Group 472.png" class="homeImage" alt="Alternate Text" />
 		</div>
@@ -18,7 +19,7 @@
 					Login
 				</div>
 				<div class="card-body">
-					<form method="post">
+					<form method="post" asp-controller="User" asp-action="Index">
 						<div class="mb-4 d-flex justify-content-center">
 							<div class="col-9">
 								<label for="username" class="form-label fw-bold">Username</label>
@@ -101,97 +102,88 @@
 					<button type="button" class="btn-close col-auto" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form method="post">
+					<form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="Register">
 						<div class="mb-4 d-flex justify-content-center">
 							<div class="col-8">
 								<div class="mb-3">
-									<label for="name" class="form-label fw-bold">FirstName</label>
+									@* <label for="name" class="form-label fw-bold">FirstName</label>
 									<input type="text" class="form-control inputCustomize" id="name" name="name">
-									<span class="text-danger"></span>
-									@* <label asp-for="Name" class="form-label">Name</label>
-									<input asp-for="Name" class="form-control" placeholder="Name">
-									<span asp-validation-for="Name" class="text-danger"></span> *@
+									<span class="text-danger"></span> *@
+									<label asp-for="FirstName" class="form-label fw-bold">First name</label>
+									<input asp-for="FirstName" class="form-control inputCustomize">
+									<span asp-validation-for="FirstName" class="text-danger"></span>
 								</div>
 
 								<div class="mb-3">
-									<label for="lastName" class="form-label fw-bold">Last name</label>
+									@* <label for="lastName" class="form-label fw-bold">Last name</label>
 									<input type="text" class="form-control inputCustomize" id="lastName" name="lastName">
-									<span class="text-danger"></span>
+									<span class="text-danger"></span> *@
 
-									@* <label asp-for="LastName" class="form-label">Last name</label>
-									<input asp-for="LastName" class="form-control" placeholder="Last name">
-									<span asp-validation-for="LastName" class="text-danger"></span> *@
+									<label asp-for="LastName" class="form-label fw-bold">Last name</label>
+									<input asp-for="LastName" class="form-control inputCustomize">
+									<span asp-validation-for="LastName" class="text-danger"></span>
 								</div>
 
 								<div class="mb-3">
-									<label for="username" class="form-label">Username</label>
-									<div class="input-group has-validation">
+									<label asp-for="UserName" class="form-label fw-bold">Username</label>
+									@* <label for="username" class="form-label">Username</label> *@
+									<div class="input-group">
 										<span class="input-group-text leftInputDesign">@@</span>
-										<input type="text" class="form-control anotherDesign" id="username">
-										<span class="text-danger"></span>
-										@* <label asp-for="Username" class="form-label">Username</label>
-										<input asp-for="Username" class="form-control" placeholder="Username">
-										<span asp-validation-for="Username" class="text-danger"></span> *@
+										@* <input type="text" class="form-control anotherDesign" id="username">
+										<span class="text-danger"></span> *@
+										<input asp-for="UserName" class="form-control anotherDesign">
+										<span asp-validation-for="UserName" class="text-danger"></span>
 									</div>
 								</div>
 
 								<div class="mb-3">
-									<label for="PhoneNumber" class="form-label fw-bold">Phone number</label>
+									@* <label for="PhoneNumber" class="form-label fw-bold">Phone number</label>
 									<input type="text" class="form-control inputCustomize" id="PhoneNumber" name="PhoneNumber">
-									<span class="text-danger"></span>
+									<span class="text-danger"></span> *@
 
-									@* <label asp-for="PhoneNumber" class="form-label">Phone number</label>
-									<input oninput="formatInputPhoneNumber(this)" maxlength="12" asp-for="PhoneNumber" class="form-control" placeholder="Phone number">
-									<span asp-validation-for="PhoneNumber" class="text-danger"></span> *@
+									<label asp-for="Phone" class="form-label fw-bold">Phone number</label>
+									<input oninput="formatInputPhoneNumber(this)" maxlength="12" asp-for="Phone" class="form-control inputCustomize">
+									<span asp-validation-for="Phone" class="text-danger"></span>
 								</div>
 
 								<div class="mb-3">
-									<label for="Email" class="form-label fw-bold">Email</label>
+									@* <label for="Email" class="form-label fw-bold">Email</label>
 									<input type="email" class="form-control inputCustomize" id="Email" name="Email">
-									<span class="text-danger"></span>
+									<span class="text-danger"></span> *@
 
-									@* <label asp-for="Email" class="form-label">Email</label>
-									<input asp-for="Email" class="form-control" placeholder="Email">
-									<span asp-validation-for="Email" class="text-danger"></span> *@
+									<label asp-for="Email" class="form-label fw-bold">Email</label>
+									<input asp-for="Email" class="form-control inputCustomize">
+									<span asp-validation-for="Email" class="text-danger"></span>
 								</div>
 
 								<div class="mb-3">
-									<label for="Photo" class="form-label fw-bold">Photo</label>
+									@* <label for="Photo" class="form-label fw-bold">Photo</label>
 									<input type="file" class="form-control anotherDesign" id="Photo" name="Photo">
-									<span class="text-danger"></span>
+									<span class="text-danger"></span> *@
 
-									@* <label asp-for="Photo" class="form-label">Select image:</label>
-
-									@if (editMode)
-									{
-									<input asp-for="Photo" class="form-control">
-									}
-									else
-									{
-									<input required asp-for="Photo" class="form-control">
-									}
-
-									<span asp-validation-for="Photo" class="text-danger"></span> *@
+									<label asp-for="Photo" class="form-label fw-bold">Select image:</label>
+									<input required asp-for="Photo" class="form-control anotherDesign">
+									<span asp-validation-for="Photo" class="text-danger"></span>
 								</div>
 
 								<div class="mb-3">
-									<label for="password" class="form-label fw-bold">Password</label>
+									@* <label for="password" class="form-label fw-bold">Password</label>
 									<input type="text" class="form-control inputCustomize" id="password" name="password">
-									<span class="text-danger"></span>
+									<span class="text-danger"></span> *@
 
-									@* <label asp-for="Password" class="form-label">Password</label>
-									<input asp-for="Password" value="@(editMode ? Model.Password : "")" type="password" class="form-control" placeholder="Password">
-									<span asp-validation-for="Password" class="text-danger"></span> *@
+									<label asp-for="Password" class="form-label fw-bold">Password</label>
+									<input asp-for="Password" type="password" class="form-control inputCustomize" placeholder="Password">
+									<span asp-validation-for="Password" class="text-danger"></span>
 								</div>
 
 								<div>
-									<label for="ConfirmPassword" class="form-label fw-bold">Confirm password</label>
+									@* <label for="ConfirmPassword" class="form-label fw-bold">Confirm password</label>
 									<input type="text" class="form-control anotherDesign" id="ConfirmPassword" name="ConfirmPassword">
-									<span class="text-danger"></span>
+									<span class="text-danger"></span> *@
 
-									@* <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
-									<input asp-for="ConfirmPassword" value="@(editMode ? Model.Password : "")" class="form-control" placeholder="Password">
-									<span asp-validation-for="ConfirmPassword" class="text-danger"></span> *@
+									<label asp-for="ConfirmPassword" class="form-label fw-bold">Confirm Password</label>
+									<input asp-for="ConfirmPassword" class="form-control inputCustomize" placeholder="Password">
+									<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
 								</div>
 								@* <input type="hidden" asp-for="ID" /> *@
 
