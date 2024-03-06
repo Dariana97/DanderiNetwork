@@ -77,6 +77,11 @@ namespace DanderiNetwork.Core.Application.Mappings
                 .ForMember(x => x.Error, opt => opt.Ignore())
                 .ReverseMap();
 
+            CreateMap<UpdateUserRequest, UpdateUserViewModel>()
+                  .ForMember(x => x.HasError, opt => opt.Ignore())
+                .ForMember(x => x.Error, opt => opt.Ignore())
+             .ReverseMap();
+
             #endregion
         }
     }

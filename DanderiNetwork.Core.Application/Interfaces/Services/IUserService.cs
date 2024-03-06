@@ -12,6 +12,7 @@ namespace DanderiNetwork.Core.Application.Interfaces.Services
         Task<AuthenticationResponse> LoginAsync(LoginViewModel vm);
         Task<RegisterResponse> RegisterAsync(SaveUserViewModel vm, string origin);
         Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordViewModel vm);
+        Task<UpdateUserResponse> Update(UpdateUserViewModel request);
         Task SignOutAsync();
     }
 }

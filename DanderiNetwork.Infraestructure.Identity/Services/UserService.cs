@@ -1,4 +1,5 @@
-﻿using DanderiNetwork.Core.Application.Dtos.User;
+﻿using DanderiNetwork.Core.Application.Dtos.Account;
+using DanderiNetwork.Core.Application.Dtos.User;
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Infraestructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -31,6 +32,57 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
 
             }).ToList();
         }
+
+        public async Task <UserResponse> GetByEmailUser(string email)
+        {
+            UserResponse response = new()
+            {
+                HasError = false,
+
+            };
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                response.HasError = true;
+                response.Error = "This user doesn't exist";
+                return response;
+            }
+            response.ID = user.Id;
+            response.ImageURL = user.ImageURL;
+         
+
+  
+            return response;
+        }
+
+        public async Task<UpdateUserResponse> Update(UpdateUserRequest request)
+        {
+            UpdateUserResponse response = new() { HasError = false };
+
+            ApplicationUser user = await _userManager.FindByIdAsync(request.Id);
+            if (user == null)
+            {
+                response.HasError = true;
+                response.Error = "This user doesn't exit";
+                return response;
+            }
+            user.ImageURL = request.ImageURL;
+            var result = await _userManager.UpdateAsync(user);
+
+
+            if (!result.Succeeded)
+            {
+                response.HasError = true;
+                response.Error = $"An error occurred while update user";
+                return response;
+            }
+
+            return response;
+
+
+        }
+
+
 
 
     }

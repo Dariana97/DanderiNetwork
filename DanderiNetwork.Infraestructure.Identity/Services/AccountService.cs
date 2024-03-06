@@ -3,6 +3,7 @@ using DanderiNetwork.Core.Application.Dtos.Email;
 using DanderiNetwork.Core.Application.Enums;
 using DanderiNetwork.Core.Application.Helpers;
 using DanderiNetwork.Core.Application.Interfaces.Services;
+using DanderiNetwork.Core.Domain.Entities;
 using DanderiNetwork.Infraestructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
@@ -69,7 +70,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             {
                 HasError = false
             };
-           
+
 
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
@@ -93,18 +94,18 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 UserName = request.UserName,
-                
+
             };
 
-           
-          
-           
-                var result = await _userManager.CreateAsync(user, request.Password);
 
-        
-         
 
-            
+
+            var result = await _userManager.CreateAsync(user, request.Password);
+
+
+
+
+
             if (result.Succeeded)
             {
 
@@ -116,7 +117,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                     //Body = $"Please confirm your account visiting this URL {verificationUri}",
                     Body = HtmlComponents.BodyEmail(verificationUri),
                     Subject = "Confirm registration"
-                }); 
+                });
             }
             else
             {
@@ -131,6 +132,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
         public async Task<string> ConfirmAccountAsync(string userId, string token)
         {
             var user = await _userManager.FindByIdAsync(userId);
+
             if (user == null)
             {
                 return $"No accounts registered with this user";
@@ -235,7 +237,17 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             return response;
         }
 
+
+      
+        
+
+   
     }
+
+    
+
+
+
 
 
 

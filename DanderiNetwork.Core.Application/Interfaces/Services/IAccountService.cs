@@ -1,4 +1,5 @@
 ﻿using DanderiNetwork.Core.Application.Dtos.Account;
+using DanderiNetwork.Core.Application.Dtos.User;
 
 namespace DanderiNetwork.Core.Application.Interfaces.Services
 {
@@ -9,6 +10,10 @@ namespace DanderiNetwork.Core.Application.Interfaces.Services
         Task<ForgotPasswordResponse> ForgotPasswordAsync(ForgotPasswordRequest request, string origin);
         Task<RegisterResponse> RegisterUserAsync(RegisterRequest request, string origin);
         Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request);
+
+
+
+
         Task SignOutAsync();
     }
 }

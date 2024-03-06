@@ -4,6 +4,7 @@ using DanderiNetwork.Core.Application.ViewModels.User;
 using DanderiNetworkApp.Midleware;
 using DanderiNetwork.Core.Application.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using DanderiNetwork.Core.Application.Dtos.User;
 
 
 namespace DanderiNetworkApp.Controllers
@@ -46,8 +47,58 @@ namespace DanderiNetworkApp.Controllers
                 vm.Error = userVm.Error;
                 return View(vm);
             }
-          
+
         }
+        private string UploadFile(IFormFile file, string ID, bool isEditMode = false, string imageURL = "")
+        {
+            if (isEditMode && file == null)
+            {
+                return imageURL;
+            }
+            /* Get file directory */
+
+            string basePath = $"/images/users/{ID}";
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
+
+            // Create doctor folder if not exists
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            /* Get file path */
+
+            // Gets the name of the original file
+            FileInfo fileInfo = new(file.FileName);
+
+            //Create a unique ID
+            Guid guid = Guid.NewGuid();
+
+            string fileName = guid + fileInfo.Extension;
+            string fileNameWithPath = Path.Combine(path, fileName);
+
+            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            if (isEditMode)
+            {
+                string[] oldImagePart = imageURL.Split('/');
+                string oldImageName = oldImagePart[^1];
+                string completeImageOldPath = Path.Combine(path, oldImageName);
+
+                if (System.IO.File.Exists(completeImageOldPath))
+                {
+                    System.IO.File.Delete(completeImageOldPath);
+                }
+            }
+
+            return $"{basePath}/{fileName}";
+        }
+
+
+    
 
         public async Task<IActionResult> Register( )
         {
@@ -64,6 +115,22 @@ namespace DanderiNetworkApp.Controllers
 
 
             RegisterResponse response = await _userService.RegisterAsync(vm, origin);
+
+            UserResponse user = await _userApplication.GetByEmailUser(vm.Email);
+
+            UpdateUserViewModel UpdateReVM = new()
+            {
+                Id = user.ID,
+                Email = user.Email
+            };
+
+            if (response.HasError != false)
+            {
+
+                UpdateReVM.ImageURL = UploadFile(vm.Photo, UpdateReVM.Id);
+                 await _userService.Update(UpdateReVM);
+                return View("Index");
+            }
             
             return View(vm);
         }
