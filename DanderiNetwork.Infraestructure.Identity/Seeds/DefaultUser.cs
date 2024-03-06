@@ -12,7 +12,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Seeds
         {
             ApplicationUser defaultUser = new();
             defaultUser.UserName = "Coquito1010";
-            defaultUser.Email = "darianacabreja@gmail.com";
+            defaultUser.Email = "darianacabrej@gmail.com";
             defaultUser.FirstName = "Dariana";
             defaultUser.LastName = "Cabreja";
             defaultUser.PhoneNumber = "+1(829) 802-1292";
