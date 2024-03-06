@@ -9,10 +9,10 @@ namespace DanderiNetwork.Core.Application.ViewModels.Following
     {
         public int ID { get; set; }
 
-        //public DateTime Created { get; set; }
-        //public int UserMainID { get; set; }      por ahora no es necesario//////
+        public DateTime Created { get; set; }
+        public string UserMainID { get; set; }      
 
-        public int FollowingUserID { get; set; }
+        public string FollowingUserID { get; set; }
         public string NameUserFollowed { get; set; }
         public string UsernameUserFollowed { get; set; }
     }

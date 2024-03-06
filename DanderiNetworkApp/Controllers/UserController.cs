@@ -5,6 +5,7 @@ using DanderiNetworkApp.Midleware;
 using DanderiNetwork.Core.Application.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace DanderiNetworkApp.Controllers
 {
     public class UserController : Controller
@@ -54,10 +55,12 @@ namespace DanderiNetworkApp.Controllers
             return View(new SaveUserViewModel());
         }
 
+        [HttpPost]
         public async Task<IActionResult> Register(SaveUserViewModel vm)
         {
 
             var origin = Request.Host.Value;
+            //Esto de acceder al Host directamente es provicional
 
 
             RegisterResponse response = await _userService.RegisterAsync(vm, origin);
@@ -125,8 +128,9 @@ namespace DanderiNetworkApp.Controllers
 
         public async Task<IActionResult> AccessDenied()
         {
-            await _commentService.GetAllViewModel();
-            return View(_userApplication.GetAllUsers());
+            
+           
+            return View(await _commentService.GetCommentsByPostId(2));
             
 
         }

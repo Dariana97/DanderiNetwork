@@ -21,6 +21,8 @@ namespace DanderiNetwork.Core.Application
 
             services.AddTransient<ICommentService, CommentServices>();
 
+            services.AddTransient<IFollowingService, FollowService>();
+
 
 
 
