@@ -4,11 +4,11 @@ namespace DanderiNetwork.Core.Application.ViewModels.User
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Debe colocar el correo del usuario")]
-        [DataType(DataType.Text)]
-        public string Email { get; set; }
+		[Required(ErrorMessage = "You must enter the username.")]
+		[DataType(DataType.Text)]
+		public string Username { get; set; }
 
-        [Required(ErrorMessage = "Debe colocar una contraseña")]
+        [Required(ErrorMessage = "You must enter the password.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

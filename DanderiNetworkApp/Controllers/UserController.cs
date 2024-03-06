@@ -65,7 +65,7 @@ namespace DanderiNetworkApp.Controllers
             string basePath = $"/images/users/{ID}";
             string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
 
-            // Create doctor folder if not exists
+            // Create user folder if not exists
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -105,7 +105,7 @@ namespace DanderiNetworkApp.Controllers
 
     
 
-        public async Task<IActionResult> Register( )
+        public async Task<IActionResult> Register()
         {
             return View(new SaveUserViewModel());
         }
@@ -114,11 +114,12 @@ namespace DanderiNetworkApp.Controllers
         public async Task<IActionResult> Register(SaveUserViewModel vm)
         {
 
-            var origin = Request.Host.Value;
-            //Esto de acceder al Host directamente es provicional
+			//var origin = Request.Host.Value;
+			//Esto de acceder al Host directamente es provicional
 
+			var origin = Request.Headers["origin"];
 
-            RegisterResponse response = await _userService.RegisterAsync(vm, origin);
+			RegisterResponse response = await _userService.RegisterAsync(vm, origin);
 
             UserResponse user = await _userApplication.GetByEmailUser(vm.Email);
 
@@ -130,13 +131,12 @@ namespace DanderiNetworkApp.Controllers
 
             if (response.HasError != false)
             {
-
                 UpdateReVM.ImageURL = UploadFile(vm.Photo, UpdateReVM.Id);
-                 await _userService.Update(UpdateReVM);
+                await _userService.Update(UpdateReVM);
                 return View("Index");
             }
             
-            return View(vm);
+            return View();
         }
 
         public async Task<IActionResult> ConfirmEmail(string userId, string token)

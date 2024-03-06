@@ -99,7 +99,6 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
 
 
 
-
             var result = await _userManager.CreateAsync(user, request.Password);
 
 
