@@ -71,7 +71,6 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 HasError = false
             };
 
-
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
             {
@@ -153,7 +152,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var route = "Home/ConfirmEmail";
+            var route = "User/ConfirmEmail";
             var Uri = new Uri(string.Concat($"{origin}/", route));
             var verificationUri = QueryHelpers.AddQueryString(Uri.ToString(), "userId", user.Id);
             verificationUri = QueryHelpers.AddQueryString(verificationUri, "token", code);

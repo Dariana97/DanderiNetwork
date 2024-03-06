@@ -129,7 +129,7 @@ namespace DanderiNetworkApp.Controllers
                 Email = user.Email
             };
 
-            if (response.HasError != false)
+            if (response.HasError != true)
             {
                 UpdateReVM.ImageURL = UploadFile(vm.Photo, UpdateReVM.Id);
                 await _userService.Update(UpdateReVM);
