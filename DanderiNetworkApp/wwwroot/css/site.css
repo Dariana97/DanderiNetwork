@@ -1,22 +1,166 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: #18191A;
+    /*margin-bottom: 60px;*/
+    font-family: "Inter", sans-serif;
+}
+
+/* Menu style */
+
+.logoimg {
+    width: 70px;
+}
+
+.highlighted {
+    color: #0ACE8C;
+}
+
+.navitems {
+    font-size: 18px;
+}
+
+    .navitems:hover {
+        background-color: #262626;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+.menu-fixed {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 280px; /* Ancho del menú */
+    overflow-y: auto; /* Permitir scroll en el menú si es necesario */
+}
+
+.main-content {
+    /*overflow-y: auto; /* Permitir scroll solo para el contenido del main */
+    /*padding-left: 280px; /* Ajustar el padding izquierdo para dejar espacio para el menú */
+    /*height: 100vh; /* Ajustar el alto del contenido para que ocupe toda la altura disponible */
+    box-sizing: border-box; /* Ajustar el box-sizing para incluir el padding en el cálculo del tamaño total */
+}
+
+/* Login & Sign Up */
+
+.probanding {
+    /*es para centrar el div del login*/
+    margin-top:12%;
+}
+
+.loginCard {
+    background-color: #242526;
+    border-radius: 30px;
+    border: 0;
+}
+
+.loginBTN {
+    background-color: #0ACE8C;
+    color: #252525;
+    border: none;
+    font-weight: bold;
+}
+
+    .loginBTN:hover {
+        background-color: #10F1A5;
+        color: #252525;
+        border: none;
+        font-weight: bold;
+    }
+
+    .loginBTN:active {
+        background-color: #089D6B;
+        color: #252525;
+        border: none;
+        font-weight: bold;
+    }
+
+    .loginBTN:focus {
+        background-color: #089D6B;
+        color: #252525;
+        border: none;
+        font-weight: bold;
+    }
+
+.inputCustomize {
+    background-color: #4E4F50;
+    border: none;
+}
+
+    .inputCustomize:hover {
+        background-color: #4E4F50;
+        border: none;
+    }
+
+.anotherDesign {
+    background-color: #4E4F50;
+}
+
+    .anotherDesign:hover {
+        background-color: #4E4F50;
+    }
+
+.leftInputDesign {
+    background-color: #3A3A3A;
+}
+
+.homeImage {
+    position: absolute;
+    left: 5%;
+    top: 2%;
+    z-index: -1;
+}
+
+.modalReset {
+    background-color: #313131;
+    border-radius: 25px;
+    border: 0;
+    width: 80%;
+}
+
+.modalSignUp {
+    width: 90%;
+}
+
+.policyTextSignUp {
+    font-size: 12px;
+}
+
+.footer ul li {
+    font-size: 12px;
+}
+
+.modal-header {
+    padding-bottom: 0;
+}
+
+.modal-body {
+    padding-top: 10px;
+}
+
+/* Home style */
+
+.inputCustomizeHome {
+    border-radius: 0;
+    border: 0;
+    background-color: #242526;
+    border-bottom: 1px solid #959595;
 }

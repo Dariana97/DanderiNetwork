@@ -22,6 +22,11 @@ namespace DanderiNetworkApp.Controllers
             _userApplication = userApplication;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [ServiceFilter(typeof(LoginAuthorize))]
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel vm)
@@ -50,7 +55,6 @@ namespace DanderiNetworkApp.Controllers
 
         public async Task<IActionResult> Register( )
         {
-
             return View(new SaveUserViewModel());
         }
 
