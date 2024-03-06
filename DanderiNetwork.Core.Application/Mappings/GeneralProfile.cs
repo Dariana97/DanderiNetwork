@@ -29,6 +29,9 @@ namespace DanderiNetwork.Core.Application.Mappings
 
             CreateMap<Comment, CommentViewModel>()
                 .ForMember(dest => dest.Replies, opt => opt.Ignore())
+                .ForMember(dest => dest.UserName, opt => opt.Ignore())
+                 .ForMember(dest => dest.UserName, opt => opt.Ignore())
+                 .ForMember(dest => dest.UserNameReplied, opt => opt.Ignore())
                 .ReverseMap()
                 
                 .ForMember(dest => dest.Post, opt => opt.Ignore());
@@ -73,6 +76,11 @@ namespace DanderiNetwork.Core.Application.Mappings
                 .ForMember(x => x.HasError, opt => opt.Ignore())
                 .ForMember(x => x.Error, opt => opt.Ignore())
                 .ReverseMap();
+
+            CreateMap<UpdateUserRequest, UpdateUserViewModel>()
+                  .ForMember(x => x.HasError, opt => opt.Ignore())
+                .ForMember(x => x.Error, opt => opt.Ignore())
+             .ReverseMap();
 
             #endregion
         }

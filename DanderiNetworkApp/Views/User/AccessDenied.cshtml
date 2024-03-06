@@ -1,8 +1,24 @@
-﻿@using DanderiNetwork.Core.Application.Dtos.User;
-@model List<UserResponse>
+﻿@using DanderiNetwork.Core.Application.ViewModels.Comment;
+@model List<CommentViewModel>
+   @*  @model UserResponse *@
 
 @foreach (var comment in Model)
 {
-   <p>@comment.ID</p>
+
+    <p>@comment.ID</p>
     <p>@comment.UserName</p>
+    <p>@comment.UserID</p>
+    <p>@comment.UserIDReplied</p>
+
+    if (comment.Replies.Count != 0)
+    {
+        <p>Soy un comentario respuesta</p>
+        <p>@comment.ID</p>
+        <p>@comment.UserName</p>
+        <p>@comment.UserID</p>
+        <p>@comment.UserIDReplied</p>
+    }
 }
+
+@* <p>@Model.ID</p>
+<p>@Model.UserName</p> *@

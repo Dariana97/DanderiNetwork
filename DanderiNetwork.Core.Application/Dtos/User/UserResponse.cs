@@ -11,5 +11,8 @@ namespace DanderiNetwork.Core.Application.Dtos.User
         public string Password { get; set; }
         public string Email { get; set; }
         public string ImageURL { get; set; }
+        public bool HasError { get; set; }
+        public string Error { get; set; }
+
     }
 }

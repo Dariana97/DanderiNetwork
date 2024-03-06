@@ -1,7 +1,7 @@
-﻿using DanderiNetwork.Core.Application.Dtos.Account;
-using DanderiNetwork.Core.Application.Interfaces.Services;
-using DanderiNetwork.Core.Application.ViewModels.User;
-using DanderiNetworkApp.Midleware;
+﻿using DanderiNetwork.Core.Application.Interfaces.Services;
+using DanderiNetwork.Core.Application.ViewModels.Comment;
+using DanderiNetwork.Core.Application.ViewModels.Following;
+using DanderiNetwork.Core.Application.ViewModels.Post;
 using DanderiNetworkApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -12,43 +12,85 @@ namespace DanderiNetworkApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUserService _userService;
+        private readonly ICommentService _commentService;
+        private readonly IPostService _postService;
+        private readonly IFollowingService _followingService;
 
-        public HomeController(ILogger<HomeController> logger, IUserService userService)
+        public HomeController(ILogger<HomeController> logger, ICommentService commentService, IPostService postService, IFollowingService followingService)
         {
             _logger = logger;
-            _userService = userService;
+            _commentService = commentService;
+            _postService = postService;
+            _followingService = followingService;
         }
 
-        [ServiceFilter(typeof(LoginAuthorize))]
-        public async Task< IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            SaveUserViewModel vm = new();
-
-            vm.FirstName = "tu";
-            vm.LastName = "Mismo";
-            vm.Email = "dariana.cabreja.inpha@gmail.com";
-            vm.UserName = "ti";
-            vm.Password = "@Danderi2910";
-            vm.ConfirmPassword = "@Danderi2910";
-            vm.Phone = "+1(829) 802-1292";
-            vm.ImageURL = @"https://i.pinimg.com/736x/ab/15/be/ab15bedf8a466846e415a64fa1933941.jpg";
 
 
-            //var origin = Request.Headers["Origin"];
-            /* var origin = Request.Headers["origin"];*/
-            //HttpRequest context = _httpContextAccessor.HttpContext;
-
-
-
-            var origin = Request.Host.Value;
-
-            //string origin = context.Request.Headers["Origin"].ToString();
-
-
-            RegisterResponse response = await _userService.RegisterAsync(vm, origin);
             return View();
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPost(SavePostViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Suceess = "This post is invalid";
+                return View("Index");
+
+            }
+            vm.Created = DateTime.Now;
+            var postSaving = await _postService.Add(vm);
+
+            if (postSaving != null)
+            {
+                ViewBag.Suceess = "Post was save successfully";
+                return View("Index");
+            }
+            ViewBag.Suceess = "Problems while saving your post";
+            return View("Index");
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteComent([FromRoute] int id)
+        {
+            await _commentService.Delete(id);
+            return View("Index");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletePost([FromRoute] int id)
+        {
+            await _postService.Delete(id);
+            return View("Index");
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddCommentToPost(SaveCommentViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Suceess = "Your comment wasn't saved";
+                return View("Index");
+
+            }
+            vm.Created = DateTime.Now;  
+            var commentSaving = await _commentService.Add(vm);
+
+            if (commentSaving != null)
+            {
+                
+                return View("Index");
+            }
+            ViewBag.Suceess = "Problems while saving your post";
+            return View("Index");
         }
 
       

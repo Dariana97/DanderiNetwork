@@ -22,7 +22,7 @@ namespace DanderiNetwork.Core.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<SaveViewModel> Add(SaveViewModel vm)
+        public virtual async Task<SaveViewModel> Add(SaveViewModel vm)
         {
             Model model = _mapper.Map<Model>(vm);
 

@@ -8,7 +8,7 @@ namespace DanderiNetwork.Core.Application.ViewModels.Comment
         public DateTime Created { get; set; }
         public int? PostID { get; set; }
         public string UserID { get; set; }
-        public string? UserIdReplied { get; set; }
+        public string? UserIDReplied { get; set; }
         public string UserName { get; set; }
         public string? UserNameReplied { get; set; }
         public string Content { get; set; }

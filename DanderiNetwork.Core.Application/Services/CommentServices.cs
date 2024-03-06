@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DanderiNetwork.Core.Application.Dtos.Account;
 using DanderiNetwork.Core.Application.Interfaces.Entities;
 using DanderiNetwork.Core.Application.Interfaces.Repositories;
 using DanderiNetwork.Core.Application.Interfaces.Services;
@@ -12,6 +13,7 @@ namespace DanderiNetwork.Core.Application.Services
         private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
         private readonly IUserApplication _UserApplication;
+        private readonly AuthenticationResponse userViewModel;
 
         public CommentServices(ICommentRepository commentRepository, IMapper mapper, IUserApplication UserRepository) : base(commentRepository, mapper)
         {
@@ -20,7 +22,7 @@ namespace DanderiNetwork.Core.Application.Services
             _UserApplication = UserRepository;
 
 
-    }
+        }
 
         public override async Task<List<CommentViewModel>> GetAllViewModel()
         {
@@ -29,7 +31,7 @@ namespace DanderiNetwork.Core.Application.Services
             List<CommentViewModel> mainComments = new();
 
             var mainComents = comments.Select(cm =>
-            {   
+            {
                 if (cm.IdReference != 0)
                 {
                     mainComments.Add(cm);
@@ -48,41 +50,94 @@ namespace DanderiNetwork.Core.Application.Services
 
         }
 
-        public  async Task<List<CommentViewModel>> GetCommentsByPostId(int postId)
+        public async Task<List<CommentViewModel>> GetCommentsByPostId(int postId)
         {
+            //    var comments = await base.GetAllViewModel();
+            //    var Users =  _UserApplication.GetAllUsers();
+
+
+            //    List<CommentViewModel> mainComments = comments.Where(c => c.PostID == postId && c.IdReference == null).ToList();
+
+
+            //    foreach(var comment in mainComments)
+            //    {
+            //        var userMain = Users?.Where(u => u.ID == comment.UserID).FirstOrDefault();
+
+
+
+
+            //                comment.UserName = userMain.UserName;//esto tiene saco de disparate
+            //                comment.UserID = userMain.ID;
+
+
+            //        comment.PostID = postId; //posibles erroes en este atributo
+
+
+
+            //    }
+            //    foreach (var comment in mainComments)
+            //    {
+
+            //        var commentsReplies = comments.Where(c => c.IdReference == comment.ID).ToList();
+
+
+
+            //        commentsReplies.ForEach(comment =>
+            //        {
+            //            var userSecond = Users?.Where(u => u.ID == comment.UserIDReplied).FirstOrDefault();
+            //            comment.UserName = userSecond.UserName;
+            //            comment.UserID = userSecond.ID;
+
+            //        });    
+
+
+            //        comment.Replies = commentsReplies;
+
+
+
+            //    }
+
+            //    return _mapper.Map<List<CommentViewModel>>(mainComments);
+            //}
+
             var comments = await base.GetAllViewModel();
-            var Users =  _UserApplication.GetAllUsers();
+            var users = _UserApplication.GetAllUsers();
 
+            List<CommentViewModel> mainComments = comments
+                .Where(c => c.PostID == postId && c.IdReference == null)
+                .ToList();
 
-            List<CommentViewModel> mainComments = comments.Where(c => c.PostID == postId && c.IdReference == 0).ToList();
-
-
-            foreach(var comment in mainComments)
+            mainComments.ForEach(comment =>
             {
-                var userMain = Users?.Where(u => u.ID == comment.UserID).FirstOrDefault();
-
-                var userSecond = Users?.Where(u => u.ID == comment.UserIdReplied).FirstOrDefault();
-                foreach(var user in Users)
+                var userMain = users?.FirstOrDefault(u => u.ID == comment.UserID);
+                if (userMain != null)
                 {
-                    if(user.ID == comment.UserID)
-                    {
-                        comment.UserName = user.UserName;//esto tiene saco de disparate
-                        comment.UserID = user.ID;
-                    }
+                    comment.UserName = userMain.UserName;
+                    comment.UserID = userMain.ID;
                 }
-               
-                comment.PostID = postId; //posibles erroes en este atributo
-                comment.UserIdReplied = userSecond.ID;
-                comment.UserNameReplied = userSecond.UserName;
 
-            }
-            foreach (var comment in mainComments)
-            {
-                comment.Replies = comments.Where(c => c.IdReference == comment.ID).ToList();
+                comment.PostID = postId;
 
-            }
+                comment.Replies = comments
+                    .Where(c => c.IdReference == comment.ID)
+                    .ToList();
+
+                comment.Replies.ForEach(reply =>
+                {
+                    var userSecond = users?.FirstOrDefault(u => u.ID == reply.UserIDReplied);
+                    if (userSecond != null)
+                    {
+                        reply.UserName = userSecond.UserName;
+                        reply.UserID = userSecond.ID;
+                    }
+                });
+            });
 
             return _mapper.Map<List<CommentViewModel>>(mainComments);
+
+
+
+
         }
 
 
