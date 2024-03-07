@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -25,6 +25,10 @@
     <ProjectReference Include="..\DanderiNetwork.Infraestructure.Identity\DanderiNetwork.Infraestructure.Identity.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Infraestructure.Persistence\DanderiNetwork.Infraestructure.Persistence.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Infraestructure.Shared\DanderiNetwork.Infraestructure.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\imagePost\" />
   </ItemGroup>
 
 </Project>

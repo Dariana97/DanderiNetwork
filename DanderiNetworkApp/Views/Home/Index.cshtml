@@ -22,10 +22,10 @@
 								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
 							</div>
 
-							<form method="post" class="col-11">
+							<form method="post" class="col-11" asp-controller="Home" asp-action="AddPost" enctype="multipart/form-data">
 								<div class="mb-4 d-flex justify-content-center">
 									<div class="col-12">
-										<textarea class="form-control inputCustomizeHome" placeholder="What are u thinking, Lara?!" style="height: 50px"></textarea>
+										<textarea for="Caption" id = "Caption" name = "Caption"class="form-control inputCustomizeHome" placeholder="What are u thinking, Lara?!" style="height: 50px"></textarea>
 										<span class="text-danger"></span>
 									</div>
 								</div>
@@ -43,7 +43,7 @@
 								<div class="collapse" id="collapseVideoURLInput">
 									<div class="mb-3 d-flex justify-content-center">
 										<div class="col-12">
-											<label for="username" class="form-label">Video URL</label>
+											<label for="VideoUrl" class="form-label">Video URL</label>
 											<div class="input-group has-validation">
 												<span class="input-group-text leftInputDesign">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
@@ -51,8 +51,8 @@
 														<path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
 													</svg>
 												</span>
-												<input type="text" class="form-control anotherDesign" id="username">
-												<span class="text-danger"></span>
+												<input type="text" class="form-control anotherDesign" id="VideoUrl" name="VideoUrl">
+												<span class="text-danger" ></span>
 											</div>
 										</div>
 									</div>
@@ -91,190 +91,108 @@
 
 				</div>
 
-				<div class="col-12 mb-4">
+				@foreach(PostViewModel vm in Model)
+				{
+					<div class="col-12 mb-4">
 
-					<div class="card homeCard d-flex justify-content-center align-items-center py-2">
+						<div class="card homeCard d-flex justify-content-center align-items-center py-2">
 
-						<div class="card-body col-10 d-flex justify-content-center">
+							<div class="card-body col-10 d-flex justify-content-center">
 
-							<div class="col-1 d-flex justify-content-end">
-								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
-							</div>
-
-							<div class="col-11">
-								<div class="d-flex justify-content-between">
-									<div class="col-11 postText">
-										<div class="d-flex gap-2">
-											<p class="mb-0 fw-medium">Lara Figuereo C.</p>
-											<p class="text-muted mb-0">@@laraF</p>
-										</div>
-										<p class="small text-secondary">29/02/2024 a las 12:00</p>
-									</div>
-									<div class="col-1 d-flex justify-content-end">
-										<div class="dropdown">
-											<a href="#" class="d-flex align-items-center text-white text-decoration-none " id="dropdownOptions" data-bs-toggle="dropdown" aria-expanded="false">
-												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-													<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-												</svg>
-											</a>
-											<ul class="dropdown-menu dropdown-menu-dark text-small rounded-3 dropdownOption" aria-labelledby="dropdownOptions">
-												<li>
-													<a class="dropdown-item text-white small d-flex align-items-center gap-2" href="#">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-															<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-															<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-														</svg>
-														Edit
-													</a>
-												</li>
-												<li>
-													<a class="dropdown-item text-danger small d-flex align-items-center gap-2" href="#">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-															<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-														</svg>
-														Delete
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
+								<div class="col-1 d-flex justify-content-end">
+									<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
 								</div>
 
-								<div class="d-flex justify-content-start">
-
-									<p class="postText">“La vida da muchas vueltas, pero más vueltas das tú en mi cabeza”</p>
-
-								</div>
-
-
-								<div class=" d-flex justify-content-center">
-									<div class="col-12 d-flex justify-content-between">
-
-										<form method="post" class="col-10 collapse" id="commentForm">
-											<div class="mb-4 d-flex gap-3 align-items-center">
-												<div class="col-12">
-													<textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
-													<span class="text-danger postText"></span>
-												</div>
-
-												<div class="col-2 d-flex justify-content-end">
-													<button type="submit" class="btn btn-sm w-100 rounded-5 btn-dark loginBTN">Post</button>
-												</div>
+								<div class="col-11">
+									<div class="d-flex justify-content-between">
+										<div class="col-11 postText">
+											<div class="d-flex gap-2">
+												<p class="mb-0 fw-medium">@vm.UserName</p>
+												<p class="text-muted mb-0">@@@vm.UserName</p>
 											</div>
+											<p class="small text-secondary">@vm.Created</p>
+										</div>
+										<div class="col-1 d-flex justify-content-end">
+											<div class="dropdown">
+												<a href="#" class="d-flex align-items-center text-white text-decoration-none " id="dropdownOptions" data-bs-toggle="dropdown" aria-expanded="false">
+													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+														<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+													</svg>
+												</a>
+												<ul class="dropdown-menu dropdown-menu-dark text-small rounded-3 dropdownOption" aria-labelledby="dropdownOptions">
+													<li>
+														<a class="dropdown-item text-white small d-flex align-items-center gap-2" href="#">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+																<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+																<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+															</svg>
+															Edit
+														</a>
+													</li>
+													<li>
+														<a class="dropdown-item text-danger small d-flex align-items-center gap-2" href="#">
+															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+																<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+															</svg>
+															Delete
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
 
-										</form>
+									<div>
+										@*d-flex justify-content-start*@
+										<img src="@vm.ImageURL" class="object-fit-cover w-100 rounded-1" alt="Image Post" />
+										<p class="postText mt-3"> <span class="fw-medium">@vm.UserName</span>@vm.Caption</p>
 
 									</div>
-								</div>
 
-								<div class="col-12 d-flex justify-content-end">
-									<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm">Reply</a>
+
+									<div class=" d-flex justify-content-center">
+										<div class="col-12 d-flex justify-content-between">
+
+											<form method="post" class="col-10 collapse" id="commentForm1">
+												<div class="mb-4 d-flex gap-3 align-items-center">
+													<div class="col-12">
+														<textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
+														<span class="text-danger postText"></span>
+													</div>
+
+													<div class="col-2 d-flex justify-content-end">
+														<button type="submit" class="btn btn-sm w-100 rounded-5 btn-light loginBTN">Post</button>
+													</div>
+												</div>
+
+											</form>
+
+										</div>
+									</div>
+
+									<div class="col-12 d-flex justify-content-between">
+										<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm2">
+											See comments
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+												<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+											</svg>
+										</a>
+										<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm1">Reply</a>
+									</div>
+
 								</div>
 
 							</div>
 
 						</div>
 
-					</div>
-
-
-				</div>
-
-				<div class="col-12 mb-4">
-
-					<div class="card homeCard d-flex justify-content-center align-items-center py-2">
-
-						<div class="card-body col-10 d-flex justify-content-center">
-
-							<div class="col-1 d-flex justify-content-end">
-								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
-							</div>
-
-							<div class="col-11">
-								<div class="d-flex justify-content-between">
-									<div class="col-11 postText">
-										<div class="d-flex gap-2">
-											<p class="mb-0 fw-medium">Lara Figuereo C.</p>
-											<p class="text-muted mb-0">@@laraF</p>
-										</div>
-										<p class="small text-secondary">29/02/2024 a las 12:00</p>
-									</div>
-									<div class="col-1 d-flex justify-content-end">
-										<div class="dropdown">
-											<a href="#" class="d-flex align-items-center text-white text-decoration-none " id="dropdownOptions" data-bs-toggle="dropdown" aria-expanded="false">
-												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-													<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-												</svg>
-											</a>
-											<ul class="dropdown-menu dropdown-menu-dark text-small rounded-3 dropdownOption" aria-labelledby="dropdownOptions">
-												<li>
-													<a class="dropdown-item text-white small d-flex align-items-center gap-2" href="#">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-															<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-															<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-														</svg>
-														Edit
-													</a>
-												</li>
-												<li>
-													<a class="dropdown-item text-danger small d-flex align-items-center gap-2" href="#">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-															<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-														</svg>
-														Delete
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div>
-									@*d-flex justify-content-start*@
-									<img src="https://media.revistagq.com/photos/6490312847440fcd9be41fb7/master/pass/flash.jpg" class="object-fit-cover w-100 rounded-1" alt="bad bunny" />
-									<p class="postText mt-3"> <span class="fw-medium">LaraF</span> A mi papi le encanta mucho esta serie, la recomiendo mucho. Pero Airi me cae mal.</p>
-
-								</div>
-
-
-								<div class=" d-flex justify-content-center">
-									<div class="col-12 d-flex justify-content-between">
-
-										<form method="post" class="col-10 collapse" id="commentForm1">
-											<div class="mb-4 d-flex gap-3 align-items-center">
-												<div class="col-12">
-													<textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
-													<span class="text-danger postText"></span>
-												</div>
-
-												<div class="col-2 d-flex justify-content-end">
-													<button type="submit" class="btn btn-sm w-100 rounded-5 btn-light loginBTN">Post</button>
-												</div>
-											</div>
-
-										</form>
-
-									</div>
-								</div>
-
-								<div class="col-12 d-flex justify-content-between">
-									<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm2">
-										See comments
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-											<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-										</svg>
-									</a>
-									<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm1">Reply</a>
-								</div>
-
-							</div>
-
-						</div>
 
 					</div>
+					
+				}
+				
 
 
-				</div>
 
 				<div class="col-12 mb-4">
 

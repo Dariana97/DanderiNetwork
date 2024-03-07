@@ -35,13 +35,23 @@ namespace DanderiNetwork.Core.Application.Services
             var modelList = await base.GetAllViewModel();
             modelList = modelList.Where(p => p.UserID == userViewModel.Id).ToList();
 
-            var postWithComment = modelList.Select(async post =>  {
+			modelList.ForEach(async post => {
 
+                post.UserName = userViewModel.UserName;
                 post.CommentList = await _commentService.GetCommentsByPostId(post.ID);
+            
 
             }); 
 
             return _mapper.Map<List<PostViewModel>>(modelList);
         }
-    }
+
+		public override async Task<SavePostViewModel> Add(SavePostViewModel vm)
+		{
+            vm.UserID = userViewModel.Id;
+			
+
+			return await base.Add(vm);
+		}
+	}
 }

@@ -20,7 +20,7 @@ namespace DanderiNetworkApp.Controllers
         {
             
 
-            return View(await _followingService.GetAllViewModel());
+            return View(/*await _followingService.GetAllViewModel()*/);
         }
 
         public async Task<IActionResult> Follow(SaveFollowingViewModel vm)

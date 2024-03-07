@@ -29,9 +29,9 @@ namespace DanderiNetworkApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+            
 
-
-            return View();
+            return View(await _postService.GetAllViewModel());
 
         }
 
@@ -50,10 +50,16 @@ namespace DanderiNetworkApp.Controllers
             {
                 ViewBag.Suceess = "This post is invalid";
                 return View("Index");
-
+            
             }
             vm.Created = DateTime.Now;
             var postSaving = await _postService.Add(vm);
+        
+
+            if (vm.ImageURL == null && vm.VideoUrl == null) {
+                postSaving.ImageURL = UploadFile(vm.Photo, postSaving.ID);
+                await _postService.Update(postSaving, postSaving.ID);
+            }
 
             if (postSaving != null)
             {
@@ -66,7 +72,55 @@ namespace DanderiNetworkApp.Controllers
 
         }
 
-        [HttpGet]
+		private string UploadFile(IFormFile file, int ID, bool isEditMode = false, string imageURL = "")
+		{
+			if (isEditMode && file == null)
+			{
+				return imageURL;
+			}
+			/* Get file directory */
+
+			string basePath = $"/images/imagePost/{ID}";
+			string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
+
+			// Create user folder if not exists
+			if (!Directory.Exists(path))
+			{
+				Directory.CreateDirectory(path);
+			}
+
+			/* Get file path */
+
+			// Gets the name of the original file
+			FileInfo fileInfo = new(file.FileName);
+
+			//Create a unique ID
+			Guid guid = Guid.NewGuid();
+
+			string fileName = guid + fileInfo.Extension;
+			string fileNameWithPath = Path.Combine(path, fileName);
+
+			using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+			{
+				file.CopyTo(stream);
+			}
+
+			if (isEditMode)
+			{
+				string[] oldImagePart = imageURL.Split('/');
+				string oldImageName = oldImagePart[^1];
+				string completeImageOldPath = Path.Combine(path, oldImageName);
+
+				if (System.IO.File.Exists(completeImageOldPath))
+				{
+					System.IO.File.Delete(completeImageOldPath);
+				}
+			}
+
+			return $"{basePath}/{fileName}";
+		}
+
+		[HttpGet]
         public async Task<IActionResult> DeleteComent([FromRoute] int id)
         {
             await _commentService.Delete(id);

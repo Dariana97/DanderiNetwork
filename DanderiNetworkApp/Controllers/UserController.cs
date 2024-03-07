@@ -56,7 +56,7 @@ namespace DanderiNetworkApp.Controllers
 
         }
 
-        [ServiceFilter(typeof(LoginAuthorize))]
+        
         private string UploadFile(IFormFile file, string ID, bool isEditMode = false, string imageURL = "")
         {
             if (isEditMode && file == null)
@@ -132,7 +132,7 @@ namespace DanderiNetworkApp.Controllers
                 Id = user.ID,
                 Email = user.Email
             };
-
+            
             if (response.HasError != true)
             {
                 UpdateReVM.ImageURL = UploadFile(vm.Photo, UpdateReVM.Id);

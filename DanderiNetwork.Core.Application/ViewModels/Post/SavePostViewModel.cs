@@ -10,8 +10,8 @@ namespace DanderiNetwork.Core.Application.ViewModels.Post
 {
     public class SavePostViewModel
     {
-        // Se puede quitar el null?
-        public int? ID { get; set; }
+        [Key]
+        public int ID { get; set; }
 
         [DataType(DataType.Url)]
         public string? VideoUrl { get; set; }
@@ -20,8 +20,8 @@ namespace DanderiNetwork.Core.Application.ViewModels.Post
         [DataType(DataType.Text)]
         public string Caption { get; set; }
        
-        public int? UserID { get; set; }
-        [DataType(DataType.Url)]
+        public string? UserID { get; set; }
+        
         public string? ImageURL { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime? Created { get; set; }
