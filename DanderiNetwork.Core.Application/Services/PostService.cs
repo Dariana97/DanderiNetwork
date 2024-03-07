@@ -33,12 +33,13 @@ namespace DanderiNetwork.Core.Application.Services
         {
             
             var modelList = await base.GetAllViewModel();
-            modelList = modelList.Where(p => p.UserID == userViewModel.Id).ToList();
+			var comments = await _commentService.GetAllViewModel();
+			modelList = modelList.Where(p => p.UserID == userViewModel.Id).ToList();
 
 			modelList.ForEach(async post => {
 
                 post.UserName = userViewModel.UserName;
-                post.CommentList = await _commentService.GetCommentsByPostId(post.ID);
+                post.CommentList = comments.Where(p => p.PostID == post.ID).ToList();
             
 
             }); 

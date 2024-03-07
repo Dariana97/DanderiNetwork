@@ -5,6 +5,7 @@ using DanderiNetwork.Core.Application.Interfaces.Repositories;
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.Comment;
 using DanderiNetwork.Core.Domain.Entities;
+using DanderiNetwork.Core.Application.Dtos.User;
 
 namespace DanderiNetwork.Core.Application.Services
 {
@@ -14,15 +15,17 @@ namespace DanderiNetwork.Core.Application.Services
         private readonly IMapper _mapper;
         private readonly IUserApplication _UserApplication;
         private readonly AuthenticationResponse userViewModel;
+        private readonly List<UserResponse> users;
 
         public CommentServices(ICommentRepository commentRepository, IMapper mapper, IUserApplication UserRepository) : base(commentRepository, mapper)
         {
             _commentRepository = commentRepository;
             _mapper = mapper;
             _UserApplication = UserRepository;
+			 users = _UserApplication.GetAllUsers();
 
 
-        }
+		}
 
         public override async Task<List<CommentViewModel>> GetAllViewModel()
         {
@@ -101,7 +104,7 @@ namespace DanderiNetwork.Core.Application.Services
             //}
 
             var comments = await base.GetAllViewModel();
-            var users = _UserApplication.GetAllUsers();
+            
 
             List<CommentViewModel> mainComments = comments
                 .Where(c => c.PostID == postId && c.IdReference == null)

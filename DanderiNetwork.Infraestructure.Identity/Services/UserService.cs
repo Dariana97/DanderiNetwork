@@ -15,9 +15,9 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             _userManager = userManager;
         }
 
-        public List<UserResponse> GetAllUsers()
+        public  List<UserResponse> GetAllUsers()
         {
-            return _userManager.Users.Select(user =>
+            return  _userManager.Users.Select(user =>
 
             new UserResponse
             {

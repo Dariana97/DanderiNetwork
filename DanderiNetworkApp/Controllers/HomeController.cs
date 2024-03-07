@@ -29,9 +29,10 @@ namespace DanderiNetworkApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
+            await _postService.GetAllViewModel();
+                
 
-            return View(await _postService.GetAllViewModel());
+			return View(await _postService.GetAllViewModel());
 
         }
 
