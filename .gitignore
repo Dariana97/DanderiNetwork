@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/DanderiNetworkApp/wwwroot/images/users/394fb63a-380d-4a38-bcf6-903542d5435e/ec1fd992-9200-4730-8bb4-03f6cd920009.png
+/DanderiNetworkApp/Views/Home/Index.cshtml
+/DanderiNetwork.Core.Domain/Entities
+/DanderiNetwork.Core.Domain/Common

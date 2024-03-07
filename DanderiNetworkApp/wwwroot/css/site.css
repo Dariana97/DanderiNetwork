@@ -43,7 +43,18 @@ body {
         font-weight: bold;
     }
 
+/*.menu-fixed {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 280px;*/ /* Ancho del menú */
+    /*overflow-y: auto;*/ /* Permitir scroll en el menú si es necesario */
+/*}*/
+
 .menu-fixed {
+    padding: 2rem 2.5rem;
+    z-index: 10;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -51,6 +62,7 @@ body {
     width: 280px; /* Ancho del menú */
     overflow-y: auto; /* Permitir scroll en el menú si es necesario */
 }
+
 
 .main-content {
     /*overflow-y: auto; /* Permitir scroll solo para el contenido del main */
@@ -163,4 +175,31 @@ body {
     border: 0;
     background-color: #242526;
     border-bottom: 1px solid #959595;
+}
+
+.homeCard {
+    background-color: #242526;
+    border-radius: 30px;
+    border: 1px solid #313131;
+}
+
+.dropdownOption {
+    background-color: #242526;
+    border: 1px solid #313131;
+}
+
+.postText {
+    font-size: 14px;
+}
+
+.modalPost {
+    width: 800px;
+}
+
+/* Home Comment style */
+
+.homeCommentCard {
+    background-color: transparent;
+    border-radius: 30px;
+    border: 1px solid #313131;
 }

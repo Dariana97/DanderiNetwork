@@ -28,13 +28,13 @@
 			{
 				<div class="col-2 vh-100">
 
-					<div class="d-flex flex-column col-auto flex-shrink-0 p-2 p-md-5 text-white vh-100 menu-fixed">
+					<div class="d-flex flex-column col-auto flex-shrink-0 text-white vh-100 menu-fixed">
 
 						<div class="d-flex align-items-center justify-content-center mt-3 mb-5">
 
 							<a asp-controller="Home" asp-action="Index" class="d-inline-grid justify-content-center text-decoration-none text-white">
 								<div class="d-flex align-items-center justify-content-center">
-									<img src="/images/Logo2.png" class="logoimg" alt="logo">
+									<img src="/images/app/Logo2.png" class="logoimg" alt="logo">
 								</div>
 								<p class="fs-5 mt-1 text-center highlighted fw-bold">Danderi Network</p>
 							</a>
@@ -45,7 +45,7 @@
 							<ul class="nav nav-pills flex-column fs-6">
 								<li class="nav-item mt-4 navitems">
 									<a asp-controller="Home" asp-action="Index" class="nav-link text-white d-flex gap-2 align-items-center">
-										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill me-2" viewBox="0 0 16 16">
+										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill ms-4 me-2" viewBox="0 0 16 16">
 											<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
 										</svg>
 										<p class="mb-0">Home</p>
@@ -53,7 +53,7 @@
 								</li>
 								<li class="nav-item mt-4 navitems">
 									<a asp-controller="Home" asp-action="Privacy" class="nav-link text-white d-flex gap-2 align-items-center">
-										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-people-fill me-2" viewBox="0 0 16 16">
+										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-people-fill ms-4 me-2" viewBox="0 0 16 16">
 											<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
 										</svg>
 										<p class="mb-0">Friends</p>
@@ -61,7 +61,7 @@
 								</li>
 								<li class="nav-item mt-4 navitems">
 									<a href="#" class="nav-link text-white d-flex gap-2 align-items-center">
-										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">
+										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill ms-4 me-2" viewBox="0 0 16 16">
 											<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
 										</svg>
 										@* <img src="https://github.com/mdo.png" alt="" width="25" height="25" class="rounded-circle me-2"> *@
@@ -72,14 +72,14 @@
 						</div>
 
 						<div class="dropdown">
-							<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+							<a href="#" class="d-flex align-items-center text-white text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="32" height="32" class="rounded-circle me-2">
 								<div>
 									<strong>Lara Figuereo C.</strong>
 									<p class="mb-0 highlighted">@@LaraF</p>
 								</div>
 							</a>
-							<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+							<ul class="dropdown-menu dropdown-menu-dark text-small" aria-labelledby="dropdownUser1">
 								<li><a class="dropdown-item text-white" href="#">Settings</a></li>
 								<li><a class="dropdown-item text-white" href="#">Profile</a></li>
 								<li><hr class="dropdown-divider"></li>
@@ -87,20 +87,22 @@
 							</ul>
 						</div>
 					</div>
+				
 				</div>
 			}
-			<div class="col-8 container">
+			<div class="col-8 container mb-5">
 
 				<main role="main" class="mt-5 main-content">
 					<div class="mb-3">
+						@**@
 						@RenderBody()
 					</div>
-
 				</main>
 
 			</div>
 
-			<footer class="footer mt-auto text-muted">
+			<footer class="footer mt-auto py-3 text-muted">
+				@*Le quite la clase: my-4*@
 				<div class="container flex-wrap d-flex justify-content-center align-items-center">
 					<ul class="nav gap-4 justify-content-center list-unstyled d-flex policyTextSignUp">
 						<li>About</li>
@@ -116,7 +118,9 @@
 				</div>
 			</footer>
 
-			<div class="@(User == null ? "col-1" : "col-2")"></div>
+			@* <div class="col-2"></div> *@
+			@* <div class="@(User == null ? "col-1" : "col-2")"></div> *@
+			<div class="@(User == null ? "" : "col-2")"></div>
 
 		</div>
 	</div>
