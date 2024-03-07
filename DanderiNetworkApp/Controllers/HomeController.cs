@@ -1,4 +1,5 @@
-﻿using DanderiNetwork.Core.Application.Interfaces.Services;
+﻿using AutoMapper;
+using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.Comment;
 using DanderiNetwork.Core.Application.ViewModels.Following;
 using DanderiNetwork.Core.Application.ViewModels.Post;
@@ -15,13 +16,15 @@ namespace DanderiNetworkApp.Controllers
         private readonly ICommentService _commentService;
         private readonly IPostService _postService;
         private readonly IFollowingService _followingService;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, ICommentService commentService, IPostService postService, IFollowingService followingService)
+        public HomeController(IMapper mapper,ILogger<HomeController> logger, ICommentService commentService, IPostService postService, IFollowingService followingService)
         {
             _logger = logger;
             _commentService = commentService;
             _postService = postService;
             _followingService = followingService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -30,6 +33,14 @@ namespace DanderiNetworkApp.Controllers
 
             return View();
 
+        }
+
+        public async Task<IActionResult> EditComment(CommentViewModel vm)
+        {
+			SaveCommentViewModel svm = _mapper.Map<SaveCommentViewModel>(vm);
+            await _commentService.Update(svm, svm.ID);
+
+            return View("Index");
         }
 
         [HttpPost]

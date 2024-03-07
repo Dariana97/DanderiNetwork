@@ -41,11 +41,20 @@ namespace DanderiNetwork.Core.Application.Mappings
               
                 .ForMember(dest => dest.Post, opt => opt.Ignore());
 
-            #endregion
+            CreateMap<SaveCommentViewModel, CommentViewModel>()
+      .ForMember(dest => dest.Replies, opt => opt.Ignore())
+      .ForMember(dest => dest.UserName, opt => opt.Ignore())
+       .ForMember(dest => dest.UserName, opt => opt.Ignore())
+       .ForMember(dest => dest.UserNameReplied, opt => opt.Ignore())
+      .ReverseMap();
 
-            #region FollowingProfile
+	 
 
-            CreateMap<Following, FollowingViewModel>()
+			#endregion
+
+			#region FollowingProfile
+
+			CreateMap<Following, FollowingViewModel>()
                 .ForMember(dest => dest.NameUserFollowed, opt => opt.Ignore())
                 .ForMember(dest => dest.UsernameUserFollowed, opt => opt.Ignore())
                 .ReverseMap();

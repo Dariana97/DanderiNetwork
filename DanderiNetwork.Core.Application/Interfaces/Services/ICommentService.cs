@@ -8,5 +8,7 @@ namespace DanderiNetwork.Core.Application.Interfaces.Services
     {
 
         Task<List<CommentViewModel>> GetCommentsByPostId(int postId);
-    }
+
+		
+	}
 }

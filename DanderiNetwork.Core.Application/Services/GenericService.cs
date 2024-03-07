@@ -33,7 +33,7 @@ namespace DanderiNetwork.Core.Application.Services
             return modelVm;
         }
 
-        public async Task Update(SaveViewModel vm, int id)
+        public virtual async Task Update(SaveViewModel vm, int id)
         {
             Model model = _mapper.Map<Model>(vm);
             await _repository.UpdateAsync(model, id);

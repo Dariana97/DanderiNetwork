@@ -29,12 +29,12 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
         {
             AuthenticationResponse response = new();
 
-            var user = await _userManager.FindByEmailAsync(request.Email);
+            var user = await _userManager.FindByNameAsync(request.Username);
             if (user == null)
             {
                 response.HasError = true;
 
-                response.Error = $"There're not Accounts registered with {request.Email}";
+                response.Error = $"There're not Accounts registered with {request.Username}";
                 return response;
             }
 
@@ -42,13 +42,13 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             if (!result.Succeeded)
             {
                 response.HasError = true;
-                response.Error = $"Invalid credentials for {request.Email}";
+                response.Error = $"Invalid credentials for {request.Username}";
                 return response;
             }
             if (!user.EmailConfirmed)
             {
                 response.HasError = true;
-                response.Error = $"Account no actived for {request.Email}";
+                response.Error = $"Account no actived for {request.Username}";
                 return response;
             }
 

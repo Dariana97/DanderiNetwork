@@ -12,18 +12,19 @@ namespace DanderiNetworkApp.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+       
         private readonly ICommentService _commentService;
         private readonly IUserApplication _userApplication;
 
-        public UserController(IUserService userService, IUserApplication userApplication, IHttpContextAccessor httpContextAccessor, ICommentService commentService)
+        public UserController(IUserService userService, IUserApplication userApplication,  ICommentService commentService)
         {
             _userService = userService;
-            _httpContextAccessor = httpContextAccessor;
+           
             _commentService = commentService;
             _userApplication = userApplication;
         }
 
+        [ServiceFilter(typeof(LoginAuthorize))]
         public IActionResult Index()
         {
             return View();
@@ -54,6 +55,8 @@ namespace DanderiNetworkApp.Controllers
             }
 
         }
+
+        [ServiceFilter(typeof(LoginAuthorize))]
         private string UploadFile(IFormFile file, string ID, bool isEditMode = false, string imageURL = "")
         {
             if (isEditMode && file == null)
@@ -110,6 +113,7 @@ namespace DanderiNetworkApp.Controllers
             return View(new SaveUserViewModel());
         }
 
+        [ServiceFilter(typeof(LoginAuthorize))]
         [HttpPost]
         public async Task<IActionResult> Register(SaveUserViewModel vm)
         {
@@ -139,6 +143,7 @@ namespace DanderiNetworkApp.Controllers
             return View();
         }
 
+        [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             string response = await _userService.ConfirmEmailAsync(userId, token);

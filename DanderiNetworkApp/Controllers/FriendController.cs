@@ -16,9 +16,11 @@ namespace DanderiNetworkApp.Controllers
             _followingService = followingService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult>  Index()
         {
-            return View();
+            
+
+            return View(await _followingService.GetAllViewModel());
         }
 
         public async Task<IActionResult> Follow(SaveFollowingViewModel vm)
@@ -43,12 +45,7 @@ namespace DanderiNetworkApp.Controllers
 
         public async Task<IActionResult> UnFollow(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Suceess = "Invalid action";
-                return View("Index"); //vista para seguidores, se debe modificar el acceso al index
 
-            }
             try
             {
                 await _followingService.Delete(id);

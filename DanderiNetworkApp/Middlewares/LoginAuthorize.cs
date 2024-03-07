@@ -1,9 +1,11 @@
 ﻿using DanderiNetworkApp.Controllers;
 using DanderiNetworkApp.Middlewares;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace DanderiNetworkApp.Midleware
 {
+    
     public class LoginAuthorize : IAsyncActionFilter
     {
         private readonly ValidateUserSession _userSession;

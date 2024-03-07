@@ -47,6 +47,7 @@ namespace DanderiNetwork.Core.Application.Services
 
                 Follow.UsernameUserFollowed = FollowedUser.UserName;
                 Follow.NameUserFollowed = FollowedUser.Name;
+                Follow.ImageURL = FollowedUser.ImageURL;
 
 
                 return Follow;

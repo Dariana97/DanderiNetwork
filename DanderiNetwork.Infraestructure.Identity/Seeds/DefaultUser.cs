@@ -12,7 +12,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Seeds
         {
             ApplicationUser defaultUser = new();
             defaultUser.UserName = "Coquito1010";
-            defaultUser.Email = "darianacabrej@gmail.com";
+            defaultUser.Email = "darianacabreja@gmail.com";
             defaultUser.FirstName = "Dariana";
             defaultUser.LastName = "Cabreja";
             defaultUser.PhoneNumber = "+1(829) 802-1292";
@@ -26,7 +26,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Seeds
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "@Danderi2910");
+                    await userManager.CreateAsync(defaultUser, "@Coquito1010");
                     await userManager.AddToRoleAsync(defaultUser, Roles.User.ToString());
 
                 }
