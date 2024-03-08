@@ -6,6 +6,8 @@ using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.Comment;
 using DanderiNetwork.Core.Domain.Entities;
 using DanderiNetwork.Core.Application.Dtos.User;
+using Microsoft.AspNetCore.Http;
+using DanderiNetwork.Core.Application.Helpers;
 
 namespace DanderiNetwork.Core.Application.Services
 {
@@ -15,45 +17,58 @@ namespace DanderiNetwork.Core.Application.Services
         private readonly IMapper _mapper;
         private readonly IUserApplication _UserApplication;
         private readonly AuthenticationResponse userViewModel;
-        
+		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly AuthenticationResponse _userViewModel;
 
-        public CommentServices(ICommentRepository commentRepository, IMapper mapper, IUserApplication UserRepository) : base(commentRepository, mapper)
+
+		public CommentServices(IHttpContextAccessor httpContextAccessor,ICommentRepository commentRepository, IMapper mapper, IUserApplication UserRepository) : base(commentRepository, mapper)
         {
             _commentRepository = commentRepository;
             _mapper = mapper;
             _UserApplication = UserRepository;
-			 
+            _httpContextAccessor = httpContextAccessor;
+            _userViewModel = userViewModel = _httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+
 
 
 		}
 
-        //public override async Task<List<CommentViewModel>> GetAllViewModel()
-        //{
-        //    var comments = await base.GetAllViewModel();
+		public override async Task<SaveCommentViewModel> Add(SaveCommentViewModel vm)
+		{
 
-        //    List<CommentViewModel> mainComments = new();
+            vm.UserID = _userViewModel.Id;
+			SaveCommentViewModel Comment = await base.Add(vm);
+      
+			return Comment;
+		}
 
-        //    var mainComents = comments.Select(cm =>
-        //    {
-        //        if (cm.IdReference != 0)
-        //        {
-        //            mainComments.Add(cm);
-        //        }
-        //        return cm;
-        //    }
+		//public override async Task<List<CommentViewModel>> GetAllViewModel()
+		//{
+		//    var comments = await base.GetAllViewModel();
 
-        //    ).ToList();
+		//    List<CommentViewModel> mainComments = new();
 
-        //    foreach (var comment in mainComments)
-        //    {
-        //        comment.Replies = comments.Where(reply => reply.IdReference == comment.ID).ToList();
-        //    }
+		//    var mainComents = comments.Select(cm =>
+		//    {
+		//        if (cm.IdReference != 0)
+		//        {
+		//            mainComments.Add(cm);
+		//        }
+		//        return cm;
+		//    }
 
-        //    return _mapper.Map<List<CommentViewModel>>(mainComents);
+		//    ).ToList();
 
-        //}
+		//    foreach (var comment in mainComments)
+		//    {
+		//        comment.Replies = comments.Where(reply => reply.IdReference == comment.ID).ToList();
+		//    }
 
-        public async Task<List<CommentViewModel>> GetAllViewModel()
+		//    return _mapper.Map<List<CommentViewModel>>(mainComents);
+
+		//}
+
+		public async Task<List<CommentViewModel>> GetAllViewModel()
         {
             //    var comments = await base.GetAllViewModel();
             //    var Users =  _UserApplication.GetAllUsers();
@@ -130,7 +145,8 @@ namespace DanderiNetwork.Core.Application.Services
                     var userSecond = users?.FirstOrDefault(u => u.ID == reply.UserIDReplied);
                     if (userSecond != null)
                     {
-                        reply.UserName = userSecond.UserName;
+                        reply.UserName = userMain.UserName;
+                        reply.UserNameReplied = userSecond.UserName;
                         reply.UserID = userSecond.ID;
                     }
                 });

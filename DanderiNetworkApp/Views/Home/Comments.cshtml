@@ -19,6 +19,7 @@
 
                         <div class="card-body col-10">
 
+
                             <div class="col-12 d-flex mb-4">
 
                                 <div class="col-1 d-flex justify-content-end">
@@ -99,7 +100,7 @@
                                     <div class="col-12 d-flex justify-content-between">
 
                                         <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#replies" aria-expanded="false">
-                                            See comments
+                                            See comments (@Model.CommentList.Count)
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
                                             </svg>
@@ -113,184 +114,156 @@
                             </div>
 
                             <div class="collapse" id="replies">
+                                @if(Model.CommentList.Count != 0)
+                                {
+                                    foreach(CommentViewModel maincoment in  Model.CommentList)
+                                    {
+                                        @* Comentario principal *@
+                                        <div class="col-12 d-flex justify-content-end">
 
-                                <div class="col-12 d-flex justify-content-end">
+                                            <div class="col-11 d-flex">
 
-                                    <div class="col-11 d-flex">
-
-                                        <div class="col-1 d-flex justify-content-end">
-                                            <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
-                                        </div>
-
-                                        <div class="col-11">
-
-                                            <div class="d-flex justify-content-between">
-                                                <div class="col-11 postText">
-                                                    <div class="d-flex gap-2">
-                                                        <p class="mb-0 fw-medium">Anderson Figuereo L.</p>
-                                                        <p class="text-muted mb-0">@@Andersxon29</p>
-                                                    </div>
-                                                    <p class="small text-secondary">29/02/2024 a las 12:00</p>
+                                                <div class="col-1 d-flex justify-content-end">
+                                                    <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
                                                 </div>
-                                            </div>
 
-                                            <div>
+                                                <div class="col-11">
 
-                                                <p class="postText">Pero Airi es la mejor, mi niña.</p>
-
-                                            </div>
-
-
-                                            <div class="d-flex justify-content-center">
-
-                                                <div class="col-12 d-flex justify-content-between">
-
-                                                    <form method="post" class="col-10 collapse" id="commentForm1">
-                                                        <div class="mb-4 d-flex gap-3 align-items-center">
-                                                            <div class="col-12">
-                                                                <textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
-                                                                <span class="text-danger postText"></span>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="col-11 postText">
+                                                            <div class="d-flex gap-2">
+                                                                <p class="mb-0 fw-medium">Anderson Figuereo L.</p>
+                                                                <p class="text-muted mb-0">@@@maincoment.UserName</p>
                                                             </div>
-
-                                                            <div class="col-2 d-flex justify-content-end">
-                                                                <button type="submit" class="btn btn-sm w-100 rounded-5 btn-light loginBTN">Post</button>
-                                                            </div>
+                                                            <p class="small text-secondary">@maincoment.Created</p>
                                                         </div>
-
-                                                    </form>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 d-flex justify-content-between">
-                                                <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#repliesComment" aria-expanded="false">
-                                                    Replies
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                                                    </svg>
-                                                </a>
-                                                <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm1">Reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="collapse" id="repliesComment">
-
-                                    <div class="col-12 d-flex justify-content-end mt-3 collapse" >
-
-                                        <div class="col-10 d-flex separation">
-
-                                            <div class="col-1 d-flex justify-content-end mt-3">
-                                                <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
-                                            </div>
-
-                                            <div class="col-11 mt-3">
-
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col-11 postText">
-                                                        <div class="d-flex gap-2">
-                                                            <p class="mb-0 fw-medium">Dariana Cabreja C.</p>
-                                                            <p class="text-muted mb-0">@@Dariana97</p>
-                                                        </div>
-                                                        <p class="small text-secondary">29/02/2024 a las 12:00</p>
                                                     </div>
-                                                </div>
 
-                                                <div>
+                                                    <div>
 
-                                                    <p class="postText"> <span class="fw-medium highlighted">@@Andersxon29</span> Saa, una loquita ella.</p>
+                                                        <p class="postText">@maincoment.Content</p>
 
-                                                </div>
+                                                    </div>
 
-                                                <div class=" d-flex justify-content-center">
+
+                                                    <div class="d-flex justify-content-center">
+
+                                                        <div class="col-12 d-flex justify-content-between">
+
+                                                            <form method="post" asp-controller="Home" asp-action="Replies" collapse" id="commentForm1">
+                                                                <div class="mb-4 d-flex gap-3 align-items-center">
+                                                                    <div class="col-12">
+                                                                        <textarea for ="Content" name="Content" id="Content" class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
+                                                                        <span class="text-danger postText"></span>
+                                                                    </div>
+                                                                    <input type="hidden" for="PostID" name="PostID" value="@maincoment.PostID" class="form-control" />
+                                                                
+                                                                    <input type="hidden" for="IdReference" name="IdReference" value="@maincoment.ID" class="form-control" />
+                                                                    <input type="hidden" for="UserIDReplied" name="UserIDReplied" value="@maincoment.UserID" class="form-control" />
+                                                                    <div class="col-2 d-flex justify-content-end">
+                                                                        <button type="submit" class="btn btn-sm w-100 rounded-5 btn-light loginBTN">Post</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-12 d-flex justify-content-between">
-
-                                                        <form method="post" class="col-10 collapse" id="commentForm2">
-                                                            <div class="mb-4 d-flex gap-3 align-items-center">
-                                                                <div class="col-12">
-                                                                    <textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
-                                                                    <span class="text-danger postText"></span>
-                                                                </div>
-
-                                                                <div class="col-2 d-flex justify-content-end">
-                                                                    <button type="submit" class="btn btn-sm w-100 rounded-5 btn-light loginBTN">Post</button>
-                                                                </div>
-                                                            </div>
-
-                                                        </form>
-
+                                                        <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#repliesComment" aria-expanded="false">
+                                                            Replies
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+                                                            </svg>
+                                                        </a>
+                                                        <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm1">Reply</a>
                                                     </div>
-                                                </div>
-
-                                                <div class="col-12 d-flex justify-content-end">
-                                                    <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm2">Reply</a>
                                                 </div>
                                             </div>
 
                                         </div>
 
-                                    </div>
+                                        if (maincoment.Replies.Count != 0)
+                                        {
+                                            foreach (CommentViewModel replies in maincoment.Replies)
+                                            {
+                                                <div class="collapse" id="repliesComment">
 
-                                    <div class="col-12 d-flex justify-content-end mt-3 collapse">
 
-                                        <div class="col-10 d-flex separation">
 
-                                            <div class="col-1 d-flex justify-content-end mt-3">
-                                                <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
-                                            </div>
+                                                    <div class="col-12 d-flex justify-content-end mt-3 collapse">
 
-                                            <div class="col-11 mt-3">
+                                                        <div class="col-10 d-flex separation">
 
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col-11 postText">
-                                                        <div class="d-flex gap-2">
-                                                            <p class="mb-0 fw-medium">Dariana Cabreja C.</p>
-                                                            <p class="text-muted mb-0">@@Dariana97</p>
+                                                            <div class="col-1 d-flex justify-content-end mt-3">
+                                                                <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
+                                                            </div>
+
+                                                            <div class="col-11 mt-3">
+
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div class="col-11 postText">
+                                                                        <div class="d-flex gap-2">
+                                                                            <p class="mb-0 fw-medium">Aqui te mando el nombre</p>
+                                                                            <p class="text-muted mb-0">@@@replies.UserName</p>
+                                                                        </div>
+                                                                        <p class="small text-secondary">@replies.Created</p>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div>
+
+                                                                    <p class="postText"> <span class="fw-medium highlighted">@@@replies.UserNameReplied</span> @replies.Content</p>
+
+                                                                </div>
+
+
+                                                                <div class=" d-flex justify-content-center">
+                                                                    <div class="col-12 d-flex justify-content-between">
+
+                                                                        <form method="post" asp-controller="Home" asp-action="Replies" class="col-10 collapse" id="commentForm3">
+                                                                            <div class="mb-4 d-flex gap-3 align-items-center">
+                                                                                <div class="col-12">
+                                                                                    <textarea for="Content" name="Content" id="Content" class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
+                                                                                    <span class="text-danger postText"></span>
+                                                                                </div>
+                                                                                <input type="hidden" for="PostID" name="PostID" value="@maincoment.PostID" class="form-control" />
+                                                                                <input type="hidden" for="UserID" name="UserID" value="@replies.UserID" class="form-control" />
+                                                                                <input type="hidden" for="IdReference" name="IdReference" value="@maincoment.ID" class="form-control" />
+                                                                                <input type="hidden" for="UserIDReplied" name="UserIDReplied" value="@replies.UserID" class="form-control" />
+                                                                                <div class="col-2 d-flex justify-content-end">
+                                                                                    <button type="submit" class="btn btn-sm w-100 rounded-5 btn-light loginBTN">Post</button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 d-flex justify-content-end">
+                                                                    <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm3">Reply</a>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
-                                                        <p class="small text-secondary">29/02/2024 a las 12:00</p>
-                                                    </div>
-                                                </div>
-
-                                                <div>
-
-                                                    <p class="postText"> <span class="fw-medium highlighted">@@Andersxon29</span> Saa, una loquita ella.</p>
-
-                                                </div>
-
-
-                                                <div class=" d-flex justify-content-center">
-                                                    <div class="col-12 d-flex justify-content-between">
-
-                                                        <form method="post" class="col-10 collapse" id="commentForm3">
-                                                            <div class="mb-4 d-flex gap-3 align-items-center">
-                                                                <div class="col-12">
-                                                                    <textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
-                                                                    <span class="text-danger postText"></span>
-                                                                </div>
-
-                                                                <div class="col-2 d-flex justify-content-end">
-                                                                    <button type="submit" class="btn btn-sm w-100 rounded-5 btn-light loginBTN">Post</button>
-                                                                </div>
-                                                            </div>
-
-                                                        </form>
 
                                                     </div>
+
                                                 </div>
+                                            }
+                                            
+                                        } 
+                                    }
 
-                                                <div class="col-12 d-flex justify-content-end">
-                                                    <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm3">Reply</a>
-                                                </div>
-                                            </div>
+                                    
+                                }
+                               
+                                
 
-                                        </div>
 
-                                    </div>
-
-                                </div>
+                         
 
                             </div>
 

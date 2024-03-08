@@ -52,7 +52,7 @@ namespace DanderiNetwork.Core.Application.Services
             return _mapper.Map<List<ViewModel>>(modelList);
         }
 
-        public async Task<ViewModel> GetByIdViewModel(int id)
+        public virtual async Task<ViewModel> GetByIdViewModel(int id)
         {
             Model model = await _repository.GetByIdAsync(id);
 

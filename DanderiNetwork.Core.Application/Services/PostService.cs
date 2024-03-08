@@ -42,14 +42,28 @@ namespace DanderiNetwork.Core.Application.Services
                 post.CommentList = comments.Where(p => p.PostID == post.ID).ToList();
             
 
-            }); 
+            });
+			
 
-            return _mapper.Map<List<PostViewModel>>(modelList);
+
+			return _mapper.Map<List<PostViewModel>>(modelList).OrderByDescending(i => i.Created).ToList(); 
         }
 
-		public override async Task<SavePostViewModel> Add(SavePostViewModel vm)
+        public override async Task<PostViewModel> GetByIdViewModel(int id)
+        {
+            var comments = await _commentService.GetAllViewModel();
+            PostViewModel model = await base.GetByIdViewModel(id);
+            model.CommentList = comments.Where(cm => cm.PostID == id).ToList();
+
+           
+
+            return model;
+        }
+
+
+        public override async Task<SavePostViewModel> Add(SavePostViewModel vm)
 		{
-            vm.UserID = userViewModel.Id;
+            vm.UserID = userViewModel.Id; 
 			
 
 			return await base.Add(vm);

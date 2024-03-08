@@ -65,7 +65,7 @@ namespace DanderiNetworkApp.Controllers
             if (postSaving != null)
             {
                 ViewBag.Suceess = "Post was save successfully";
-                return RedirectToRoute(new { controller = "Home", action = "Index" }); ;
+                return RedirectToRoute(new { controller = "Home", action = "Index" }); 
             }
             ViewBag.Suceess = "Problems while saving your post";
             return View("Index");
@@ -151,7 +151,7 @@ namespace DanderiNetworkApp.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Suceess = "Your comment wasn't saved";
-                return View("Index");
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
 
             }
             vm.Created = DateTime.Now;  
@@ -160,10 +160,31 @@ namespace DanderiNetworkApp.Controllers
             if (commentSaving != null)
             {
                 
-                return View("Index");
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             ViewBag.Suceess = "Problems while saving your post";
-            return View("Index");
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Replies(SaveCommentViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Suceess = "Your comment wasn't saved";
+                return RedirectToAction("Comments", new { ID = vm.PostID });
+
+            }
+            vm.Created = DateTime.Now;
+            var commentSaving = await _commentService.Add(vm);
+
+            if (commentSaving != null)
+            {
+
+                return RedirectToAction("Comments", new { ID = vm.PostID });
+            }
+            ViewBag.Suceess = "Problems while saving your post";
+            return RedirectToAction("Comments", new { ID = vm.PostID });
         }
 
       
