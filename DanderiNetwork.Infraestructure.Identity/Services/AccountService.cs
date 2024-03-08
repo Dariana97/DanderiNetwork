@@ -170,12 +170,12 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 HasError = false
             };
 
-            var user = await _userManager.FindByEmailAsync(request.Email);
+            var user = await _userManager.FindByNameAsync(request.Username);
 
             if (user == null)
             {
                 response.HasError = true;
-                response.Error = $"No Accounts registered with {request.Email}";
+                response.Error = $"No Accounts registered with {request.Username}";
 
                 return response;
             }

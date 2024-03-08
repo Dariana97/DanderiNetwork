@@ -9,18 +9,17 @@ using DanderiNetwork.Core.Application.Dtos.User;
 
 namespace DanderiNetworkApp.Controllers
 {
+
     public class UserController : Controller
     {
         private readonly IUserService _userService;
        
-        private readonly ICommentService _commentService;
+    
         private readonly IUserApplication _userApplication;
 
-        public UserController(IUserService userService, IUserApplication userApplication,  ICommentService commentService)
+        public UserController(IUserService userService, IUserApplication userApplication)
         {
             _userService = userService;
-           
-            _commentService = commentService;
             _userApplication = userApplication;
         }
 
@@ -171,8 +170,10 @@ namespace DanderiNetworkApp.Controllers
             {
                 vm.HasError = response.HasError;
                 vm.Error = response.Error;
-                return View(vm);
-            }
+				@ViewBag.ForgotError = response.Error;
+
+				return RedirectToRoute(new { controller = "User", action = "Index" });
+			}
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
 
@@ -206,7 +207,7 @@ namespace DanderiNetworkApp.Controllers
         {
             
            
-            return View(await _commentService.GetAllViewModel());
+            return View();
             
 
         }

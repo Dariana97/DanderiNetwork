@@ -71,12 +71,12 @@
 							Enter your username and we will send you an email with a new password to get back to your account.
 						</p>
 					</div>
-					<form method="post">
+					<form method="post" asp-action="ForgotPassword" asp-controller="User">
 						<div class="mb-4 d-flex justify-content-center">
 							<div class="col-8">
-								<label for="username" class="form-label fw-bold">Username</label>
-								<input type="text" class="form-control inputCustomize" id="username" name="username">
-								<span class="text-danger"></span>
+								<label for="Username" class="form-label fw-bold">Username</label>
+								<input type="text" class="form-control inputCustomize" id="Username" name="Username">
+								<span class="text-danger">@ViewBag.ForgotError</span>
 							</div>
 						</div>
 

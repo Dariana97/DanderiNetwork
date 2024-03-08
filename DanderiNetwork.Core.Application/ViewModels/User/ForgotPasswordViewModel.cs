@@ -6,7 +6,7 @@ namespace DanderiNetwork.Core.Application.ViewModels.User
     {
         [Required(ErrorMessage = "Debe colocar el correo del usuario")]
         [DataType(DataType.Text)]
-        public string Email { get; set; }   
+        public string Username { get; set; }   
         
         public bool HasError { get; set; }
         public string? Error { get; set; }
