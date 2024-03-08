@@ -1,4 +1,5 @@
-﻿using DanderiNetwork.Core.Application.Interfaces.Services;
+﻿using AutoMapper;
+using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.Following;
 using Microsoft.AspNetCore.Mvc;
 namespace DanderiNetworkApp.Controllers
@@ -8,17 +9,23 @@ namespace DanderiNetworkApp.Controllers
     {
         private readonly IFollowingService _followingService;
         private readonly IUserApplication _userApplication;
+		private readonly ICommentService _commentService;
+		private readonly IPostService _postService;
+		private readonly IMapper _mapper;
 
-        public FriendController(IFollowingService followingService, IUserApplication userApplication)
+		public FriendController(IFollowingService followingService, IUserApplication userApplication, ICommentService commentService, IPostService postService, IMapper mapper)
         {
             _followingService = followingService;
 			_userApplication = userApplication;
+            _commentService = commentService;
+            _postService = postService;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewData["UserViewModel"] = _userApplication.GetAllUsers();
-            return View();
+            return View(await _postService.GetAllViewModel());
         }
 
         public async Task<IActionResult> Follow(SaveFollowingViewModel vm)

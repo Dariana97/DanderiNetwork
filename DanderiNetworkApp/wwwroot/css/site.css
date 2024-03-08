@@ -198,8 +198,6 @@ body {
 
 /* Home Comment style */
 
-/* Home Comment style */
-
 .homeCommentCard {
     background-color: transparent;
     border-radius: 30px;
@@ -217,3 +215,13 @@ body {
     background-color: #242526;
     border: 1px solid #313131;
 }
+
+.newFriend {
+    background-color: #242526;
+    border: 1px solid #313131;
+    color: #10F1A5;
+}
+
+    .newFriend:hover {
+        border: 1px solid #313131;
+    }
