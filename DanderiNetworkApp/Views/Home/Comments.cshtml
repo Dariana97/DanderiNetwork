@@ -30,10 +30,10 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="col-11 postText">
                                             <div class="d-flex gap-2">
-                                                <p class="mb-0 fw-medium">@Model.</p>
-                                                <p class="text-muted mb-0">@@laraF</p>
+                                                <p class="mb-0 fw-medium">Lara Figuereo C.</p>
+                                                <p class="text-muted mb-0">@@@Model.UserName</p>
                                             </div>
-                                            <p class="small text-secondary">29/02/2024 a las 12:00</p>
+                                            <p class="small text-secondary">@Model.Created</p>
                                         </div>
                                         <div class="col-1 d-flex justify-content-end">
                                             <div class="dropdown">
@@ -66,8 +66,8 @@
                                     </div>
 
                                     <div>
-                                        <img src="https://media.revistagq.com/photos/6490312847440fcd9be41fb7/master/pass/flash.jpg" class="object-fit-cover w-100 rounded-1" alt="" />
-                                        <p class="postText mt-3"> <span class="fw-medium">LaraF</span> A mi papi le encanta mucho esta serie, la recomiendo mucho. Pero Airi me cae mal.</p>
+                                        <img src="@Model.ImageURL" class="object-fit-cover w-100 rounded-1" alt="" />
+                                        <p class="postText mt-3"> <span class="fw-medium">@Model.UserName</span> @Model.Caption</p>
 
                                     </div>
 
@@ -78,6 +78,7 @@
 
 
                                             <form method="post" class="col-10 collapse" id="commentForm">
+                                                
                                                 <div class="mb-4 d-flex gap-3 align-items-center">
                                                     <div class="col-12">
                                                         <textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
