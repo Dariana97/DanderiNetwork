@@ -52,6 +52,7 @@ namespace DanderiNetwork.Core.Application.Services
 
             public async Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordViewModel vm)
             {
+                 vm.Password = GeneratedPassword();
                 ResetPasswordRequest resetRequest = _mapper.Map<ResetPasswordRequest>(vm);
                 return await _accountService.ResetPasswordAsync(resetRequest);
             }
@@ -64,6 +65,22 @@ namespace DanderiNetwork.Core.Application.Services
         {
             return await _userApplication.GetByEmailUser(email);
         }
+
+        public string GeneratedPassword()
+        {
+			Random rdn = new Random();
+			string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890%$#@";
+			int longitud = caracteres.Length;
+			char letra;
+			int longitudContrasenia = 10;
+			string contraseniaAleatoria = string.Empty;
+			for (int i = 0; i < longitudContrasenia; i++)
+			{
+				letra = caracteres[rdn.Next(longitud)];
+				contraseniaAleatoria += letra.ToString();
+			}
+            return contraseniaAleatoria;
+		}
 
     }
     }

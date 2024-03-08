@@ -7,6 +7,8 @@ using DanderiNetwork.Core.Domain.Entities;
 using DanderiNetwork.Infraestructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
+using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 
@@ -196,13 +198,15 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
 
         private async Task<string> SendForgotPasswordUri(ApplicationUser user, string origin)
         {
-            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var route = "User/ResetPassword";
-            var Uri = new Uri(string.Concat($"{origin}/", route));
-            var verificationUri = QueryHelpers.AddQueryString(Uri.ToString(), "token", code);
+			var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+			code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+			var email = user.Email;
+			var route = "User/ResetPassword";
+			var uri = new Uri(string.Concat($"{origin}/{route}"));
+			var verificationUri = QueryHelpers.AddQueryString(uri.ToString(), "token", code);
+			verificationUri = QueryHelpers.AddQueryString(verificationUri, "email", email);
 
-            return verificationUri;
+			return verificationUri;
         }
 
         public async Task SignOutAsync()
@@ -210,14 +214,23 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request)
+		//var tokenHandler = new JwtSecurityTokenHandler();
+		//var jwtToken = tokenHandler.ReadJwtToken(request.Token);
+
+		//// Obtener el usuario del token
+		//string username = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "username")?.Value;
+
+		public async Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request)
         {
             ResetPasswordResponse response = new()
             {
                 HasError = false
-            };
+			};
 
-            var user = await _userManager.FindByEmailAsync(request.Email);
+		
+
+
+			var user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
             {

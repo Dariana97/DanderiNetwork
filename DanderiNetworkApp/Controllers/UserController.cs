@@ -46,7 +46,7 @@ namespace DanderiNetworkApp.Controllers
 
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
-            else
+            else 
             {
                 vm.HasError = userVm.HasError;
                 vm.Error = userVm.Error;
@@ -145,7 +145,7 @@ namespace DanderiNetworkApp.Controllers
         [ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
-            string response = await _userService.ConfirmEmailAsync(userId, token);
+            var response = await _userService.ConfirmEmailAsync(userId, token);
             return View("ConfirmEmail", response);
         }
 
@@ -185,14 +185,14 @@ namespace DanderiNetworkApp.Controllers
 
 
 		[ServiceFilter(typeof(LoginAuthorize))]
-        public IActionResult ResetPassword(string token)
+        public IActionResult ResetPassword(string token, string email)
         {
-            return View(new ResetPasswordViewModel { Token = token });
-        }
+            return RedirectToAction("ResetPasswordToken", new ResetPasswordViewModel() { Token = token, Email = email });
+		}
 
-        [ServiceFilter(typeof(LoginAuthorize))]
-        [HttpPost]
-        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel vm)
+        
+        
+        public async Task<IActionResult> ResetPasswordToken(ResetPasswordViewModel vm)
         {
             if (!ModelState.IsValid)
             {
@@ -202,8 +202,8 @@ namespace DanderiNetworkApp.Controllers
             ResetPasswordResponse response = await _userService.ResetPasswordAsync(vm);
             if (response.HasError)
             {
-                vm.HasError = response.HasError;
-                vm.Error = response.Error;
+                response.HasError = response.HasError;
+				response.Error = response.Error;
                 return View(vm);
             }
             return RedirectToRoute(new { controller = "User", action = "Index" });
