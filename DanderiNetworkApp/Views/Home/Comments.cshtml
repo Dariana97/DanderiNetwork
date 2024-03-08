@@ -66,9 +66,22 @@
                                     </div>
 
                                     <div>
-                                        <img src="@Model.ImageURL" class="object-fit-cover w-100 rounded-1" alt="" />
-                                        <p class="postText mt-3"> <span class="fw-medium">@Model.UserName</span> @Model.Caption</p>
-
+                                        @if (Model.ImageURL == null && Model.VideoUrl == null)
+                                        {
+                                            <p class="postText"> <span class="fw-medium">@Model.UserName</span> @Model.Caption</p>
+                                        }
+                                        else
+                                        {
+                                            @if (Model.ImageURL == null)
+                                            {
+                                                <iframe class="w-100 rounded-1" height="315" src="@Model.VideoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                            }
+                                            else if (Model.VideoUrl == null)
+                                            {
+                                                <img src="@Model.ImageURL" class="object-fit-cover w-100 rounded-1" alt="Image Post" />
+                                            }
+                                            <p class="postText mt-3"> <span class="fw-medium">@Model.UserName </span> @Model.Caption</p>
+                                        }
                                     </div>
 
                                     <div class=" d-flex justify-content-center">
@@ -77,12 +90,13 @@
 
 
 
-                                            <form method="post" class="col-10 collapse" id="commentForm">
+                                            <form method="post" class="col-10 collapse" id="commentForm" asp-controller="Home" asp-action="Replies">
                                                 
                                                 <div class="mb-4 d-flex gap-3 align-items-center">
                                                     <div class="col-12">
-                                                        <textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
+                                                        <textarea class="form-control inputCustomizeHome postText" for="Content" name="Content" id="Content" placeholder="Add a comment..." style="height: 20px"></textarea>
                                                         <span class="text-danger postText"></span>
+                                                        <input type="hidden" for="PostID" name="PostID" value="@Model.ID" class="form-control" />
                                                     </div>
 
                                                     <div class="col-2 d-flex justify-content-end">
