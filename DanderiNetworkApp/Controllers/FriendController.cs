@@ -3,23 +3,21 @@ using DanderiNetwork.Core.Application.ViewModels.Following;
 using Microsoft.AspNetCore.Mvc;
 namespace DanderiNetworkApp.Controllers
 
-
-
-
 {
     public class FriendController : Controller
     {
         private readonly IFollowingService _followingService;
+        private readonly IUserApplication _userApplication;
 
-        public FriendController(IFollowingService followingService)
+        public FriendController(IFollowingService followingService, IUserApplication userApplication)
         {
             _followingService = followingService;
+			_userApplication = userApplication;
         }
 
-        public async Task<IActionResult>  Index()
+        public IActionResult Index()
         {
-            
-
+            ViewData["UserViewModel"] = _userApplication.GetAllUsers();
             return View();
         }
 

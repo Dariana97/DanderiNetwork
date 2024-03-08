@@ -16,8 +16,7 @@ namespace DanderiNetwork.Infraestructure.Identity.Seeds
             defaultUser.FirstName = "Dariana";
             defaultUser.LastName = "Cabreja";
             defaultUser.PhoneNumber = "+1(829) 802-1292";
-            defaultUser.ImageURL = @"https://encrypted-tbn0.gstatic.com/images?q=tb
-                                     n:ANd9GcRJyH1ZHxlyhepoZNoWyodFO5Z5ejy4WckSSLSjisP4zQ&s";
+            defaultUser.ImageURL = "https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg";
             defaultUser.EmailConfirmed = true;
             defaultUser.PhoneNumberConfirmed = true;
 

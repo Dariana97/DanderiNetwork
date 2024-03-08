@@ -1,12 +1,13 @@
 ﻿@using DanderiNetwork.Core.Application.ViewModels.User
+@using DanderiNetwork.Core.Application.Dtos.User
 @using DanderiNetwork.Core.Application.Helpers;
 @inject IHttpContextAccessor httpContext;
 @{
 	UserViewModel User = httpContext.HttpContext.Session.Get<UserViewModel>("user");
-	
 
-	
-    string viewContextCon = ViewContext.RouteData.Values["controller"].ToString(); 
+	var Users = ViewData["UserViewModel"] as List<UserResponse>;
+
+	string viewContextCon = ViewContext.RouteData.Values["controller"].ToString();
 
 }
 
@@ -69,7 +70,6 @@
 										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill ms-4 me-2" viewBox="0 0 16 16">
 											<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
 										</svg>
-										@* <img src="https://github.com/mdo.png" alt="" width="25" height="25" class="rounded-circle me-2"> *@
 										<p class="mb-0">Profile</p>
 									</a>
 								</li>
@@ -77,12 +77,15 @@
 						</div>
 
 						<div class="dropdown">
-							<a href="#" class="d-flex align-items-center text-white text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="32" height="32" class="rounded-circle me-2">
+							<a href="#" class="d-flex align-items-center text-white text-decoration-none " id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
 								<div>
-									<strong></strong>
+									<strong>Nombre Apellido</strong>
 									<p class="mb-0 highlighted">@@@User.Username</p>
 								</div>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots ms-2" viewBox="0 0 16 16">
+									<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+								</svg>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark text-small" aria-labelledby="dropdownUser1">
 								<li><a class="dropdown-item text-white" href="#">Settings</a></li>
@@ -91,11 +94,13 @@
 								<li><a class="dropdown-item text-danger" asp-controller="User" asp-action="LogOut">Sign out</a></li>
 							</ul>
 						</div>
+
 					</div>
-				
+
 				</div>
 			}
-			<div class="col-8 container mb-5">
+
+			<div class="col-7 container mb-5">
 
 				<main role="main" class="mt-5 main-content">
 					<div class="mb-3">
@@ -130,7 +135,7 @@
 				
 				<div class="@(User == null ? "" : "col-2")">
 					<div class="container mt-5 d-flex justify-content-center">
-						<div class="col-12">
+						<div class="col-11">
 							<div class="list-group rounded-5">
 								<a href="#" class="list-group-item friendsCard list-group-item-action d-flex gap-3 py-3" aria-current="true">
 									<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
@@ -149,23 +154,24 @@
 											<p class="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
 										</div>
 									</div>
-								</a>
-								<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-									<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-									<div class="d-flex gap-2 w-100 justify-content-between">
-										<div>
-											<h6 class="mb-0">Third heading</h6>
-											<p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+
+									<div class="list-group-item friendsCard d-flex gap-3 py-3" aria-current="true">
+										<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+										<div class="d-flex gap-2 w-100 justify-content-between">
+											<div>
+												<h6 class="mb-0 text-white">Anderson Figuereo L.</h6>
+												<p class="mb-0 text-muted">@@Andersxn29</p>
+											</div>
 										</div>
 									</div>
-								</a>
+
+								</div>
 							</div>
 						</div>
 					</div>
+				}
+			</div>
 
-				</div>
-			}
-			
 
 		</div>
 	</div>
