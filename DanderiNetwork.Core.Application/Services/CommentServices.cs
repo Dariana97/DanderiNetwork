@@ -15,45 +15,45 @@ namespace DanderiNetwork.Core.Application.Services
         private readonly IMapper _mapper;
         private readonly IUserApplication _UserApplication;
         private readonly AuthenticationResponse userViewModel;
-        private readonly List<UserResponse> users;
+        
 
         public CommentServices(ICommentRepository commentRepository, IMapper mapper, IUserApplication UserRepository) : base(commentRepository, mapper)
         {
             _commentRepository = commentRepository;
             _mapper = mapper;
             _UserApplication = UserRepository;
-			 users = _UserApplication.GetAllUsers();
+			 
 
 
 		}
 
-        public override async Task<List<CommentViewModel>> GetAllViewModel()
-        {
-            var comments = await base.GetAllViewModel();
+        //public override async Task<List<CommentViewModel>> GetAllViewModel()
+        //{
+        //    var comments = await base.GetAllViewModel();
 
-            List<CommentViewModel> mainComments = new();
+        //    List<CommentViewModel> mainComments = new();
 
-            var mainComents = comments.Select(cm =>
-            {
-                if (cm.IdReference != 0)
-                {
-                    mainComments.Add(cm);
-                }
-                return cm;
-            }
+        //    var mainComents = comments.Select(cm =>
+        //    {
+        //        if (cm.IdReference != 0)
+        //        {
+        //            mainComments.Add(cm);
+        //        }
+        //        return cm;
+        //    }
 
-            ).ToList();
+        //    ).ToList();
 
-            foreach (var comment in mainComments)
-            {
-                comment.Replies = comments.Where(reply => reply.IdReference == comment.ID).ToList();
-            }
+        //    foreach (var comment in mainComments)
+        //    {
+        //        comment.Replies = comments.Where(reply => reply.IdReference == comment.ID).ToList();
+        //    }
 
-            return _mapper.Map<List<CommentViewModel>>(mainComents);
+        //    return _mapper.Map<List<CommentViewModel>>(mainComents);
 
-        }
+        //}
 
-        public async Task<List<CommentViewModel>> GetCommentsByPostId(int postId)
+        public async Task<List<CommentViewModel>> GetAllViewModel()
         {
             //    var comments = await base.GetAllViewModel();
             //    var Users =  _UserApplication.GetAllUsers();
@@ -104,9 +104,9 @@ namespace DanderiNetwork.Core.Application.Services
             //}
 
             var comments = await base.GetAllViewModel();
-            
+			var users = _UserApplication.GetAllUsers();
 
-            List<CommentViewModel> mainComments = comments
+			List<CommentViewModel> mainComments = comments
                 .Where(c => c.IdReference == null)
                 .ToList();
 
@@ -119,7 +119,7 @@ namespace DanderiNetwork.Core.Application.Services
                     comment.UserID = userMain.ID;
                 }
 
-                comment.PostID = postId;
+                //comment.PostID = postId;
 
                 comment.Replies = comments
                     .Where(c => c.IdReference == comment.ID)

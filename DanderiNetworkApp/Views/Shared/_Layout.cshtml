@@ -3,6 +3,7 @@
 @inject IHttpContextAccessor httpContext;
 @{
 	UserViewModel User = httpContext.HttpContext.Session.Get<UserViewModel>("user");
+	
 
 	
     string viewContextCon = ViewContext.RouteData.Values["controller"].ToString(); 
