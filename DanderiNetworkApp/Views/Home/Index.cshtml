@@ -93,6 +93,8 @@
 
 				@foreach(PostViewModel vm in Model)
 				{
+					string openForm = $"{vm.ID}CommentForm";
+					
 					<div class="col-12 mb-4">
 
 						<div class="card homeCard d-flex justify-content-center align-items-center py-2">
@@ -143,7 +145,6 @@
 									</div>
 
 									<div>
-										@*d-flex justify-content-start*@
 										<img src="@vm.ImageURL" class="object-fit-cover w-100 rounded-1" alt="Image Post" />
 										<p class="postText mt-3"> <span class="fw-medium">@vm.UserName</span>@vm.Caption</p>
 
@@ -153,7 +154,7 @@
 									<div class=" d-flex justify-content-center">
 										<div class="col-12 d-flex justify-content-between">
 
-											<form method="post" class="col-10 collapse" id="commentForm1">
+											<form method="post" class="col-10 collapse" id="@openForm">
 												<div class="mb-4 d-flex gap-3 align-items-center">
 													<div class="col-12">
 														<textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
@@ -171,13 +172,13 @@
 									</div>
 
 									<div class="col-12 d-flex justify-content-between">
-										<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm2">
+										<a class="highlighted text-decoration-none postText" asp-controller="Home" asp-route-ID="@vm.ID" asp-action="Comments">
 											See comments
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
 												<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
 											</svg>
 										</a>
-										<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm1">Reply</a>
+										<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#@openForm">Reply</a>
 									</div>
 
 								</div>
@@ -256,7 +257,7 @@
 								<div class=" d-flex justify-content-center">
 									<div class="col-12 d-flex justify-content-between">
 
-										<form method="post" class="col-10 collapse" id="commentForm2">
+										<form method="post" class="col-10 collapse" id="1commentForm">
 											<div class="mb-4 d-flex gap-3 align-items-center">
 												<div class="col-12">
 													<textarea class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
@@ -280,7 +281,7 @@
 											<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
 										</svg>
 									</a>
-									<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm2">Reply</a>
+									<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#1commentForm">Reply</a>
 								</div>
 
 							</div>

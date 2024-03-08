@@ -73,6 +73,13 @@ namespace DanderiNetworkApp.Controllers
 
         }
 
+        public async Task<IActionResult> Comments(int ID)
+        {
+            var vm = await _postService.GetByIdSaveViewModel(ID);
+
+            return View(vm);
+        }
+
 		private string UploadFile(IFormFile file, int ID, bool isEditMode = false, string imageURL = "")
 		{
 			if (isEditMode && file == null)
