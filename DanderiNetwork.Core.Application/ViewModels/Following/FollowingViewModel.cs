@@ -14,6 +14,7 @@ namespace DanderiNetwork.Core.Application.ViewModels.Following
 
         public string FollowingUserID { get; set; }
         public string NameUserFollowed { get; set; }
+        public string LastNameUserFollowed { get; set; }
         public string UsernameUserFollowed { get; set; }
 
         public string ImageURL { get; set; }

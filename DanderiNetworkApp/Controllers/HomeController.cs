@@ -12,6 +12,7 @@ namespace DanderiNetworkApp.Controllers
 
     public class HomeController : Controller
     {
+        #region Configuration
         private readonly ILogger<HomeController> _logger;
         private readonly ICommentService _commentService;
         private readonly IPostService _postService;
@@ -26,7 +27,10 @@ namespace DanderiNetworkApp.Controllers
             _followingService = followingService;
             _mapper = mapper;
         }
+        #endregion
 
+
+        #region Post
         public async Task<IActionResult> Index()
         {
             
@@ -34,13 +38,6 @@ namespace DanderiNetworkApp.Controllers
 
         }
 
-        public async Task<IActionResult> EditComment(CommentViewModel vm)
-        {
-			SaveCommentViewModel svm = _mapper.Map<SaveCommentViewModel>(vm);
-            await _commentService.Update(svm, svm.ID);
-
-            return View("Index");
-        }
 
         [HttpPost]
         public async Task<IActionResult> AddPost(SavePostViewModel vm)
@@ -73,6 +70,10 @@ namespace DanderiNetworkApp.Controllers
 
         }
 
+        #endregion
+
+
+        #region CommentsServices
         public async Task<IActionResult> Comments(int ID)
         {
             var vm = await _postService.GetByIdViewModel(ID);
@@ -80,53 +81,7 @@ namespace DanderiNetworkApp.Controllers
             return View(vm);
         }
 
-		private string UploadFile(IFormFile file, int ID, bool isEditMode = false, string imageURL = "")
-		{
-			if (isEditMode && file == null)
-			{
-				return imageURL;
-			}
-			/* Get file directory */
-
-			string basePath = $"/images/imagePost/{ID}";
-			string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
-
-			// Create user folder if not exists
-			if (!Directory.Exists(path))
-			{
-				Directory.CreateDirectory(path);
-			}
-
-			/* Get file path */
-
-			// Gets the name of the original file
-			FileInfo fileInfo = new(file.FileName);
-
-			//Create a unique ID
-			Guid guid = Guid.NewGuid();
-
-			string fileName = guid + fileInfo.Extension;
-			string fileNameWithPath = Path.Combine(path, fileName);
-
-			using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-			{
-				file.CopyTo(stream);
-			}
-
-			if (isEditMode)
-			{
-				string[] oldImagePart = imageURL.Split('/');
-				string oldImageName = oldImagePart[^1];
-				string completeImageOldPath = Path.Combine(path, oldImageName);
-
-				if (System.IO.File.Exists(completeImageOldPath))
-				{
-					System.IO.File.Delete(completeImageOldPath);
-				}
-			}
-
-			return $"{basePath}/{fileName}";
-		}
+		
 
 		[HttpGet]
         public async Task<IActionResult> DeleteComent([FromRoute] int id)
@@ -142,6 +97,14 @@ namespace DanderiNetworkApp.Controllers
             await _postService.Delete(id);
             return View("Index");
 
+        }
+
+        public async Task<IActionResult> EditComment(CommentViewModel vm)
+        {
+            SaveCommentViewModel svm = _mapper.Map<SaveCommentViewModel>(vm);
+            await _commentService.Update(svm, svm.ID);
+
+            return View("Index");
         }
 
 
@@ -187,15 +150,68 @@ namespace DanderiNetworkApp.Controllers
             return RedirectToAction("Comments", new { ID = vm.PostID });
         }
 
-      
+        #endregion
+
+
+        #region Secondary services
+
+        private string UploadFile(IFormFile file, int ID, bool isEditMode = false, string imageURL = "")
+        {
+            if (isEditMode && file == null)
+            {
+                return imageURL;
+            }
+            /* Get file directory */
+
+            string basePath = $"/images/imagePost/{ID}";
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
+
+            // Create user folder if not exists
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            /* Get file path */
+
+            // Gets the name of the original file
+            FileInfo fileInfo = new(file.FileName);
+
+            //Create a unique ID
+            Guid guid = Guid.NewGuid();
+
+            string fileName = guid + fileInfo.Extension;
+            string fileNameWithPath = Path.Combine(path, fileName);
+
+            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            if (isEditMode)
+            {
+                string[] oldImagePart = imageURL.Split('/');
+                string oldImageName = oldImagePart[^1];
+                string completeImageOldPath = Path.Combine(path, oldImageName);
+
+                if (System.IO.File.Exists(completeImageOldPath))
+                {
+                    System.IO.File.Delete(completeImageOldPath);
+                }
+            }
+
+            return $"{basePath}/{fileName}";
+        }
+        #endregion
 
 
         public IActionResult Privacy()
         {
             return View();
-            
-            
+
+
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
