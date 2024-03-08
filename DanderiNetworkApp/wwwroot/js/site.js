@@ -48,3 +48,37 @@ $(document).ready(function () {
         }
     });
 });
+
+function validarInputs(inputIds) {
+    let cumpleRequisitos = true;
+
+    inputIds.forEach(function (inputId) {
+        const input = document.getElementById(inputId);
+        const valor = input.value;
+
+        const regexMayuscula = /[A-Z]/;
+        const regexMinuscula = /[a-z]/;
+        const regexDigito = /[0-9]/;
+        const regexNoAlfanumerico = /[^a-zA-Z0-9]/;
+
+        const cumpleRequisitosInput = valor.length >= 6 && regexMayuscula.test(valor) && regexMinuscula.test(valor) && regexDigito.test(valor) && regexNoAlfanumerico.test(valor);
+
+        input.style.border = cumpleRequisitosInput ? '1px solid green' : '1px solid red';
+
+        if (!cumpleRequisitosInput) {
+            cumpleRequisitos = false;
+        }
+    });
+}
+
+const inputIds = ['passwordSign', 'ConfirmPassword']; // IDs de los inputs a validar
+
+inputIds.forEach(function (inputId) {
+    const input = document.getElementById(inputId);
+    input.addEventListener('input', function () {
+        validarInputs(inputIds);
+    });
+});
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

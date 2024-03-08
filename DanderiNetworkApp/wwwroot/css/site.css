@@ -235,3 +235,8 @@ body {
     .newFriend:hover {
         border: 1px solid #313131;
     }
+
+.form-control:focus {
+    box-shadow: none;
+    outline: none;
+}

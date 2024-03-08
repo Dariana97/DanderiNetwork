@@ -81,8 +81,6 @@ namespace DanderiNetworkApp.Controllers
             return View(vm);
         }
 
-		
-
 		[HttpGet]
         public async Task<IActionResult> DeleteComent([FromRoute] int id)
         {
@@ -203,14 +201,6 @@ namespace DanderiNetworkApp.Controllers
             return $"{basePath}/{fileName}";
         }
         #endregion
-
-
-        public IActionResult Privacy()
-        {
-            return View();
-
-
-        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
