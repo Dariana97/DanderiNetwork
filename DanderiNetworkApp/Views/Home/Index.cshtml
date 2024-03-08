@@ -23,9 +23,10 @@
 							</div>
 
 							<form method="post" class="col-11" asp-controller="Home" asp-action="AddPost" enctype="multipart/form-data">
+
 								<div class="mb-4 d-flex justify-content-center">
 									<div class="col-12">
-										<textarea for="Caption" id = "Caption" name = "Caption"class="form-control inputCustomizeHome" placeholder="What are u thinking, Lara?!" style="height: 50px"></textarea>
+										<textarea for="Caption" id="Caption" name="Caption" class="form-control inputCustomizeHome" placeholder="What are u thinking, Lara?!" style="height: 50px"></textarea>
 										<span class="text-danger"></span>
 									</div>
 								</div>
@@ -52,7 +53,7 @@
 													</svg>
 												</span>
 												<input type="text" class="form-control anotherDesign" id="VideoUrl" name="VideoUrl">
-												<span class="text-danger" ></span>
+												<span class="text-danger"></span>
 											</div>
 										</div>
 									</div>
@@ -62,12 +63,12 @@
 									<div class="col-auto d-flex justify-content-end gap-4">
 
 										<a href="#" class="highlighted text-decoration-none" data-bs-toggle="collapse" data-bs-target="#collapsePhotoInput">
-											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-image-fill" viewBox="0 0 16 16">
+											<svg xmlns="http://www.w3.org/2000/svg" width="20" id="photo" height="20" fill="currentColor" class="bi bi-image-fill" viewBox="0 0 16 16">
 												<path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0" />
 											</svg>
 										</a>
 
-										<a href="#" class="highlighted text-decoration-none" data-bs-toggle="collapse" data-bs-target="#collapseVideoURLInput">
+										<a href="#" class="highlighted text-decoration-none" id="video" data-bs-toggle="collapse" data-bs-target="#collapseVideoURLInput">
 											<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-camera-video-fill" viewBox="0 0 16 16">
 												<path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z" />
 											</svg>
@@ -75,7 +76,6 @@
 									</div>
 
 								</div>
-
 
 								<div class=" d-flex justify-content-center">
 									<div class="col-12 d-flex justify-content-end">
@@ -91,10 +91,10 @@
 
 				</div>
 
-				@foreach(PostViewModel vm in Model)
+				@foreach (PostViewModel vm in Model)
 				{
 					string openForm = $"{vm.ID}CommentForm";
-					
+
 					<div class="col-12 mb-4">
 
 						<div class="card homeCard d-flex justify-content-center align-items-center py-2">
@@ -145,13 +145,29 @@
 									</div>
 
 									<div>
-										<img src="@vm.ImageURL" class="object-fit-cover w-100 rounded-1" alt="Image Post" />
-										<p class="postText mt-3"> <span class="fw-medium">@vm.UserName</span> @vm.Caption</p>
+
+										@if (vm.ImageURL == null && vm.VideoUrl == null)
+										{
+											<p class="postText"> <span class="fw-medium">@vm.UserName</span> @vm.Caption</p>
+										}
+										else
+										{
+											@if (vm.ImageURL == null)
+											{
+												<iframe class="w-100 rounded-1" height="315" src="@vm.VideoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+											}
+											else if (vm.VideoUrl == null)
+											{
+												<img src="@vm.ImageURL" class="object-fit-cover w-100 rounded-1" alt="Image Post" />
+											}
+											<p class="postText mt-3"> <span class="fw-medium">@vm.UserName</span> @vm.Caption</p>
+										}
 
 									</div>
 
 
 									<div class=" d-flex justify-content-center">
+
 										<div class="col-12 d-flex justify-content-between">
 
 											<form method="post" class="col-10 collapse" id="@openForm">
@@ -172,12 +188,15 @@
 									</div>
 
 									<div class="col-12 d-flex justify-content-between">
-										<a class="highlighted text-decoration-none postText" asp-controller="Home" asp-route-ID="@vm.ID" asp-action="Comments">
-											See comments
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-												<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-											</svg>
-										</a>
+										@if (vm.CommentList.Count != 0)
+										{
+											<a class="highlighted text-decoration-none postText" asp-controller="Home" asp-route-ID="@vm.ID" asp-action="Comments">
+												See comments
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+													<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+												</svg>
+											</a>
+										}
 										<a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#@openForm">Reply</a>
 									</div>
 
@@ -189,9 +208,9 @@
 
 
 					</div>
-					
+
 				}
-				
+
 
 
 
@@ -245,10 +264,7 @@
 								</div>
 
 								<div>
-									@*d-flex justify-content-start*@
-
 									<iframe class="w-100 rounded-1" height="315" src="https://www.youtube.com/embed/STDG00mc9zk?si=rS6BImXbKITdOStS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-									@* <img src="https://juanluisguerra.com/wp-content/uploads/2020/11/bachata-rosa-cover.jpg" class="object-fit-cover w-100 rounded-1" alt="" /> *@
 									<p class="postText mt-3"> <span class="fw-medium">LaraF</span> Juan Luis Guerra, el mejor artista que pudo parir RD</p>
 
 								</div>
