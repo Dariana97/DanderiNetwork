@@ -139,7 +139,7 @@
 												</a>
 												<ul class="dropdown-menu dropdown-menu-dark text-small rounded-3 dropdownOption" aria-labelledby="dropdownOptions">
 													<li>
-														<a class="dropdown-item text-white small d-flex align-items-center gap-2" href="#">
+														<a class="dropdown-item text-white small d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#editPost">
 															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 																<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 																<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -181,6 +181,61 @@
 
 									</div>
 
+									<!-- Modals -->
+									<!-- Modal - Edit Post -->
+									<div class="modal fade" id="editPost" tabindex="-1" aria-labelledby="modal-tittle" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content loginCard modalPostHome">
+												<div class="modal-header border-0">
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<h1 class="modal-title w-100 text-center fs-5 highlighted fw-bold mb-3" id="modal-tittle">Edit post</h1>
+
+													<form method="post">
+														<div class="mb-4 d-flex justify-content-center">
+															<div class="col-8">
+																<div class="col-12 mb-3">
+																	<label for="username" class="form-label fw-bold">Username</label>
+																	<input type="text" class="form-control inputCustomize" id="username" name="username">
+																	<span class="text-danger"></span>
+																</div>
+
+																<div class="col-12 mb-3">
+																	<label for="Photo" class="form-label fw-bold">Photo</label>
+																	<input type="file" class="form-control anotherDesign" id="Photo" name="Photo">
+																	<span class="text-danger"></span>
+																</div>
+
+																<div class="col-12">
+																	<label for="username" class="form-label">Video URL</label>
+																	<div class="input-group has-validation">
+																		<span class="input-group-text leftInputDesign">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+																				<path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"></path>
+																				<path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"></path>
+																			</svg>
+																		</span>
+																		<input type="text" class="form-control anotherDesign" id="username">
+																		<span class="text-danger"></span>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+
+														<div class="d-flex justify-content-center">
+															<div class="col-8">
+																<button type="submit" class="btn btn-light w-100 loginBTN">Save</button>
+															</div>
+														</div>
+													</form>
+												</div>
+												<div class="modal-footer border-0">
+												</div>
+											</div>
+										</div>
+									</div>
 
 									<div class=" d-flex justify-content-center">
 
@@ -206,7 +261,7 @@
 
 									<div class="col-12 d-flex justify-content-between">
 										<a class="highlighted text-decoration-none postText" asp-controller="Home" asp-route-ID="@vm.ID" asp-action="Comments">
-											View @vm.CommentList.Count See comments
+											View @vm.CommentList.Count comments
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
 												<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
 											</svg>
