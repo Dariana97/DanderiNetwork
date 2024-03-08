@@ -206,7 +206,7 @@ namespace DanderiNetworkApp.Controllers
         {
             
            
-            return View(await _commentService.GetCommentsByPostId(2));
+            return View(await _commentService.GetAllViewModel());
             
 
         }

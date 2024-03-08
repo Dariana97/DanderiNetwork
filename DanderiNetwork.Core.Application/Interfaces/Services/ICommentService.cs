@@ -7,7 +7,7 @@ namespace DanderiNetwork.Core.Application.Interfaces.Services
     public interface ICommentService : IGenericService<SaveCommentViewModel, CommentViewModel, Comment>
     {
 
-        Task<List<CommentViewModel>> GetCommentsByPostId(int postId);
+        
 
 		
 	}

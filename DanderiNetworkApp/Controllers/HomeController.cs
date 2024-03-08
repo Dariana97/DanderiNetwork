@@ -53,12 +53,14 @@ namespace DanderiNetworkApp.Controllers
             }
             vm.Created = DateTime.Now;
             var postSaving = await _postService.Add(vm);
-        
 
-            if (vm.ImageURL == null && vm.VideoUrl == null) {
-                postSaving.ImageURL = UploadFile(vm.Photo, postSaving.ID);
-                await _postService.Update(postSaving, postSaving.ID);
-            }
+			if (vm.VideoUrl == null && vm.Photo != null)
+            {
+				postSaving.ImageURL = UploadFile(vm.Photo, postSaving.ID);
+				await _postService.Update(postSaving, postSaving.ID);
+			}
+	
+
 
             if (postSaving != null)
             {
