@@ -195,7 +195,7 @@ namespace DanderiNetworkApp.Controllers
         public async Task<IActionResult> ResetPasswordToken(ResetPasswordViewModel vm)
         {
             if (!ModelState.IsValid)
-            {
+            {   
                 return View(vm);
             }
 

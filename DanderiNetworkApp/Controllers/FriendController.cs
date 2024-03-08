@@ -35,15 +35,20 @@ namespace DanderiNetworkApp.Controllers
        
 
             var user = await _userApplication.GetByUserName(username);
-            
-            var FollowingSaving = await _followingService.Follow(user.ID);
 
-            if (FollowingSaving != null)
+            
+            if(!user.HasError)
             {
-				return RedirectToRoute(new { controller = "Friend", action = "Index" }); //vista para seguidores, se debe modificar el acceso al index
+				var FollowingSaving = await _followingService.Follow(user.ID);
+
+				if (FollowingSaving != null)
+				{
+					return RedirectToRoute(new { controller = "Friend", action = "Index" }); //vista para seguidores, se debe modificar el acceso al index
+				}
+
 			}
 
-			return RedirectToRoute(new { controller = "Friend", action = "Index" }); //vista para seguidores, se debe modificar el acceso al index
+			return RedirectToRoute(new { controller = "Friend", action = "Index" }); //viewbag para erroes en la vista de friends
 
 		}
 

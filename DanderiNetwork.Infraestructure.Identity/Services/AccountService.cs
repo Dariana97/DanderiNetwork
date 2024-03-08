@@ -248,6 +248,15 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
                 response.Error = $"An error occurred while reset password";
                 return response;
             }
+            else
+            {
+				await _emailService.SendAsync(new EmailRequest()
+				{
+					To = user.Email,
+					Body = $"Your password was reset your new password is: <strong>{request.Password}</strong>",
+					Subject = "New Password"
+				});
+			}
 
             return response;
         }
