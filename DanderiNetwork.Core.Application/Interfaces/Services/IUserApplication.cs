@@ -11,5 +11,7 @@ namespace DanderiNetwork.Core.Application.Interfaces.Services
 
         Task<UserResponse> GetByEmailUser(string email);
         List<UserResponse> GetAllUsers();
+
+        Task<UserResponse> GetByUserName(string UserName);
     }
 }

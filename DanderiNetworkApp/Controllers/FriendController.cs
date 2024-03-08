@@ -21,40 +21,42 @@ namespace DanderiNetworkApp.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Follow(SaveFollowingViewModel vm)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Suceess = "Invalid action";
-                return View("Index");
+        //public async Task<IActionResult> Follow(string username)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        ViewBag.Suceess = "Invalid action";
+        //        return View("Index");
 
-            }
-            vm.Created = DateTime.Now;
-            var FollowingSaving = await _followingService.Add(vm);
+        //    }
 
-            if (FollowingSaving != null)
-            {
-                return View("Index"); //vista para seguidores, se debe modificar el acceso al index
-            }
+        //    var user = await _userApplication.GetByUserName(username);
+        //    vm.Created = DateTime.Now;
+        //    var FollowingSaving = await _followingService.Add(user);
 
-            return View("Index"); //vista para seguidores, se debe modificar el acceso al index
+        //    if (FollowingSaving != null)
+        //    {
+        //        return View("Index"); //vista para seguidores, se debe modificar el acceso al index
+        //    }
 
-        }
+        //    return View("Index"); //vista para seguidores, se debe modificar el acceso al index
 
-        public async Task<IActionResult> UnFollow(int id)
-        {
+        //}
 
-            try
-            {
-                await _followingService.Delete(id);
-                return View("Index"); //vista para seguidores, se debe modificar el acceso al index
-            }
-            catch (Exception ex)
-            {
-                return View("Index"); //vista para seguidores, se debe modificar el acceso al index
-            }
+        //public async Task<IActionResult> UnFollow(int id)
+        //{
 
-        }
+        //    try
+        //    {
+        //        await _followingService.Delete(id);
+        //        return View("Index"); //vista para seguidores, se debe modificar el acceso al index
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return View("Index"); //vista para seguidores, se debe modificar el acceso al index
+        //    }
+
+        //}
 
 
 

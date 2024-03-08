@@ -55,7 +55,10 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             response.Id = user.Id;
             response.Email = user.Email;
             response.UserName = user.UserName;
-           
+            response.Name = user.FirstName;
+            response.Lastname = user.LastName;
+            response.ImageUrl = user.ImageURL;
+
 
             var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
 

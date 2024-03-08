@@ -56,6 +56,30 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             return response;
         }
 
+
+        public async Task<UserResponse> GetByUserName(string UserName)
+        {
+            UserResponse response = new()
+            {
+                HasError = false,
+
+            };
+            var user = await _userManager.FindByNameAsync(UserName);
+            if (user == null)
+            {
+                response.HasError = true;
+                response.Error = "This user doesn't exist";
+                return response;
+            }
+            response.ID = user.Id;
+            
+            response.ImageURL = user.ImageURL;
+
+
+
+            return response;
+        }
+
         public async Task<UpdateUserResponse> Update(UpdateUserRequest request)
         {
             UpdateUserResponse response = new() { HasError = false };

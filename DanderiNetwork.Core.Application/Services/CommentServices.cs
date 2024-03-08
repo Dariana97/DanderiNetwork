@@ -70,53 +70,7 @@ namespace DanderiNetwork.Core.Application.Services
 
 		public async Task<List<CommentViewModel>> GetAllViewModel()
         {
-            //    var comments = await base.GetAllViewModel();
-            //    var Users =  _UserApplication.GetAllUsers();
-
-
-            //    List<CommentViewModel> mainComments = comments.Where(c => c.PostID == postId && c.IdReference == null).ToList();
-
-
-            //    foreach(var comment in mainComments)
-            //    {
-            //        var userMain = Users?.Where(u => u.ID == comment.UserID).FirstOrDefault();
-
-
-
-
-            //                comment.UserName = userMain.UserName;//esto tiene saco de disparate
-            //                comment.UserID = userMain.ID;
-
-
-            //        comment.PostID = postId; //posibles erroes en este atributo
-
-
-
-            //    }
-            //    foreach (var comment in mainComments)
-            //    {
-
-            //        var commentsReplies = comments.Where(c => c.IdReference == comment.ID).ToList();
-
-
-
-            //        commentsReplies.ForEach(comment =>
-            //        {
-            //            var userSecond = Users?.Where(u => u.ID == comment.UserIDReplied).FirstOrDefault();
-            //            comment.UserName = userSecond.UserName;
-            //            comment.UserID = userSecond.ID;
-
-            //        });    
-
-
-            //        comment.Replies = commentsReplies;
-
-
-
-            //    }
-
-            //    return _mapper.Map<List<CommentViewModel>>(mainComments);
-            //}
+            
 
             var comments = await base.GetAllViewModel();
 			var users = _UserApplication.GetAllUsers();

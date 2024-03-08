@@ -11,6 +11,9 @@ namespace DanderiNetwork.Core.Application.ViewModels.Post
 
         public string? VideoUrl { get; set; }
         public string Caption { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+
         public string UserID { get; set; }
         public string? ImageURL { get; set; }
         public string UserName { get; set; }
