@@ -126,8 +126,42 @@
 
 			@if (viewContextCon == "Home")
 			{
+				
 				<div class="@(User == null ? "" : "col-2")">
-					<span>Hola soy Home</span>
+					<div class="container mt-5 d-flex justify-content-center">
+						<div class="col-11">
+							<div class="list-group rounded-5">
+								<a href="#" class="list-group-item friendsCard list-group-item-action d-flex gap-3 py-3" aria-current="true">
+									<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+									<div class="d-flex gap-2 w-100 justify-content-between">
+										<div>
+											<p class="mb-0">Nombre Apellido</p>
+											<p class="mb-0 opacity-75">@@Dariana97</p>
+										</div>
+									</div>
+								</a>
+								<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+									<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+									<div class="d-flex gap-2 w-100 justify-content-between">
+										<div>
+											<h6 class="mb-0">Another title here</h6>
+											<p class="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
+										</div>
+									</div>
+								</a>
+								<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+									<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+									<div class="d-flex gap-2 w-100 justify-content-between">
+										<div>
+											<h6 class="mb-0">Third heading</h6>
+											<p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			}
 			
