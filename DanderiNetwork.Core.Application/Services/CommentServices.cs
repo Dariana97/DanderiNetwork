@@ -132,6 +132,8 @@ namespace DanderiNetwork.Core.Application.Services
                 {
                     comment.UserName = userMain.UserName;
                     comment.UserID = userMain.ID;
+                    comment.Name = userMain.Name;
+                    comment.LastName = userMain.Lastname;
                 }
 
                 //comment.PostID = postId;
@@ -148,6 +150,8 @@ namespace DanderiNetwork.Core.Application.Services
                         reply.UserName = userMain.UserName;
                         reply.UserNameReplied = userSecond.UserName;
                         reply.UserID = userSecond.ID;
+                        reply.Name = userSecond.Name;
+                        reply.LastName = userSecond.Lastname;
                     }
                 });
             });

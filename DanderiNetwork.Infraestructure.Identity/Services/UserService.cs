@@ -23,12 +23,13 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             {
 
                 ID = user.Id,
+                Name = user.FirstName,
                 Email = user.Email,
                 ImageURL = user.ImageURL,
                 UserName = user.UserName,
                 Lastname = user.LastName,
                 PhoneNumber = user.PhoneNumber,
-                Name = user.FirstName
+                
 
             }).ToList();
         }
