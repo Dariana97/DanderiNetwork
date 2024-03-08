@@ -18,8 +18,8 @@
 
 						<div class="card-body col-10 d-flex justify-content-center">
 
-							<div class="col-1 d-flex justify-content-end">
-								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
+							<div class="col-1 d-flex justify-content-end  me-3">
+								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle">
 							</div>
 
 							<form method="post" class="col-11" asp-controller="Home" asp-action="AddPost" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
 								<div class="collapse" id="collapseVideoURLInput">
 									<div class="mb-3 d-flex justify-content-center">
 										<div class="col-12">
-											<label for="VideoUrl" class="form-label">Video URL</label>
+											<label for="VideoUrl" class="form-label fw-bold">Video URL</label>
 											<div class="input-group has-validation">
 												<span class="input-group-text leftInputDesign">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
@@ -117,15 +117,15 @@
 
 							<div class="card-body col-10 d-flex justify-content-center">
 
-								<div class="col-1 d-flex justify-content-end">
-									<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3 object-fit-cover">
+								<div class="col-1 d-flex justify-content-end me-3">
+									<img src="@vm.UserImageURL" alt="" width="40" height="40" class="rounded-circle object-fit-cover">
 								</div>
 
 								<div class="col-11">
 									<div class="d-flex justify-content-between">
 										<div class="col-11 postText">
 											<div class="d-flex gap-2">
-												<p class="mb-0 fw-medium">@vm.UserName</p>
+												<p class="mb-0 fw-medium">@vm.Name @vm.LastName</p>
 												<p class="text-muted mb-0">@@@vm.UserName</p>
 											</div>
 											<p class="small text-secondary">@vm.Created</p>
@@ -148,7 +148,7 @@
 														</a>
 													</li>
 													<li>
-														<a class="dropdown-item text-danger small d-flex align-items-center gap-2" href="#">
+														<a class="dropdown-item text-danger small d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#deletePost">
 															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
 																<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
 															</svg>
@@ -185,7 +185,7 @@
 									<!-- Modal - Edit Post -->
 									<div class="modal fade" id="editPost" tabindex="-1" aria-labelledby="modal-tittle" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered">
-											<div class="modal-content loginCard modalPostHome">
+											<div class="modal-content loginCard">
 												<div class="modal-header border-0">
 													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
@@ -208,7 +208,7 @@
 																</div>
 
 																<div class="col-12">
-																	<label for="username" class="form-label">Video URL</label>
+																	<label for="username" class="form-label fw-bold">Video URL</label>
 																	<div class="input-group has-validation">
 																		<span class="input-group-text leftInputDesign">
 																			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
@@ -232,6 +232,23 @@
 													</form>
 												</div>
 												<div class="modal-footer border-0">
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- Modals -->
+									<!-- Modal - Delete Post -->
+									<div class="modal fade p-4 py-md-5" tabindex="-1" role="dialog" id="deletePost" data-bs-backdrop="static">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content rounded-3 shadow darki">
+												<div class="modal-body p-4 text-center">
+													<h5 class="mb-3 fw-bold">Delete this post?</h5>
+													<p class="mb-0">You can always change your mind and go back.</p>
+												</div>
+												<div class="modal-footer flex-nowrap p-0">
+													<button type="button" class="btn btn-lg btn-link hightlightedBTN fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes, enable</strong></button>
+													<button type="button" class="btn btn-lg btn-link hightlightedBTN fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No thanks</button>
 												</div>
 											</div>
 										</div>

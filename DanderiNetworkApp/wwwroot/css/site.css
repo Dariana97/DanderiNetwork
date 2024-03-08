@@ -33,6 +33,10 @@ body {
     color: #0ACE8C;
 }
 
+.darki {
+    background-color: #313131;
+}
+
 .navitems {
     font-size: 18px;
 }
@@ -42,15 +46,6 @@ body {
         border-radius: 10px;
         font-weight: bold;
     }
-
-/*.menu-fixed {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 280px;*/ /* Ancho del menú */
-    /*overflow-y: auto;*/ /* Permitir scroll en el menú si es necesario */
-/*}*/
 
 .menu-fixed {
     padding: 2rem 2.5rem;
@@ -65,10 +60,7 @@ body {
 
 
 .main-content {
-    /*overflow-y: auto; /* Permitir scroll solo para el contenido del main */
-    /*padding-left: 280px; /* Ajustar el padding izquierdo para dejar espacio para el menú */
-    /*height: 100vh; /* Ajustar el alto del contenido para que ocupe toda la altura disponible */
-    box-sizing: border-box; /* Ajustar el box-sizing para incluir el padding en el cálculo del tamaño total */
+    box-sizing: border-box; 
 }
 
 /* Login & Sign Up */
@@ -195,6 +187,24 @@ body {
 .modalPost {
     width: 800px;
 }
+
+.hightlightedBTN {
+    color: #10F1A5;
+}
+
+    .hightlightedBTN:hover {
+
+        color: #5BDEB2;
+    }
+
+    .hightlightedBTN:active {
+            color: #10F1A5;
+
+    }
+
+    .hightlightedBTN:focus {
+        color: #10F1A5;
+    }
 
 /* Home Comment style */
 
