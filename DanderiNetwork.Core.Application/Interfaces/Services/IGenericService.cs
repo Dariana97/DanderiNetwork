@@ -17,7 +17,7 @@ namespace DanderiNetwork.Core.Application.Interfaces.Services
 
             Task Delete(int id);
 
-            Task<ViewModel> GetByIdSaveViewModel(int id);
+            Task<ViewModel> GetByIdViewModel(int id);
 
             Task<List<ViewModel>> GetAllViewModel();
         }

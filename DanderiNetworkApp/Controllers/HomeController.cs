@@ -30,8 +30,6 @@ namespace DanderiNetworkApp.Controllers
         public async Task<IActionResult> Index()
         {
             
-                
-
 			return View(await _postService.GetAllViewModel());
 
         }
@@ -75,7 +73,7 @@ namespace DanderiNetworkApp.Controllers
 
         public async Task<IActionResult> Comments(int ID)
         {
-            var vm = await _postService.GetByIdSaveViewModel(ID);
+            var vm = await _postService.GetByIdViewModel(ID);
 
             return View(vm);
         }
