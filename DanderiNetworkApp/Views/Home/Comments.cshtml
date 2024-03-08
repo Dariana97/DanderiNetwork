@@ -11,14 +11,13 @@
 
         <div class="d-flex justify-content-center">
 
-            <div class="col-6 col-md-7 col-sm-8">
+            <div class="col-6 col-md-8 col-sm-8">
 
                 <div class="col-12 mb-4" id="hola">
 
                     <div class="card homeCard d-flex justify-content-center align-items-center py-2">
 
                         <div class="card-body col-10">
-
 
                             <div class="col-12 d-flex mb-4">
 
@@ -114,17 +113,21 @@
                             </div>
 
                             <div class="collapse" id="replies">
+
                                 @if(Model.CommentList.Count != 0)
                                 {
                                     foreach(CommentViewModel maincoment in  Model.CommentList)
                                     {
+                                        string openForm = $"{maincoment.ID}CommentForm";
+                                        string principalCommentsReplies = $"{maincoment.ID}commentReply";
+
                                         @* Comentario principal *@
-                                        <div class="col-12 d-flex justify-content-end">
+                                        <div class="col-12 d-flex justify-content-end mt-4">
 
                                             <div class="col-11 d-flex">
 
                                                 <div class="col-1 d-flex justify-content-end">
-                                                    <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
+                                                    <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3 justify-content-center">
                                                 </div>
 
                                                 <div class="col-11">
@@ -132,7 +135,7 @@
                                                     <div class="d-flex justify-content-between">
                                                         <div class="col-11 postText">
                                                             <div class="d-flex gap-2">
-                                                                <p class="mb-0 fw-medium">Anderson Figuereo L.</p>
+                                                                <p class="mb-0 fw-medium">@maincoment.Name @maincoment.LastName</p>
                                                                 <p class="text-muted mb-0">@@@maincoment.UserName</p>
                                                             </div>
                                                             <p class="small text-secondary">@maincoment.Created</p>
@@ -150,7 +153,8 @@
 
                                                         <div class="col-12 d-flex justify-content-between">
 
-                                                            <form method="post" asp-controller="Home" asp-action="Replies" collapse" id="commentForm1">
+                                                            <form method="post" asp-controller="Home" asp-action="Replies" class="col-10 collapse" id="@openForm">
+                                                                
                                                                 <div class="mb-4 d-flex gap-3 align-items-center">
                                                                     <div class="col-12">
                                                                         <textarea for ="Content" name="Content" id="Content" class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
@@ -171,13 +175,15 @@
                                                     </div>
 
                                                     <div class="col-12 d-flex justify-content-between">
-                                                        <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#repliesComment" aria-expanded="false">
+
+                                                        <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#@principalCommentsReplies" aria-expanded="false">
                                                             Replies (@maincoment.Replies.Count)
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
                                                             </svg>
                                                         </a>
-                                                        <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm1">Reply</a>
+
+                                                        <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#@openForm">Reply</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,9 +194,9 @@
                                         {
                                             foreach (CommentViewModel replies in maincoment.Replies)
                                             {
-                                                <div class="collapse" id="repliesComment">
+                                                string openForm1 = $"{replies.ID}CommentForm";
 
-
+                                                <div class="collapse" id="@principalCommentsReplies">
 
                                                     <div class="col-12 d-flex justify-content-end mt-3 collapse">
 
@@ -205,7 +211,7 @@
                                                                 <div class="d-flex justify-content-between">
                                                                     <div class="col-11 postText">
                                                                         <div class="d-flex gap-2">
-                                                                            <p class="mb-0 fw-medium">Aqui te mando el nombre</p>
+                                                                            <p class="mb-0 fw-medium">@replies.Name @replies.LastName</p>
                                                                             <p class="text-muted mb-0">@@@replies.UserName</p>
                                                                         </div>
                                                                         <p class="small text-secondary">@replies.Created</p>
@@ -222,7 +228,7 @@
                                                                 <div class=" d-flex justify-content-center">
                                                                     <div class="col-12 d-flex justify-content-between">
 
-                                                                        <form method="post" asp-controller="Home" asp-action="Replies" class="col-10 collapse" id="commentForm3">
+                                                                        <form method="post" asp-controller="Home" asp-action="Replies" class="col-10 collapse" id="@openForm1">
                                                                             <div class="mb-4 d-flex gap-3 align-items-center">
                                                                                 <div class="col-12">
                                                                                     <textarea for="Content" name="Content" id="Content" class="form-control inputCustomizeHome postText" placeholder="Add a comment..." style="height: 20px"></textarea>
@@ -243,7 +249,7 @@
                                                                 </div>
 
                                                                 <div class="col-12 d-flex justify-content-end">
-                                                                    <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#commentForm3">Reply</a>
+                                                                    <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#@openForm1">Reply</a>
                                                                 </div>
                                                             </div>
 
@@ -259,11 +265,6 @@
 
                                     
                                 }
-                               
-                                
-
-
-                         
 
                             </div>
 

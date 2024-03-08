@@ -198,8 +198,22 @@ body {
 
 /* Home Comment style */
 
+/* Home Comment style */
+
 .homeCommentCard {
     background-color: transparent;
     border-radius: 30px;
+    border: 1px solid #313131;
+}
+
+.separation {
+    border-top: 1px solid #313131;
+}
+
+
+/* Friends style */
+
+.friendsCard {
+    background-color: #242526;
     border: 1px solid #313131;
 }
