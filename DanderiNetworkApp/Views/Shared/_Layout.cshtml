@@ -1,12 +1,13 @@
 ﻿@using DanderiNetwork.Core.Application.ViewModels.User
+@using DanderiNetwork.Core.Application.Dtos.User
 @using DanderiNetwork.Core.Application.Helpers;
 @inject IHttpContextAccessor httpContext;
 @{
 	UserViewModel User = httpContext.HttpContext.Session.Get<UserViewModel>("user");
-	
 
-	
-    string viewContextCon = ViewContext.RouteData.Values["controller"].ToString(); 
+	var Users = ViewData["UserViewModel"] as List<UserResponse>;
+
+	string viewContextCon = ViewContext.RouteData.Values["controller"].ToString();
 
 }
 
@@ -77,12 +78,15 @@
 						</div>
 
 						<div class="dropdown">
-							<a href="#" class="d-flex align-items-center text-white text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="32" height="32" class="rounded-circle me-2">
+							<a href="#" class="d-flex align-items-center text-white text-decoration-none " id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
 								<div>
-									<strong></strong>
+									<strong>Nombre Apellido</strong>
 									<p class="mb-0 highlighted">@@@User.Username</p>
 								</div>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots ms-2" viewBox="0 0 16 16">
+									<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+								</svg>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark text-small" aria-labelledby="dropdownUser1">
 								<li><a class="dropdown-item text-white" href="#">Settings</a></li>
@@ -91,11 +95,13 @@
 								<li><a class="dropdown-item text-danger" asp-controller="User" asp-action="LogOut">Sign out</a></li>
 							</ul>
 						</div>
+
 					</div>
-				
+
 				</div>
 			}
-			<div class="col-8 container mb-5">
+
+			<div class="col-7 container mb-5">
 
 				<main role="main" class="mt-5 main-content">
 					<div class="mb-3">
@@ -125,47 +131,86 @@
 			@* <div class="col-2"></div> *@
 			@* <div class="@(User == null ? "col-1" : "col-2")"></div> *@
 
-			@if (viewContextCon == "Home")
-			{
-				
-				<div class="@(User == null ? "" : "col-2")">
-					<div class="container mt-5 d-flex justify-content-center">
-						<div class="col-11">
-							<div class="list-group rounded-5">
-								<a href="#" class="list-group-item friendsCard list-group-item-action d-flex gap-3 py-3" aria-current="true">
-									<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-									<div class="d-flex gap-2 w-100 justify-content-between">
-										<div>
-											<p class="mb-0">Nombre Apellido</p>
-											<p class="mb-0 opacity-75">@@Dariana97</p>
+			<div class="@(User == null ? "" : "col-3")">
+
+				@if (viewContextCon == "Friend")
+				{
+					<div class="container mt-5">
+
+						<h4>All friends</h4>
+
+						<div class="d-flex justify-content-start">
+
+							<div class="col-11">
+								<div class="list-group rounded-5">
+
+									@if (Users != null)
+									{
+										@foreach (UserResponse user in Users)
+										{
+											<div class="list-group-item friendsCard d-flex gap-3 py-3" aria-current="true">
+												<img src="@user.ImageURL" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0 object-fit-cover">
+												<div class="d-flex gap-2 w-100 justify-content-between">
+													<div class="col-12">
+														<div class="col-12 d-flex justify-content-between">
+															<div class="col-11">
+																<p class="col-11 mb-0 text-white">@user.Name @user.Lastname</p>
+															</div>
+															<div class="col-1 d-flex justify-content-end">
+																<div class="dropdown">
+
+																	<a href="#" class="d-flex align-items-center text-white text-decoration-none " id="dropdownOptions" data-bs-toggle="dropdown" aria-expanded="false">
+																		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+																			<path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+																		</svg>
+																	</a>
+
+																	<ul class="dropdown-menu dropdown-menu-dark text-small rounded-5 dropdownOption" aria-labelledby="dropdownOptions">
+																		<li>
+																			<a class="dropdown-item text-danger small d-flex justify-content-center align-items-center" href="#">
+																				Delete
+																			</a>
+																		</li>
+																	</ul>
+																</div>
+															</div>
+
+														</div>
+														<p class="mb-0 text-muted">@@@user.UserName</p>
+													</div>
+												</div>
+
+											</div>
+										}
+									}
+
+									<div class="list-group-item friendsCard d-flex gap-3 py-3" aria-current="true">
+										<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+										<div class="d-flex gap-2 w-100 justify-content-between">
+											<div>
+												<h6 class="mb-0 text-white">Dariana Cabreja C.</h6>
+												<p class="mb-0 text-muted">@@Dariana97</p>
+											</div>
 										</div>
 									</div>
-								</a>
-								<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-									<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-									<div class="d-flex gap-2 w-100 justify-content-between">
-										<div>
-											<h6 class="mb-0">Another title here</h6>
-											<p class="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
+
+									<div class="list-group-item friendsCard d-flex gap-3 py-3" aria-current="true">
+										<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+										<div class="d-flex gap-2 w-100 justify-content-between">
+											<div>
+												<h6 class="mb-0 text-white">Anderson Figuereo L.</h6>
+												<p class="mb-0 text-muted">@@Andersxn29</p>
+											</div>
 										</div>
 									</div>
-								</a>
-								<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-									<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-									<div class="d-flex gap-2 w-100 justify-content-between">
-										<div>
-											<h6 class="mb-0">Third heading</h6>
-											<p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-										</div>
-									</div>
-								</a>
+
+								</div>
 							</div>
 						</div>
 					</div>
+				}
+			</div>
 
-				</div>
-			}
-			
 
 		</div>
 	</div>
