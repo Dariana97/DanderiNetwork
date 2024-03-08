@@ -174,11 +174,17 @@ namespace DanderiNetworkApp.Controllers
 
 				return RedirectToRoute(new { controller = "User", action = "Index" });
 			}
-            return RedirectToRoute(new { controller = "User", action = "Index" });
+            return RedirectToRoute(new { controller = "User", action = "ForgotPassword" });
         }
 
+		[ServiceFilter(typeof(LoginAuthorize))]
+		public IActionResult ForgotPassword()
+		{
+			return View();
+		}
 
-        [ServiceFilter(typeof(LoginAuthorize))]
+
+		[ServiceFilter(typeof(LoginAuthorize))]
         public IActionResult ResetPassword(string token)
         {
             return View(new ResetPasswordViewModel { Token = token });
