@@ -107,7 +107,7 @@ namespace DanderiNetwork.Core.Application.Services
             
 
             List<CommentViewModel> mainComments = comments
-                .Where(c => c.PostID == postId && c.IdReference == null)
+                .Where(c => c.IdReference == null)
                 .ToList();
 
             mainComments.ForEach(comment =>

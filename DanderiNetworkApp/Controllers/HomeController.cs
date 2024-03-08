@@ -29,7 +29,7 @@ namespace DanderiNetworkApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await _postService.GetAllViewModel();
+            
                 
 
 			return View(await _postService.GetAllViewModel());
@@ -65,7 +65,7 @@ namespace DanderiNetworkApp.Controllers
             if (postSaving != null)
             {
                 ViewBag.Suceess = "Post was save successfully";
-                return View("Index");
+                return RedirectToRoute(new { controller = "Home", action = "Index" }); ;
             }
             ViewBag.Suceess = "Problems while saving your post";
             return View("Index");
