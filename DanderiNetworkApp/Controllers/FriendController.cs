@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.Following;
+using DanderiNetwork.Core.Application.ViewModels.Post;
 using Microsoft.AspNetCore.Mvc;
 namespace DanderiNetworkApp.Controllers
 
@@ -25,30 +26,26 @@ namespace DanderiNetworkApp.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["UserViewModel"] = _userApplication.GetAllUsers();
-            return View(await _postService.GetAllViewModel());
+            //return View(await _postService.GetPostForFollow());
+            return View(await _postService.GetPostForFollow());
         }
 
-        //public async Task<IActionResult> Follow(string username)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        ViewBag.Suceess = "Invalid action";
-        //        return View("Index");
+        public async Task<IActionResult> Follow(string username)
+        {
+       
 
-        //    }
+            var user = await _userApplication.GetByUserName(username);
+            
+            var FollowingSaving = await _followingService.Follow(user.ID);
 
-        //    var user = await _userApplication.GetByUserName(username);
-        //    vm.Created = DateTime.Now;
-        //    var FollowingSaving = await _followingService.Add(user);
+            if (FollowingSaving != null)
+            {
+				return RedirectToRoute(new { controller = "Friend", action = "Index" }); //vista para seguidores, se debe modificar el acceso al index
+			}
 
-        //    if (FollowingSaving != null)
-        //    {
-        //        return View("Index"); //vista para seguidores, se debe modificar el acceso al index
-        //    }
+			return RedirectToRoute(new { controller = "Friend", action = "Index" }); //vista para seguidores, se debe modificar el acceso al index
 
-        //    return View("Index"); //vista para seguidores, se debe modificar el acceso al index
-
-        //}
+		}
 
         //public async Task<IActionResult> UnFollow(int id)
         //{

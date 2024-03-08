@@ -6,6 +6,8 @@ namespace DanderiNetwork.Core.Application.Interfaces.Services
 {
     public interface IPostService : IGenericService<SavePostViewModel, PostViewModel, Post>
     {
+		Task<List<PostViewModel>> GetPostForFollow();
 
-    }
+
+	}
 }

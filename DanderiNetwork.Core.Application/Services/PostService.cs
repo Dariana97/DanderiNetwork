@@ -66,9 +66,11 @@ namespace DanderiNetwork.Core.Application.Services
             }
 
             posts.ForEach( post => {
-                post.UserName = follow.Where(u => u.FollowingUserID == post.UserID).FirstOrDefault().UsernameUserFollowed;
-                post.CommentList = comments.Where(p => p.PostID == post.ID).ToList();
-            });
+                //post.UserName = follow.Where(u => u.FollowingUserID == post.UserID).FirstOrDefault().UsernameUserFollowed;
+                //post.CommentList = comments.Where(p => p.PostID == post.ID).ToList();
+                post.CommentList = new List<ViewModels.Comment.CommentViewModel>();
+
+			});
 
             return _mapper.Map<List<PostViewModel>>(modelList).OrderByDescending(i => i.Created).ToList();
         }

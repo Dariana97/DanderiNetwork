@@ -159,11 +159,11 @@
 													Enter the username of the person you want to add as a friend.
 												</p>
 											</div>
-											<form method="post">
+											<form asp-controller="Friend" asp-action="Follow" method="post">
 												<div class="mb-4 d-flex justify-content-center">
 													<div class="col-8">
 														<label for="username" class="form-label fw-bold">Username</label>
-														<input type="text" class="form-control inputCustomize" id="username" name="username">
+														<input type="text" class="form-control inputCustomize" for="username" id="username" name="username">
 														<span class="text-danger"></span>
 													</div>
 												</div>

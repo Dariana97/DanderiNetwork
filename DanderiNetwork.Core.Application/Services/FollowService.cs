@@ -61,6 +61,7 @@ namespace DanderiNetwork.Core.Application.Services
         public async Task<FollowingViewModel> Follow(string ID)
         {
             SaveFollowingViewModel vm = new();
+         
             vm.UserMainID = userViewModel.Id;
             vm.FollowingUserID = ID;
             vm.Created = DateTime.Now;
