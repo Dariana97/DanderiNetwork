@@ -1,5 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+	ViewData["Tittle"] = "Confirm email";
 }
+
+<div class="container d-flex justify-content-center align-items-start">
+	<div class="">
+
+		<div class="d-flex justify-content-center align-content-center">
+			<img src="~/images/app/EmailVerified.png" class="w-75 h-75" alt="Alternate Text" />
+		</div>
+		<div class="d-flex justify-content-center">
+			<div class="col-8">
+				<h1 class="text-center highlighted">Please verify your email</h1>
+			</div>
+		</div>
+
+		<div class="d-flex justify-content-center">
+
+			<div class="col-9">
+				<p class="highlighted fw-bold"> Hi, dear!</p>
+				<p>
+					We will send you an email to validate your account. Once you are authorized you will be able to access.
+				</p>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center">
+			<div class="col-9">
+				<a asp-controller="User" asp-action="Index" class="btn newFriend rounded-5">Back to home page</a>
+			</div>
+		</div>
+	</div>
+</div>
