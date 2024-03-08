@@ -52,11 +52,11 @@ namespace DanderiNetwork.Core.Application.Services
             return _mapper.Map<List<ViewModel>>(modelList);
         }
 
-        public async Task<SaveViewModel> GetByIdSaveViewModel(int id)
+        public async Task<ViewModel> GetByIdSaveViewModel(int id)
         {
             Model model = await _repository.GetByIdAsync(id);
 
-            SaveViewModel vm = _mapper.Map<SaveViewModel>(model);
+            ViewModel vm = _mapper.Map<ViewModel>(model);
 
             return vm;
         }
