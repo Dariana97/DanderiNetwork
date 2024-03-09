@@ -12,7 +12,7 @@
 
 			<div class="col-6 col-lg-7 col-md-9 col-sm-8">
 
-				@if (Model.Count == 0)
+				@if (Model.Count == 0 || Model == null)
 				{
 					<div class="col-12 mt-5">
 						<div class="d-flex justify-content-center">
@@ -27,8 +27,10 @@
 							</div>
 						</div>
 					</div>
-				}
-				@foreach (PostViewModel vm in Model)
+				} 
+				else
+				{
+					@foreach (PostViewModel vm in Model)
 				{
 					string openForm = $"{vm.ID}CommentForm";
 
@@ -144,7 +146,8 @@
 					</div>
 
 				}
-
+				}
+				
 			</div>
 		</div>
 	</div>

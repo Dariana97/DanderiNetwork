@@ -119,9 +119,6 @@ namespace DanderiNetwork.Core.Application.Services
 			return posts.OrderByDescending(i => i.Created).ToList();
 		}
 
-
-
-
 		public override async Task<SavePostViewModel> Add(SavePostViewModel vm)
 		{
             vm.UserID = userViewModel.Id; 

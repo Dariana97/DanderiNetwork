@@ -5,6 +5,7 @@ using DanderiNetworkApp.Midleware;
 using DanderiNetwork.Core.Application.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using DanderiNetwork.Core.Application.Dtos.User;
+using DanderiNetwork.Core.Domain.Entities;
 
 
 namespace DanderiNetworkApp.Controllers
@@ -13,8 +14,6 @@ namespace DanderiNetworkApp.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-       
-    
         private readonly IUserApplication _userApplication;
 
         public UserController(IUserService userService, IUserApplication userApplication)
@@ -58,10 +57,10 @@ namespace DanderiNetworkApp.Controllers
             }
 
         }
-
-        public IActionResult Profile()
+		public IActionResult Profile()
         {
-            return View();
+            return View(HttpContext.Session.Get<UserResponse>("user"));
+
         }
 
         private string UploadFile(IFormFile file, string ID, bool isEditMode = false, string imageURL = "")
@@ -112,9 +111,6 @@ namespace DanderiNetworkApp.Controllers
             return $"{basePath}/{fileName}";
         }
 
-
-    
-
         public async Task<IActionResult> Register()
         {
             return View(new SaveUserViewModel());
@@ -126,7 +122,6 @@ namespace DanderiNetworkApp.Controllers
         {
             if(!ModelState.IsValid)
             {
-                //ViewBag.SaveUserVm = vm;
                 return View("Index", vm);
 			}
 
@@ -230,7 +225,7 @@ namespace DanderiNetworkApp.Controllers
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
 
-        public async Task<IActionResult> AccessDenied()
+        public IActionResult AccessDenied()
         {
             return View();
         }
