@@ -39,6 +39,9 @@ namespace DanderiNetworkApp.Controllers
            SavePostViewModel vm = _mapper.Map<SavePostViewModel>(await _postService.GetByIdViewModel(id));
             return View(vm);
         }
+
+
+
         [HttpPost]
         public async Task<IActionResult> EditPost(SavePostViewModel vm)
         {
@@ -66,6 +69,16 @@ namespace DanderiNetworkApp.Controllers
 			return View(await _postService.GetAllViewModel());
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletePost([FromRoute] int id)
+        {
+            await _postService.Delete(id);
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+        }
+
+
 
 
         [HttpPost]
@@ -118,13 +131,7 @@ namespace DanderiNetworkApp.Controllers
 
 		}
 
-        [HttpGet]
-        public async Task<IActionResult> DeletePost([FromRoute] int id)
-        {
-            await _postService.Delete(id);
-            return RedirectToRoute(new { controller = "Home", action = "Index" });
 
-		}
 
         public async Task<IActionResult> EditComment(CommentViewModel vm)
         {
