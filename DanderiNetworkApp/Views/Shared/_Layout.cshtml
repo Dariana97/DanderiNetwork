@@ -2,10 +2,11 @@
 @using DanderiNetwork.Core.Application.Dtos.User
 @using DanderiNetwork.Core.Application.Helpers;
 @inject IHttpContextAccessor httpContext;
+@using DanderiNetwork.Core.Application.ViewModels.Following;
 @{
 	UserViewModel User = httpContext.HttpContext.Session.Get<UserViewModel>("user");
 
-	var Users = ViewData["UserViewModel"] as List<UserResponse>;
+	var Users = ViewData["UserViewModel"] as List<FollowingViewModel>;
 
 	string viewContextCon = ViewContext.RouteData.Values["controller"].ToString();
 
@@ -189,7 +190,7 @@
 								<div class="col-11">
 									<div class="list-group rounded-5">
 
-										@foreach (UserResponse user in Users)
+										@foreach (FollowingViewModel user in Users)
 										{
 											<div class="list-group-item friendsCard d-flex gap-3 py-3" aria-current="true">
 
@@ -198,7 +199,7 @@
 													<div class="col-12">
 														<div class="col-12 d-flex justify-content-between">
 															<div class="col-11">
-																<p class="col-11 mb-0 text-white">@user.Name @user.Lastname</p>
+																<p class="col-11 mb-0 text-white">@user.NameUserFollowed @user.LastNameUserFollowed</p>
 															</div>
 															<div class="col-1 d-flex justify-content-end">
 																<div class="dropdown">
@@ -220,7 +221,7 @@
 															</div>
 
 														</div>
-														<p class="mb-0 text-muted">@@@user.UserName</p>
+														<p class="mb-0 text-muted">@@@user.UsernameUserFollowed</p>
 													</div>
 												</div>
 											</div>

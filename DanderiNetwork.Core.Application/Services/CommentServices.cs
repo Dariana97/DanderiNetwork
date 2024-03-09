@@ -85,7 +85,7 @@ namespace DanderiNetwork.Core.Application.Services
                 if (userMain != null)
                 {
                     comment.UserName = userMain.UserName;
-                    comment.UserID = userMain.ID;
+                    comment.UserImage = userMain.ImageURL;
                     comment.Name = userMain.Name;
                     comment.LastName = userMain.Lastname;
                 }
@@ -98,7 +98,7 @@ namespace DanderiNetwork.Core.Application.Services
 
                 comment.Replies.ForEach(reply =>
                 {
-                    var userSecond = users?.FirstOrDefault(u => u.ID == reply.UserIDReplied);
+                    var userSecond = users?.FirstOrDefault(u => u.ID == reply.UserID);
                     if (userSecond != null)
                     {
                         reply.UserName = userMain.UserName;
@@ -106,6 +106,8 @@ namespace DanderiNetwork.Core.Application.Services
                         reply.UserID = userSecond.ID;
                         reply.Name = userSecond.Name;
                         reply.LastName = userSecond.Lastname;
+                        reply.UserImage = userSecond.ImageURL;
+                        
                     }
                 });
             });

@@ -14,6 +14,7 @@ namespace DanderiNetwork.Core.Application.ViewModels.Comment
         public string UserName { get; set; }
         public string? UserNameReplied { get; set; }
         public string Content { get; set; }
+        public string UserImage { get; set; }
         public int? IdReference { get; set; }
         public List<CommentViewModel>? Replies { get; set; }
 
