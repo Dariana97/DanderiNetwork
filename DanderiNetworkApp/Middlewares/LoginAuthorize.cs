@@ -21,7 +21,7 @@ namespace DanderiNetworkApp.Midleware
             if (_userSession.HasUser())
             {
                 var controller = (UserController)context.Controller;
-                context.Result = controller.RedirectToAction("AccessDenied", "User");
+                context.Result = controller.RedirectToAction("Index", "Home");
             }
 			else
             {

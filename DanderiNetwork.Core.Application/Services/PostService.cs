@@ -41,6 +41,7 @@ namespace DanderiNetwork.Core.Application.Services
                 post.UserName = userViewModel.UserName;
                 post.Name = userViewModel.Name;
                 post.LastName = userViewModel.Lastname;
+				post.UserImageURL = userViewModel.ImageUrl;
                 post.CommentList = comments.Where(p => p.PostID == post.ID).ToList();
             });
 
@@ -51,50 +52,13 @@ namespace DanderiNetwork.Core.Application.Services
         {
             var comments = await _commentService.GetAllViewModel();
             PostViewModel model = await base.GetByIdViewModel(id);
+            model.UserImageURL = userViewModel.ImageUrl;
             model.CommentList = comments.Where(cm => cm.PostID == id).ToList();
+            model.Name = userViewModel.Name;
+            model.LastName = userViewModel.Lastname;
 
             return model;
         }
-
-		//     public  async Task<List<PostViewModel>> GetPostForFollow()
-		//     {
-		//         var follow = await _followingService.GetAllFollows();
-		//         var modelList = await base.GetAllViewModel();
-		//         var comments = await _commentService.GetAllViewModel();
-		//         List<PostViewModel> posts = new();
-
-		//         foreach (var fw in follow) {
-		//         posts.Add(modelList.Where(u => u.UserID == fw.FollowingUserID).FirstOrDefault());
-		//         }
-
-		//         posts.ForEach( post => {
-		//             //post.UserName = follow.Where(u => u.FollowingUserID == post.UserID).FirstOrDefault().UsernameUserFollowed;
-		//             //post.CommentList = comments.Where(p => p.PostID == post.ID).ToList();
-		//             post.CommentList = new List<ViewModels.Comment.CommentViewModel>();
-
-		//});
-
-		//         return _mapper.Map<List<PostViewModel>>(modelList).OrderByDescending(i => i.Created).ToList();
-		//     }
-		//public async Task<List<PostViewModel>> GetPostForFollow()
-		//{
-		//	var follow = await _followingService.GetAllFollows();
-		//	var modelList = await base.GetAllViewModel();
-		//	var comments = await _commentService.GetAllViewModel();   Sirve pero solo me trae un post por cada follow
-		//	List<PostViewModel> posts = new List<PostViewModel>();
-
-		//	foreach (var fw in follow)
-		//	{
-		//		var post = modelList.FirstOrDefault(u => u.UserID == fw.FollowingUserID);
-		//		if (post != null)
-		//		{
-		//			post.CommentList = comments.Where(p => p.PostID == post.ID).ToList();
-		//			posts.Add(post);
-		//		}
-		//	}
-
-		//	return posts.OrderByDescending(i => i.Created).ToList();
-		//}
 
 		public async Task<List<PostViewModel>> GetPostForFollow()
 		{
