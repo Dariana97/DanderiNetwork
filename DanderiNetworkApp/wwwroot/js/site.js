@@ -48,3 +48,83 @@ $(document).ready(function () {
         }
     });
 });
+
+function validarInputs(inputIds) {
+    let cumpleRequisitos = true;
+
+    inputIds.forEach(function (inputId) {
+        const input = document.getElementById(inputId);
+        const valor = input.value;
+
+        const regexMayuscula = /[A-Z]/;
+        const regexMinuscula = /[a-z]/;
+        const regexDigito = /[0-9]/;
+        const regexNoAlfanumerico = /[^a-zA-Z0-9]/;
+
+        const cumpleRequisitosInput = valor.length >= 6 && regexMayuscula.test(valor) && regexMinuscula.test(valor) && regexDigito.test(valor) && regexNoAlfanumerico.test(valor);
+
+        input.style.border = cumpleRequisitosInput ? '1px solid green' : '1px solid red';
+
+        if (!cumpleRequisitosInput) {
+            cumpleRequisitos = false;
+        }
+    });
+}
+
+const inputIds = ['passwordSign', 'ConfirmPassword']; // IDs de los inputs a validar
+
+inputIds.forEach(function (inputId) {
+    const input = document.getElementById(inputId);
+    input.addEventListener('input', function () {
+        validarInputs(inputIds);
+    });
+});
+
+$(document).ready(function () {
+    $("#formularioSignUp").submit(function (event) {
+        event.preventDefault();
+
+        var form = $(this);
+        var formData = new FormData(form[0]);
+
+        $.ajax({
+            url: form.attr("action"),
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                // Si la operación fue exitosa (usuario registrado), manejar la respuesta...
+                // ...
+            },
+            error: function (xhr) {
+                if (xhr.status === 400) {
+                    // Mostrar el modal de nuevo
+                    $('#signUpModal').modal('show');
+
+                    // Mostrar mensajes de error específicos
+                    $.each(xhr.responseJSON, function (key, value) {
+                        // Encontrar el campo de entrada correspondiente y mostrar el mensaje de error
+                        // Ejemplo:
+                        var inputField = $("#formularioSignUp [name='Username" + key + "']");
+                        var errorSpan = inputField.next(".text-danger");
+                        errorSpan.text(value);
+
+                        // Opcionalmente: agregar clases CSS para resaltar el campo con error
+                        inputField.addClass("is-invalid");
+                    });
+                } else {
+                    // Manejar otros errores
+                    alert("Ocurrió un error inesperado. Inténtalo de nuevo más tarde.");
+                }
+            }
+        });
+    });
+});
+
+
+
+
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

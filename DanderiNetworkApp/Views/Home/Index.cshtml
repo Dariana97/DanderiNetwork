@@ -1,7 +1,12 @@
 ﻿@using DanderiNetwork.Core.Application.ViewModels.Post
+@using DanderiNetwork.Core.Application.ViewModels.User
+@using Microsoft.AspNetCore.Http
+@using DanderiNetwork.Core.Application.Helpers;
+@inject IHttpContextAccessor httpContext;
 @model List<PostViewModel>
 @{
-	ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
+	UserViewModel UserLog = httpContext.HttpContext.Session.Get<UserViewModel>("user");
 }
 
 <div class="container">
@@ -18,15 +23,15 @@
 
 						<div class="card-body col-10 d-flex justify-content-center">
 
-							<div class="col-1 d-flex justify-content-end  me-3">
-								<img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle">
+							<div class="col-1 d-flex justify-content-end me-3">
+								<img src="@UserLog.ImageURL" alt="" width="40" height="40" class="rounded-circle object-fit-cover">
 							</div>
 
 							<form method="post" class="col-11" asp-controller="Home" asp-action="AddPost" enctype="multipart/form-data">
 
 								<div class="mb-4 d-flex justify-content-center">
 									<div class="col-12">
-										<textarea for="Caption" id="Caption" name="Caption" class="form-control inputCustomizeHome" placeholder="What are u thinking, Lara?!" style="height: 50px"></textarea>
+										<textarea for="Caption" id="Caption" name="Caption" class="form-control inputCustomizeHome" placeholder="What are u thinking, @UserLog.Name?!" style="height: 50px"></textarea>
 										<span class="text-danger"></span>
 									</div>
 								</div>
@@ -62,8 +67,8 @@
 								<div class="d-flex justify-content-start">
 									<div class="col-auto d-flex justify-content-end gap-4">
 
-										<a href="#" class="highlighted text-decoration-none" data-bs-toggle="collapse" data-bs-target="#collapsePhotoInput">
-											<svg xmlns="http://www.w3.org/2000/svg" width="20" id="photo" height="20" fill="currentColor" class="bi bi-image-fill" viewBox="0 0 16 16">
+										<a href="#" class="highlighted text-decoration-none" id="photo" data-bs-toggle="collapse" data-bs-target="#collapsePhotoInput">
+											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-image-fill" viewBox="0 0 16 16">
 												<path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0" />
 											</svg>
 										</a>
@@ -139,7 +144,7 @@
 												</a>
 												<ul class="dropdown-menu dropdown-menu-dark text-small rounded-3 dropdownOption" aria-labelledby="dropdownOptions">
 													<li>
-														<a class="dropdown-item text-white small d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#editPost">
+														<a class="dropdown-item text-white small d-flex align-items-center gap-2" asp-controller="Home" asp-action="EditPost" asp-route-id="@vm.ID">
 															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 																<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 																<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -237,7 +242,6 @@
 										</div>
 									</div>
 
-									<!-- Modals -->
 									<!-- Modal - Delete Post -->
 									<div class="modal fade p-4 py-md-5" tabindex="-1" role="dialog" id="deletePost" data-bs-backdrop="static">
 										<div class="modal-dialog modal-dialog-centered">
