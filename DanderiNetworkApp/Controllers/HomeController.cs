@@ -31,6 +31,32 @@ namespace DanderiNetworkApp.Controllers
 
 
         #region Post
+
+        public async Task<IActionResult> EditPost([FromRoute] int id)
+        {
+           SavePostViewModel vm = _mapper.Map<SavePostViewModel>(await _postService.GetByIdViewModel(id));
+            return View(vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditPost(SavePostViewModel vm)
+        {
+
+
+            vm.Created = DateTime.Now;
+            if (vm.VideoUrl == null && vm.Photo != null)
+            {
+                vm.ImageURL = UploadFile(vm.Photo, vm.ID, true, vm.ImageURL);
+                await _postService.Update(vm, vm.ID);
+            }
+            await _postService.Update(vm, vm.ID);
+
+
+
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+
+           
+        }
         public async Task<IActionResult> Index()
         {
             

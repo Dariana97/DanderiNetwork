@@ -162,7 +162,7 @@ namespace DanderiNetworkApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(vm);
+                return View();
             }
             var origin = Request.Headers["origin"];
             ForgotPasswordResponse response = await _userService.ForgotPasswordAsync(vm, origin);
@@ -170,7 +170,7 @@ namespace DanderiNetworkApp.Controllers
             {
                 vm.HasError = response.HasError;
                 vm.Error = response.Error;
-				@ViewBag.ForgotError = response.Error;
+				@ViewBag.Error = response.Error;
 
 				return RedirectToRoute(new { controller = "User", action = "Index" });
 			}
