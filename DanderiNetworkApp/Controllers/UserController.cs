@@ -35,7 +35,8 @@ namespace DanderiNetworkApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(vm);
+                ViewBag.ErrorMessage = "Invalid access data";
+                return View();
             }
 
             AuthenticationResponse userVm = await _userService.LoginAsync(vm);
@@ -50,12 +51,19 @@ namespace DanderiNetworkApp.Controllers
             {
                 vm.HasError = userVm.HasError;
                 vm.Error = userVm.Error;
-                return View(vm);
+
+                ViewBag.ErrorState = vm.HasError;
+				ViewBag.ErrorStateMessage = vm.Error;
+                return View();
             }
 
         }
 
-        
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
         private string UploadFile(IFormFile file, string ID, bool isEditMode = false, string imageURL = "")
         {
             if (isEditMode && file == null)
@@ -171,7 +179,9 @@ namespace DanderiNetworkApp.Controllers
             {
                 vm.HasError = response.HasError;
                 vm.Error = response.Error;
-				@ViewBag.Error = response.Error;
+
+				@ViewBag.ErrorState = response.HasError;
+				@ViewBag.ErrorStateMessage = response.Error;
 
 				return RedirectToRoute(new { controller = "User", action = "Index" });
 			}
@@ -212,11 +222,7 @@ namespace DanderiNetworkApp.Controllers
 
         public async Task<IActionResult> AccessDenied()
         {
-            
-           
             return View();
-            
-
         }
     }
 }

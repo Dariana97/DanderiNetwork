@@ -3,6 +3,7 @@ using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.Comment;
 using DanderiNetwork.Core.Application.ViewModels.Following;
 using DanderiNetwork.Core.Application.ViewModels.Post;
+using DanderiNetworkApp.Midleware;
 using DanderiNetworkApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +11,8 @@ using System.Diagnostics;
 
 namespace DanderiNetworkApp.Controllers
 {
-	[Authorize]
-	public class HomeController : Controller
+    [Authorize]
+    public class HomeController : Controller
     {
         #region Configuration
         private readonly ILogger<HomeController> _logger;
@@ -58,7 +59,8 @@ namespace DanderiNetworkApp.Controllers
 
            
         }
-        public async Task<IActionResult> Index()
+
+		public async Task<IActionResult> Index()
         {
             
 			return View(await _postService.GetAllViewModel());
@@ -228,12 +230,5 @@ namespace DanderiNetworkApp.Controllers
             return $"{basePath}/{fileName}";
         }
         #endregion
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
