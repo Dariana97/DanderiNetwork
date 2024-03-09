@@ -8,7 +8,7 @@
 	<div class="col-8">
 		<div class="col-12 d-flex justify-content-end">
 			<div class="col-3">
-				<a href="#" class="btn newFriend rounded-5 w-100">Edit profile</a>
+				<a asp-controller="User" asp-action="EditProfile" class="btn newFriend rounded-5 w-100">Edit profile</a>
 			</div>
 		</div>
 
@@ -23,11 +23,11 @@
 				</div>
 				<div class="d-flex gap-3 justify-content-center">
 					<div>
-						<p class="fw-medium">Tel.:</p>
+						@* <p class="fw-medium">Tel.:</p> *@
 						<p class="fw-medium">Email: </p>
 					</div>
 					<div>
-						<p>@Model.PhoneNumber</p>
+						@* <p>@Model.PhoneNumber</p> *@
 						<p>@Model.Email</p>
 					</div>
 				</div>

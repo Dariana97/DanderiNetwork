@@ -57,6 +57,12 @@ namespace DanderiNetworkApp.Controllers
             }
 
         }
+
+        public IActionResult EditProfile()
+        {
+            return View();
+        }
+
 		public IActionResult Profile()
         {
             return View(HttpContext.Session.Get<UserResponse>("user"));
