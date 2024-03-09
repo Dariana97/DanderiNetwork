@@ -13,7 +13,7 @@
 			<img src="/images/app/Group 472.png" class="homeImage" alt="Alternate Text" />
 		</div>
 
-		@if (ViewBag.ErrorState != null && ViewBag.ErrorState == true)
+		@if (ViewBag.ErrorState != null && ViewBag.ErrorState)
 		{
 			<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				<p>@ViewBag.ErrorStateMessage</p>

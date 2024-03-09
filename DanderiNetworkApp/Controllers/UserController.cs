@@ -179,7 +179,9 @@ namespace DanderiNetworkApp.Controllers
             {
                 vm.HasError = response.HasError;
                 vm.Error = response.Error;
-				@ViewBag.Error = response.Error;
+
+				@ViewBag.ErrorState = response.HasError;
+				@ViewBag.ErrorStateMessage = response.Error;
 
 				return RedirectToRoute(new { controller = "User", action = "Index" });
 			}
