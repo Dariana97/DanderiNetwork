@@ -4,7 +4,7 @@ using DanderiNetwork.Core.Application.Helpers;
 using DanderiNetwork.Core.Application.Interfaces.Repositories;
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.Post;
-using DanderiNetwork.Core.Application.ViewModels.User;
+
 using DanderiNetwork.Core.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 
