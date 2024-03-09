@@ -2,45 +2,44 @@
 @model SavePostViewModel
 
 
-      <form method="post" asp-action="EditPost" asp-controller="Home" enctype="multipart/form-data">
-					<div class="mb-4 d-flex justify-content-center">
-						<div class="col-8">
+<form method="post" asp-action="EditPost" asp-controller="Home" enctype="multipart/form-data">
+	<div class="mb-4 d-flex justify-content-center">
+		<div class="col-8">
 
-							<div class="col-12 mb-3">
-								<label asp-for="Caption" class="form-label fw-bold">Caption</label>
+			<div class="col-12 mb-3">
+				<label asp-for="Caption" class="form-label fw-bold">Caption</label>
 				<input asp-for="Caption" class="form-control inputCustomize" name="Caption">
 				<span asp-validation-for="Caption" class="text-danger"></span>
-							</div>
-							
+			</div>
 
-							<div class="col-12 mb-3">
-								<label asp-for="Photo" class="form-label fw-bold">Photo</label>
-								<input asp-for="Photo"  class="form-control anotherDesign" id="Photo" name="Photo">
-								<span asp-validation-for="Photo" class="text-danger"></span>
-							</div>
-							<input type="hidden" asp-for="ID" class="form-control" />
-						
-							<div class="col-12">
-								<label asp-for ="VideoUrl" for="username" class="form-label fw-bold">Video URL</label>
-								<div class="input-group has-validation">
-									<span class="input-group-text leftInputDesign">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-											<path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"></path>
-											<path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"></path>
-										</svg>
-									</span>
-									<input asp-for="VideoUrl" type="text" class="form-control anotherDesign" >
-									<span class="text-danger"></span>
-								</div>
-							</div>
 
-						</div>
-					</div>
+			<div class="col-12 mb-3">
+				<label asp-for="Photo" class="form-label fw-bold">Photo</label>
+				<input asp-for="Photo" class="form-control anotherDesign" id="Photo" name="Photo">
+				<span asp-validation-for="Photo" class="text-danger"></span>
+			</div>
+			<input type="hidden" asp-for="ID" class="form-control" />
 
-					<div class="d-flex justify-content-center">
-						<div class="col-8">
-							<button type="submit" class="btn btn-light w-100 loginBTN">Save</button>
-						</div>
-					</div>
-				</form>
-			
+			<div class="col-12">
+				<label asp-for="VideoUrl" for="username" class="form-label fw-bold">Video URL</label>
+				<div class="input-group has-validation">
+					<span class="input-group-text leftInputDesign">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+							<path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"></path>
+							<path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"></path>
+						</svg>
+					</span>
+					<input asp-for="VideoUrl" type="text" class="form-control anotherDesign">
+					<span class="text-danger"></span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="d-flex justify-content-center">
+		<div class="col-8">
+			<button type="submit" class="btn btn-light w-100 loginBTN">Save</button>
+		</div>
+	</div>
+</form>
