@@ -114,25 +114,25 @@ namespace DanderiNetworkApp.Controllers
         public async Task<IActionResult> DeleteComent([FromRoute] int id)
         {
             await _commentService.Delete(id);
-            return View("Index");
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
 
-        }
+		}
 
         [HttpGet]
         public async Task<IActionResult> DeletePost([FromRoute] int id)
         {
             await _postService.Delete(id);
-            return View("Index");
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
 
-        }
+		}
 
         public async Task<IActionResult> EditComment(CommentViewModel vm)
         {
             SaveCommentViewModel svm = _mapper.Map<SaveCommentViewModel>(vm);
             await _commentService.Update(svm, svm.ID);
 
-            return View("Index");
-        }
+            return RedirectToRoute(new { controller = "Home", action = "Index" });
+		}
 
 
         [HttpPost]
