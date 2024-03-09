@@ -17,20 +17,17 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
 
         public  List<UserResponse> GetAllUsers()
         {
-            return  _userManager.Users.Select(user =>
+            return _userManager.Users.Select(user =>
 
             new UserResponse
             {
-
                 ID = user.Id,
                 Name = user.FirstName,
                 Email = user.Email,
                 ImageURL = user.ImageURL,
                 UserName = user.UserName,
                 Lastname = user.LastName,
-                PhoneNumber = user.PhoneNumber,
-                
-
+                PhoneNumber = user.PhoneNumber
             }).ToList();
         }
 
@@ -51,8 +48,6 @@ namespace DanderiNetwork.Infraestructure.Identity.Services
             response.ID = user.Id;
             response.ImageURL = user.ImageURL;
          
-
-  
             return response;
         }
 

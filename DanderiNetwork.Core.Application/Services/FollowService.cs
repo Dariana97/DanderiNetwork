@@ -33,7 +33,9 @@ namespace DanderiNetwork.Core.Application.Services
             var user = _userApplication.GetAllUsers();
 
             List<Following> modelList = await _followingRepository.GetAllAsync();
+            
             var follows = modelList.Select(x => new FollowingViewModel {
+                
                 ID = x.ID,
                 UserMainID = x.UserMainID,
                 NameUserFollowed = user.Where(u => u.ID == x.FollowingUserID).FirstOrDefault().Name,
@@ -41,7 +43,7 @@ namespace DanderiNetwork.Core.Application.Services
                 Created = x.Created,
                 UsernameUserFollowed = user.Where(u => u.ID == x.FollowingUserID).FirstOrDefault().UserName,
                 ImageURL = user.Where(u => u.ID == x.FollowingUserID).FirstOrDefault().ImageURL,
-                LastNameUserFollowed = user.Where(u => u.ID == x.FollowingUserID).FirstOrDefault().ImageURL
+                LastNameUserFollowed = user.Where(u => u.ID == x.FollowingUserID).FirstOrDefault().Lastname
 
             });
 
@@ -51,8 +53,6 @@ namespace DanderiNetwork.Core.Application.Services
                 .ToList();
 
             return followedfilters;
-
-           
         }
 
 

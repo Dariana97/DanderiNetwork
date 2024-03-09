@@ -1,4 +1,6 @@
-﻿@{
+﻿@using DanderiNetwork.Core.Application.Dtos.User
+@model UserResponse;
+@{
 	ViewData["Tittle"] = "Profile";
 }
 
@@ -13,11 +15,11 @@
 		<div class="col-12 d-flex justify-content-center align-items-center homeCard py-5 p-4 mt-4">
 			<div>
 				<div>
-					<img src="https://cowlatinamerica.voices.wooster.edu/wp-content/uploads/sites/263/2022/03/ab6761610000e5ebaa60935c3c4dc4a0fd48759e.jpg" width="350" height="350" class="rounded-circle object-fit-cover" alt="Alternate Text" />
+					<img src="@Model.ImageURL" width="350" height="350" class="rounded-circle object-fit-cover" alt="Alternate Text" />
 				</div>
 				<div class="mt-4">
-					<h3 class="highlighted fw-bold text-center">Lara Figuereo C.</h3>
-					<p class="text-center fs-5 text-muted">@@laraF29</p>
+					<h3 class="highlighted fw-bold text-center">@Model.Name @Model.Lastname</h3>
+					<p class="text-center fs-5 text-muted">@@@Model.UserName</p>
 				</div>
 				<div class="d-flex gap-3 justify-content-center">
 					<div>
@@ -25,12 +27,14 @@
 						<p class="fw-medium">Email: </p>
 					</div>
 					<div>
-						<p>829-802-1292</p>
-						<p>darianacabreja@gmail.com</p>
+						<p>@Model.PhoneNumber</p>
+						<p>@Model.Email</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
 

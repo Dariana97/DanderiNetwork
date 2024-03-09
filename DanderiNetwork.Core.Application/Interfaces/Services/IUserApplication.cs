@@ -8,10 +8,8 @@ namespace DanderiNetwork.Core.Application.Interfaces.Services
     public interface IUserApplication
     {
         Task<UpdateUserResponse> Update(UpdateUserRequest request);
-
         Task<UserResponse> GetByEmailUser(string email);
         List<UserResponse> GetAllUsers();
-
         Task<UserResponse> GetByUserName(string UserName);
     }
 }
