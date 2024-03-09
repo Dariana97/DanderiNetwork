@@ -1,12 +1,10 @@
-﻿
-
-namespace DanderiNetwork.Core.Application.Helpers
+﻿namespace DanderiNetwork.Core.Application.Componets
 {
     public static class HtmlComponents
     {
         public static string BodyEmail(string verificationuri)
         {
-            
+
 
             string emailBody = $@"
 <!DOCTYPE html>

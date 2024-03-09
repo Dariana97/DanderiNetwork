@@ -2,14 +2,14 @@
 @model SavePostViewModel
 
 
-				<form method="post" asp-action="Home" >
+      <form method="post" asp-action="EditPost" asp-controller="Home" enctype="multipart/form-data">
 					<div class="mb-4 d-flex justify-content-center">
 						<div class="col-8">
 
 							<div class="col-12 mb-3">
-								<label for="username" class="form-label fw-bold">Username</label>
-								<input type="text" class="form-control inputCustomize" id="username" name="username">
-								<span class="text-danger"></span>
+								<label asp-for="Caption" class="form-label fw-bold">Caption</label>
+				<input asp-for="Caption" class="form-control inputCustomize" name="Caption">
+				<span asp-validation-for="Caption" class="text-danger"></span>
 							</div>
 							
 

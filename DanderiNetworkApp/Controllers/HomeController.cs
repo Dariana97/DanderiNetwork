@@ -4,13 +4,14 @@ using DanderiNetwork.Core.Application.ViewModels.Comment;
 using DanderiNetwork.Core.Application.ViewModels.Following;
 using DanderiNetwork.Core.Application.ViewModels.Post;
 using DanderiNetworkApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace DanderiNetworkApp.Controllers
 {
-
-    public class HomeController : Controller
+	[Authorize]
+	public class HomeController : Controller
     {
         #region Configuration
         private readonly ILogger<HomeController> _logger;
@@ -31,7 +32,7 @@ namespace DanderiNetworkApp.Controllers
 
 
         #region Post
-
+        
         public async Task<IActionResult> EditPost([FromRoute] int id)
         {
            SavePostViewModel vm = _mapper.Map<SavePostViewModel>(await _postService.GetByIdViewModel(id));

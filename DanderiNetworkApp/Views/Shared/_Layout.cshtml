@@ -6,7 +6,7 @@
 @{
 	UserViewModel User = httpContext.HttpContext.Session.Get<UserViewModel>("user");
 
-	var Users = ViewData["UserViewModel"] as List<FollowingViewModel>;
+	List<FollowingViewModel> Users = ViewData["UserViewModel"] as List<FollowingViewModel>;
 
 	string viewContextCon = ViewContext.RouteData.Values["controller"].ToString();
 
