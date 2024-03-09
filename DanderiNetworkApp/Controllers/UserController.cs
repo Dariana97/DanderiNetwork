@@ -55,7 +55,11 @@ namespace DanderiNetworkApp.Controllers
 
         }
 
-        
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
         private string UploadFile(IFormFile file, string ID, bool isEditMode = false, string imageURL = "")
         {
             if (isEditMode && file == null)
