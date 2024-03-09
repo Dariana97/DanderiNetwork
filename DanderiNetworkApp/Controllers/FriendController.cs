@@ -28,7 +28,7 @@ namespace DanderiNetworkApp.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["UserViewModel"] = _followingService.GetAllFollows();
-            //return View(await _postService.GetPostForFollow());
+           
             return View(await _postService.GetPostForFollow());
         }
 

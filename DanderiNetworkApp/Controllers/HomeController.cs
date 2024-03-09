@@ -33,7 +33,7 @@ namespace DanderiNetworkApp.Controllers
 
 
         #region Post
-
+        
         public async Task<IActionResult> EditPost([FromRoute] int id)
         {
            SavePostViewModel vm = _mapper.Map<SavePostViewModel>(await _postService.GetByIdViewModel(id));
