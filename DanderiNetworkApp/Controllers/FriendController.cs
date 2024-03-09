@@ -50,21 +50,21 @@ namespace DanderiNetworkApp.Controllers
 			return RedirectToRoute(new { controller = "Friend", action = "Index" });
 
 		}
+		[HttpGet]
+		public async Task<IActionResult> UnFollow([FromRoute]int id)
+		{
 
-		//public async Task<IActionResult> UnFollow(int id)
-		//{
+			try
+			{
+				await _followingService.UnFollow(id);
+                return RedirectToRoute(new { controller = "Friend", action = "Index" });
+            }
+			catch (Exception ex)
+			{
+                return RedirectToRoute(new { controller = "Friend", action = "Index" });
+            }
 
-		//    try
-		//    {
-		//        await _followingService.Delete(id);
-		//        return View("Index"); //vista para seguidores, se debe modificar el acceso al index
-		//    }
-		//    catch (Exception ex)
-		//    {
-		//        return View("Index"); //vista para seguidores, se debe modificar el acceso al index
-		//    }
-
-		//}
+		}
 
 
 
