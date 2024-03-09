@@ -24,6 +24,10 @@ namespace DanderiNetwork.Core.Application.Mappings
                 .ForMember(dest => dest.Photo, opt => opt.Ignore())
                 .ReverseMap();
 
+            CreateMap<PostViewModel, SavePostViewModel>()
+              .ForMember(dest => dest.Photo, opt => opt.Ignore())
+              .ReverseMap();
+
             #endregion
 
             #region CommentProfile
