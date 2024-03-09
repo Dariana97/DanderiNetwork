@@ -6,6 +6,9 @@ namespace DanderiNetwork.Core.Application.ViewModels.Following
 {
     public class SaveFollowingViewModel
     {
+
+        //This is a relationship Entity
+
         [Key]
         public int ID { get; set; }
         public DateTime? Created { get; set; }
