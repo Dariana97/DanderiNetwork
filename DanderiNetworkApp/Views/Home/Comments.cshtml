@@ -21,8 +21,8 @@
 
                             <div class="col-12 d-flex mb-4">
 
-                                <div class="col-1 d-flex justify-content-end">
-                                    <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
+                                <div class="col-1 me-3 d-flex justify-content-end">
+                                    <img src="@Model.ImageURL" alt="" width="40" height="40" class="rounded-circle">
                                 </div>
 
                                 <div class="col-11">
@@ -31,7 +31,7 @@
 
                                         <div class="col-11 postText">
                                             <div class="d-flex gap-2">
-                                                <p class="mb-0 fw-medium">Lara Figuereo C.</p>
+                                                <p class="mb-0 fw-medium">@Model.Name @Model.LastName</p>
                                                 <p class="text-muted mb-0">@@@Model.UserName</p>
                                             </div>
                                             <p class="small text-secondary">@Model.Created</p>
@@ -115,7 +115,7 @@
                                     <div class="col-12 d-flex justify-content-between">
 
                                         <a href="#" class="highlighted text-decoration-none postText" data-bs-toggle="collapse" data-bs-target="#replies" aria-expanded="false">
-                                            See comments (@Model.CommentList.Count)
+                                            See @Model.CommentList.Count comments
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
                                             </svg>
@@ -142,8 +142,8 @@
 
                                             <div class="col-11 d-flex">
 
-                                                <div class="col-1 d-flex justify-content-end">
-                                                    <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3 justify-content-center">
+                                                <div class="col-1 me-3 d-flex justify-content-end">
+                                                    <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle justify-content-center">
                                                 </div>
 
                                                 <div class="col-11">
@@ -218,8 +218,8 @@
 
                                                         <div class="col-10 d-flex separation">
 
-                                                            <div class="col-1 d-flex justify-content-end mt-3">
-                                                                <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle me-3">
+                                                            <div class="col-1 d-flex me-3 justify-content-end mt-3">
+                                                                <img src="https://img.maspormas.com/2015/12/2-Chihuahua-1160x1160.jpeg" alt="" width="40" height="40" class="rounded-circle">
                                                             </div>
 
                                                             <div class="col-11 mt-3">
