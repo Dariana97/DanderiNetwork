@@ -2,10 +2,12 @@
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.ViewModels.Following;
 using DanderiNetwork.Core.Application.ViewModels.Post;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace DanderiNetworkApp.Controllers
 
 {
+    [Authorize]
     public class FriendController : Controller
     {
         private readonly IFollowingService _followingService;

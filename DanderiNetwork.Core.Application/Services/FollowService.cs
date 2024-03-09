@@ -52,9 +52,7 @@ namespace DanderiNetwork.Core.Application.Services
 
             return followedfilters;
 
-            
-
-
+           
         }
 
 

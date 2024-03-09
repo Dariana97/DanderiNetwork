@@ -13,6 +13,14 @@
 			<img src="/images/app/Group 472.png" class="homeImage" alt="Alternate Text" />
 		</div>
 
+		@if (ViewBag.ErrorState != null && ViewBag.ErrorState == true)
+		{
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<p>@ViewBag.ErrorStateMessage</p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		}
+
 		<div class="col-lg-5 col-md-10 col-sm-12">
 			<div class="card loginCard">
 				<div class="mt-5 mb-4 text-center fw-bold highlighted fs-3">
@@ -24,16 +32,23 @@
 							<div class="col-9">
 								<label for="Username" class="form-label fw-bold">Username</label>
 								<input type="text" class="form-control inputCustomize" id="Username" name="Username">
-								<span class="text-danger"></span>
 							</div>
 						</div>
 						<div class="mb-3 d-flex justify-content-center">
 							<div class="col-9">
 								<label for="password" class="form-label fw-bold">Password</label>
 								<input type="password" class="form-control inputCustomize" id="password" name="password">
-								<span class="text-danger"></span>
 							</div>
 						</div>
+
+						@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage != "")
+						{
+							<div class="mb-3 d-flex justify-content-center">
+								<div class="col-9">
+									<span class="text-danger">@ViewBag.ErrorMessage</span>
+								</div>
+							</div>
+						}
 						<div class="mb-4 d-flex justify-content-center">
 							<div class="col-9 d-flex justify-content-end">
 								<a href="#" class="highlighted text-decoration-none" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">Forgot password?</a>
@@ -51,6 +66,7 @@
 							<p>Don't have an account? <a href="#" class="highlighted text-decoration-none" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a></p>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -180,5 +196,6 @@
 			</div>
 		</div>
 	</div>
+
 
 </div>

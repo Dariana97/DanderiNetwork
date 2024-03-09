@@ -1,6 +1,7 @@
 ﻿using DanderiNetworkApp.Controllers;
 using DanderiNetworkApp.Middlewares;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace DanderiNetworkApp.Midleware
@@ -20,11 +21,11 @@ namespace DanderiNetworkApp.Midleware
             if (_userSession.HasUser())
             {
                 var controller = (UserController)context.Controller;
-                context.Result = controller.RedirectToAction("Index", "Home");
+                context.Result = controller.RedirectToAction("AccessDenied", "User");
             }
-            else
+			else
             {
-                await next();
+				await next();
             }
         }
     }
