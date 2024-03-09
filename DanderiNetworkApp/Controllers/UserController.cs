@@ -116,9 +116,11 @@ namespace DanderiNetworkApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(SaveUserViewModel vm)
         {
-
-			//var origin = Request.Host.Value;
-			//Esto de acceder al Host directamente es provicional
+            if(!ModelState.IsValid)
+            {
+                //ViewBag.SaveUserVm = vm;
+                return View("Index", vm);
+			}
 
 			var origin = Request.Headers["origin"];
 
@@ -136,13 +138,12 @@ namespace DanderiNetworkApp.Controllers
             {
                 UpdateReVM.ImageURL = UploadFile(vm.Photo, UpdateReVM.Id);
                 await _userService.Update(UpdateReVM);
-                return View("Index");
+                return View();
             }
-            
-            return View();
-        }
+            return RedirectToRoute(new { controller = "User", action = "Index" });
+		}
 
-        [ServiceFilter(typeof(LoginAuthorize))]
+		[ServiceFilter(typeof(LoginAuthorize))]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             var response = await _userService.ConfirmEmailAsync(userId, token);
