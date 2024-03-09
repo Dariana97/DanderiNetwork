@@ -148,7 +148,13 @@ namespace DanderiNetworkApp.Controllers
                 await _userService.Update(UpdateReVM);
                 return View();
             }
-            return RedirectToRoute(new { controller = "User", action = "Index" });
+
+			vm.HasError = response.HasError;
+			vm.Error = response.Error;
+
+			@ViewBag.ErrorState = response.HasError;
+			@ViewBag.ErrorStateMessage = response.Error;
+			return RedirectToRoute(new { controller = "User", action = "Index" });
 		}
 
 		[ServiceFilter(typeof(LoginAuthorize))]
@@ -175,6 +181,7 @@ namespace DanderiNetworkApp.Controllers
             }
             var origin = Request.Headers["origin"];
             ForgotPasswordResponse response = await _userService.ForgotPasswordAsync(vm, origin);
+            
             if (response.HasError)
             {
                 vm.HasError = response.HasError;
@@ -215,7 +222,10 @@ namespace DanderiNetworkApp.Controllers
             {
                 response.HasError = response.HasError;
 				response.Error = response.Error;
-                return View(vm);
+
+				@ViewBag.ErrorState = response.HasError;
+				@ViewBag.ErrorStateMessage = response.Error;
+				return View(vm);
             }
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
