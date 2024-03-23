@@ -1,4 +1,4 @@
-﻿using DanderiNetwork.Infraestructure.Identity.Entities;
+﻿using DanderiNetwork.Core.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

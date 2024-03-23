@@ -22,7 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DanderiNetwork.Core.Application\DanderiNetwork.Core.Application.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Core.Domain\DanderiNetwork.Core.Domain.csproj" />
-    <ProjectReference Include="..\DanderiNetwork.Infraestructure.Identity\DanderiNetwork.Infraestructure.Identity.csproj" />
+    <ProjectReference Include="..\DanderiNetwork.Infraestructure.Identity\DanderiNetwork.Infraestructure.Credentials.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Infraestructure.Persistence\DanderiNetwork.Infraestructure.Persistence.csproj" />
     <ProjectReference Include="..\DanderiNetwork.Infraestructure.Shared\DanderiNetwork.Infraestructure.Shared.csproj" />
   </ItemGroup>

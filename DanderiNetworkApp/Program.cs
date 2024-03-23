@@ -1,5 +1,4 @@
 using DanderiNetwork.Infraestructure.Identity;
-using DanderiNetwork.Infraestructure.Identity.Entities;
 using DanderiNetwork.Infraestructure.Identity.Seeds;
 using DanderiNetwork.Infraestructure.Shared;
 using DanderiNetwork.Infraestructure.Persistence;
@@ -9,6 +8,7 @@ using DanderiNetworkApp.Middlewares;
 using DanderiNetworkApp.Midleware;
 using DanderiNetwork.Core.Application.Interfaces.Services;
 using DanderiNetwork.Core.Application.Services;
+using DanderiNetwork.Core.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
-builder.Services.AddPersistenceInfrastructure(builder.Configuration);
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
+builder.Services.AddPersistenceInfrastructure(builder.Configuration);
+
 builder.Services.AddSharedInfrastructure(builder.Configuration);
 builder.Services.AddScoped<LoginAuthorize>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

@@ -1,5 +1,5 @@
 ﻿using DanderiNetwork.Core.Application.Enums;
-using DanderiNetwork.Infraestructure.Identity.Entities;
+using DanderiNetwork.Core.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.Data;
 

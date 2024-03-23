@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 
+
 namespace DanderiNetwork.Infraestructure.Persistence.Contexts
 {
   
@@ -54,15 +55,21 @@ namespace DanderiNetwork.Infraestructure.Persistence.Contexts
                 .HasForeignKey(a => a.PostID)
                 .OnDelete(DeleteBehavior.Cascade);
 
+			modelBuilder.Entity<ApplicationUser>()
+			 .HasMany(d => d.Posts)
+			 .WithOne(a => a.User)
+			 .HasForeignKey(a => a.UserID)
+			 .OnDelete(DeleteBehavior.Cascade);
 
-           
-            #endregion
 
-            #region Property Configuration
 
-            #region Comment
+			#endregion
 
-            modelBuilder.Entity<Comment>().
+			#region Property Configuration
+
+			#region Comment
+
+			modelBuilder.Entity<Comment>().
                Property(d => d.Content)
             .IsRequired();
 

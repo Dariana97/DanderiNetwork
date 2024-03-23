@@ -1,6 +1,6 @@
 ﻿using DanderiNetwork.Core.Application.Interfaces.Services;
+using DanderiNetwork.Core.Domain.Entities;
 using DanderiNetwork.Infraestructure.Identity.Contexts;
-using DanderiNetwork.Infraestructure.Identity.Entities;
 using DanderiNetwork.Infraestructure.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
