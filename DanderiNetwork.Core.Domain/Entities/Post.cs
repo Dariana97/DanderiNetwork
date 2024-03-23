@@ -1,5 +1,4 @@
 ﻿using DanderiNetwork.Core.Domain.Common;
-
 namespace DanderiNetwork.Core.Domain.Entities
 {
     public class Post : BaseEntityWithImage
@@ -9,7 +8,9 @@ namespace DanderiNetwork.Core.Domain.Entities
         public string UserID { get; set; }
 
         //Navigation properties
-        
-        public ICollection<Comment>? Comments { get; set; }
+
+        public ApplicationUser User { get; set; }
+
+		public ICollection<Comment>? Comments { get; set; }
     }
 }

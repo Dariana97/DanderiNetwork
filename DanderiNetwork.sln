@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanderiNetwork.Core.Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanderiNetwork.Infraestructure.Persistence", "DanderiNetwork.Infraestructure.Persistence\DanderiNetwork.Infraestructure.Persistence.csproj", "{2AE29500-F5F5-4D39-AE23-B01D3DAF9F31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanderiNetwork.Infraestructure.Identity", "DanderiNetwork.Infraestructure.Identity\DanderiNetwork.Infraestructure.Identity.csproj", "{6D0515A7-4955-436B-804A-61A071645987}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanderiNetwork.Infraestructure.Credentials", "DanderiNetwork.Infraestructure.Identity\DanderiNetwork.Infraestructure.Credentials.csproj", "{6D0515A7-4955-436B-804A-61A071645987}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanderiNetwork.Infraestructure.Shared", "DanderiNetwork.Infraestructure.Shared\DanderiNetwork.Infraestructure.Shared.csproj", "{CDDAAAE3-7DA3-4AB4-8369-5E2922B04500}"
 EndProject
