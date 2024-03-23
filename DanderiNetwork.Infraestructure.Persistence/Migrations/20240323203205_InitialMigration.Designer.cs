@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DanderiNetwork.Infraestructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240307172555_AddStringToPost")]
-    partial class AddStringToPost
+    [Migration("20240323203205_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,13 +71,12 @@ namespace DanderiNetwork.Infraestructure.Persistence.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FollowingUserID")
-                        .HasColumnType("int");
+                    b.Property<string>("FollowingUserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserMainID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsernameUserFollowed")
+                    b.Property<string>("UserMainID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
